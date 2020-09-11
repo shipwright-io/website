@@ -1,0 +1,4 @@
+# Strings not in the core docsy theme
+
+[main_license]
+other = """The Shipwright Contributors | Licensed under <a href="https://github.com/shipwright-io/website/LICENSE">CC BY 4.0</a>"""
