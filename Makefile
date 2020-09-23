@@ -1,4 +1,4 @@
-.PHONY: all build travis
+.PHONY: all build travis deploy
 
 all: build
 
@@ -9,3 +9,6 @@ build:
 travis:
 	hack/install-hugo.sh
 	npm install
+
+deploy:
+	hack/deploy.sh
