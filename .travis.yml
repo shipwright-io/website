@@ -5,3 +5,8 @@ install:
   - make travis
 script:
   - make
+deploy:
+  - provider: script
+    script: make deploy
+    on:
+      branch: master
