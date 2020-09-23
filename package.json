@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "dependencies": {
+    "postcss": "^8.0.7"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.0.0",
+    "postcss-cli": "^8.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shipwright-io/website.git"
+  },
+  "author": "The Shipwright Contributors",
+  "license": "CC-BY-4.0",
+  "bugs": {
+    "url": "https://github.com/shipwright-io/website/issues"
+  },
+  "homepage": "https://github.com/shipwright-io/website#readme"
+}
