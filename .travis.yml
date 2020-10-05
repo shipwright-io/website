@@ -8,11 +8,12 @@ script:
 deploy:
   - provider: pages
     skip_cleanup: true
-    github_token: $GITHUB_AUTH_TOKEN
+    github_token: $GITHUB_AUTH_SECRET
     committer_from_gh: true
     local_dir: public
     repo: shipwright-io/shipwright-io.github.io
     target_branch: master
     keep_history: true
+    verbose: true
     on:
       branch: master
