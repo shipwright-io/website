@@ -3,9 +3,9 @@
 all: build
 
 build:
-	hugo --minify
+	rm -rf public/*
+	hugo -t docsy --minify
 
 travis:
 	hack/install-hugo.sh
 	npm install
-	
