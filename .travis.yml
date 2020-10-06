@@ -8,5 +8,3 @@ script:
 deploy:
   - provider: script
     script: make deploy
-    on:
-      branch: master
