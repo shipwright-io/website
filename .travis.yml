@@ -8,6 +8,7 @@ script:
 deploy:
   - provider: script
     script: make deploy
+    skip_cleanup: true
     on:
       repo: adambkaplan/shipwright-website
       all_branches: true
