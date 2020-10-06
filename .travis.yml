@@ -8,3 +8,6 @@ script:
 deploy:
   - provider: script
     script: make deploy
+    on:
+      repo: adambkaplan/shipwright-website
+      all_branches: true
