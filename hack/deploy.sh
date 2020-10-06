@@ -17,10 +17,12 @@ if [ -n "${GITHUB_AUTH_SECRET}" && -n "${GITHUB_USERNAME}" ]; then
   git config --global user.name "${GITHUB_USERNAME}"
 fi
 
-rm -rf public/*
+echo "Updating public submodule to latest version"
+git submodule update --remote public
 
 # Build the project.
 echo "Building hugo site"
+rm -rf public/*
 hugo -t docsy --minify
 
 msg="rebuilding site `date`"
@@ -43,9 +45,8 @@ popd
 
 # Update the submodule
 if [ -z "$(git status --porcelain)" ]; then
-  git add .
-  git commit -m "$msg"
-  git push
+  echo "Local project changes detected. Ensure all project code and submodules are updated in a future commit."
+  git status
 fi
 
 echo "Done"
