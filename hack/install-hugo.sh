@@ -8,7 +8,11 @@ installDir=${HUGO_INSTALL_DIR:-"$HOME/bin"}
 echo "Installing Hugo v${hugoVersion}"
 mkdir -p ${tmpDir}
 pushd ${tmpDir}
-wget "https://github.com/gohugoio/hugo/releases/download/v${hugoVersion}/hugo_extended_${hugoVersion}_${hugoOS}-64bit.tar.gz"
+args=""
+if [[ -n "${GITHUB_AUTH_SECRET}" && -n "${GITHUB_USERNAME}" ]]; then
+    args="--user=${GITHUB_USERNAME} --password=${GITHUB_AUTH_SECRET}"
+fi
+wget ${args} "https://github.com/gohugoio/hugo/releases/download/v${hugoVersion}/hugo_extended_${hugoVersion}_${hugoOS}-64bit.tar.gz"
 tar -xzvf "hugo_extended_${hugoVersion}_${hugoOS}-64bit.tar.gz"
 mv hugo ${installDir}
 popd

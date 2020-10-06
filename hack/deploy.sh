@@ -6,7 +6,7 @@
 
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
-if [ -n "${GITHUB_AUTH_SECRET}" && -n "${GITHUB_USERNAME}" ]; then
+if [[ -n "${GITHUB_AUTH_SECRET}" && -n "${GITHUB_USERNAME}" ]]; then
   echo "Adding GitHub credentials"
   touch "${HOME}/.git-credentials"
   chmod 0600 "${HOME}/.git-credentials"
