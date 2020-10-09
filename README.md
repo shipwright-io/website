@@ -1,5 +1,7 @@
 # Shipwright Documentation
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f92d5739-363b-446b-b56e-dfd47a96a1fd/deploy-status)](https://app.netlify.com/sites/shipwright-io/deploys)
+
 This repository contains the assets needed to build the Shipwright website and documentation.
 
 ## Using this repository
