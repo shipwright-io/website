@@ -8,13 +8,14 @@ resources:
 - src: "**.{png}"
   title: "Figure #:counter"
 ---
+*Update 2020-11-30: Added link to Part 2 of this series*
 
 What is Shipwright? Which problems does this project try to solve?
 
 In [Part 1](/blog/2020/10/15/introducing-shipwright-part-1) of this series, we'll look back at the history of delivering software applications,
 and how that has changed in the age of Kubernetes and cloud-native development.
 
-In Part 2 of this series, we'll introduce Shipwright and the Build APIs that make it simple to
+In [Part 2](/blog/2020/11/30/introducing-shipwright-part-2) of this series, we'll introduce Shipwright and the Build APIs that make it simple to
 build container images on Kubernetes.
 
 ## Delivering Your Applications - A History
