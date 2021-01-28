@@ -146,7 +146,7 @@ enable = false
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
 [[params.links.user]]
     name = "User mailing list"
-    url = "mailto:shipwright-users@lists.shipwright.io"
+    url = "https://lists.shipwright.io/admin/lists/shipwright-users.lists.shipwright.io/"
     icon = "fa fa-envelope"
     desc = "Discussion and help from your fellow users"
 # [[params.links.user]]
@@ -172,6 +172,6 @@ enable = false
     desc = "Chat with the Shipwright contributors"
 [[params.links.developer]]
     name = "Developer mailing list"
-    url = "mailto:shipwright-dev@lists.shipwright.io"
+    url = "https://lists.shipwright.io/admin/lists/shipwright-dev.lists.shipwright.io/"
     icon = "fa fa-envelope"
     desc = "Discuss development issues around the project"
