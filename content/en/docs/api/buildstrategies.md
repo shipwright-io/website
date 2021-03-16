@@ -1,5 +1,6 @@
 ---
-title: BuildStrategies
+title: BuildStrategy and ClusterBuildStrategy 
+weight: 20
 ---
 
 - [Overview](#overview)
@@ -25,13 +26,13 @@ title: BuildStrategies
 
 ## Overview
 
-There are two types of strategies, the `ClusterBuildStrategy` (`clusterbuildstrategies.shipwright.io/v1alpha1`) and the `BuildStrategy` (`buildstrategies.shipwright.io/v1alpha1`). Both strategies define a shared group of steps, needed to fullfil the application build.
+There are two types of strategy API: the `ClusterBuildStrategy` (`clusterbuildstrategies.shipwright.io/v1alpha1`) and the `BuildStrategy` (`buildstrategies.shipwright.io/v1alpha1`). Both strategies define a shared group of steps, needed to fullfil the application build.
 
-A `ClusterBuildStrategy` is available cluster-wide, while a `BuildStrategy` is available within a namespace.
+    A `ClusterBuildStrategy` is available cluster-wide, while a `BuildStrategy` is available within a [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/).
 
 ## Available ClusterBuildStrategies
 
-Well-known strategies can be boostrapped from [here](../samples/buildstrategy). The current supported Cluster BuildStrategy are:
+Well-known strategies can be boostrapped from [GitHub](https://github.com/shipwright-io/build/tree/master/samples/buildstrategy). The current supported Cluster BuildStrategy are:
 
 - [buildah](../samples/buildstrategy/buildah/buildstrategy_buildah_cr.yaml)
 - [buildpacks-v3-heroku](../samples/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_cr.yaml)

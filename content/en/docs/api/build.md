@@ -1,5 +1,6 @@
 ---
 title: Build
+weight: 10
 ---
 
 - [Overview](#overview)
@@ -17,11 +18,11 @@ title: Build
 
 A `Build` resource allows the user to define:
 
-- source
-- strategy
-- builder
-- dockerfile
-- output
+- `source`
+- `strategy`
+- `builder`
+- `dockerfile`
+- `output`
 
 A `Build` is available within a namespace.
 

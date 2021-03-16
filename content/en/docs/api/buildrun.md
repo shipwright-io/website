@@ -1,6 +1,7 @@
 ---
 title: "BuildRun"
 draft: false
+weight: 40
 ---
 
 - [Overview](#overview)
@@ -19,11 +20,24 @@ The resource `BuildRun` (`buildruns.dev/v1alpha1`) is the build process of a `Bu
 
 A `BuildRun` resource allows the user to define:
 
-- The `BuildRun` name, through which the user can monitor the status of the image construction.
+- The `BuildRun` _name_, through which the user can monitor the status of the image construction.
 - A referenced `Build` instance to use during the build construction.
-- A service account for hosting all related secrets in order to build the image.
+- A [service account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) for hosting all related secrets in order to build the image.
 
-A `BuildRun` is available within a namespace.
+A `BuildRun` invocation can be concise:
+
+```yaml
+apiVersion: build.dev/v1alpha1
+kind: BuildRun
+metadata:
+  name: kaniko-golang-buildrun
+spec:
+  buildRef:
+    name: kaniko-golang-build
+```
+
+As the build runs, the status of the `BuildRun` object is updated with the current progress. Work
+is in progress to standardize this status reporting with status conditions.
 
 ## BuildRun Controller
 
@@ -70,7 +84,7 @@ spec:
 
 ### Defining the ServiceAccount
 
-A `BuildRun` resource can define a serviceaccount to use. Usually this SA will host all related secrets referenced on the `Build` resource, for example:
+A `BuildRun` resource can define a ServiceAccount to use. Usually this SA will host all related secrets referenced on the `Build` resource, for example:
 
 ```yaml
 apiVersion: shipwright.io/v1alpha1

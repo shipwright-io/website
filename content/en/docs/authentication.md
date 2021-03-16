@@ -1,7 +1,6 @@
 ---
 title: Authentication during builds
 ---
-# Understanding authentication at runtime
 
 The following document provides an introduction around the different authentication methods that can take place during an image build when using the Build controller.
 
