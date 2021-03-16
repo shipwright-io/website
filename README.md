@@ -33,7 +33,7 @@ $ hugo server
 ## Contributing
 
 We are happy to have you join us and contribute to the Shipwright website!
-Please review the [Conbtributing Guide](CONTRIBUTING.md) for more information.
+Please review the [Contributing Guide](CONTRIBUTING.md) for more information.
 
 ## License
 
