@@ -9,7 +9,7 @@ menu:
 ---
 
 Documentation can be found on GitHub at
-[shipwright-io/build](https://github.com/shipwright-io/build/blob/master/docs/README.md).
+[shipwright-io/build](https://github.com/shipwright-io/build/blob/master/README.md).
 
 ## Contact Us
 
