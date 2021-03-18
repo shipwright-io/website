@@ -1,6 +1,6 @@
 ---
 title: Build Controller Profiling
-linkTitle: Profilining
+linkTitle: Profiling
 ---
 
 The build controller supports a `pprof` profiling mode, which is omitted from the binary by default. To use the profiling, use the controller image that was built with `pprof` enabled.
