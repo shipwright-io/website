@@ -38,7 +38,7 @@ export PROMETHEUS_BR_COMP_DUR_BUCKETS=30,60,90,120,180,240,300,360,420,480
 make local
 ```
 
-When you deploy the build controller in a Kubernetes cluster, you need to extend the `spec.containers[0].spec.env` section of the sample deployment file, [`500-controller.yaml`](https://github.com/shipwright-io/build/blob/master/deploy/500-controller.yaml).  
+When you deploy the build controller in a Kubernetes cluster, you need to extend the `spec.containers[0].spec.env` section of the sample deployment file, [`500-controller.yaml`](https://github.com/shipwright-io/build/blob/main/deploy/500-controller.yaml).  
 Add an additional entry:
 
 ```yaml
@@ -72,7 +72,7 @@ export PROMETHEUS_ENABLED_LABELS=buildstrategy,namespace,build
 make local
 ```
 
-When you deploy the build controller in a Kubernetes cluster, you need to extend the `spec.containers[0].spec.env` section of the sample deployment file, [`500-controller.yaml`](https://github.com/shipwright-io/build/blob/master/deploy/500-controller.yaml).  
+When you deploy the build controller in a Kubernetes cluster, you need to extend the `spec.containers[0].spec.env` section of the sample deployment file, [`500-controller.yaml`](https://github.com/shipwright-io/build/blob/main/deploy/500-controller.yaml).  
 Add an additional entry:
 
 ```yaml
