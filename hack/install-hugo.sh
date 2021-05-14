@@ -1,6 +1,6 @@
 #!/bin/bash
 
-hugoVersion=${HUGO_VERSION:-0.74.3}
+hugoVersion=${HUGO_VERSION:-0.83.1}
 hugoOS=${HUGO_OS:-"Linux"}
 tmpDir=${HUGO_TMP_DIR:-"/tmp/hugo-install"}
 installDir=${HUGO_INSTALL_DIR:-"$HOME/bin"}
