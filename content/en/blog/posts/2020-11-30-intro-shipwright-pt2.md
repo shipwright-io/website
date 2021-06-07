@@ -34,7 +34,7 @@ to overcome for many development teams.
 
 ## Shipwright Builds - A Framework for Building Images
 
-With Shipwright, we want to create an open and flexible framework that allows teams easily build
+With Shipwright, we want to create an open and flexible framework that allows teams to easily build
 container images on Kubernetes. Much of the work has been inspired by OpenShift/okd, which provides 
 its own API for building images. At the heart of every build are the following core components:
 
