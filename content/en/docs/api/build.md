@@ -139,7 +139,7 @@ metadata:
 spec:
   source:
     url: https://github.com/shipwright-io/sample-go
-    revision: docker-build
+    revision: v0.1.0
 ```
 
 ### Defining the Strategy
