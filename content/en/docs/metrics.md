@@ -3,7 +3,7 @@ title: Build Controller Metrics
 linkTitle: Metrics
 ---
 
-The Build component exposes OpenMetrics (Prometheus format) data to help you monitor the health and behavior of your build resources.
+The Build component exposes several metrics to help you monitor the health and behavior of your build resources.
 
 Following build metrics are exposed on port `8383`.
 
@@ -38,8 +38,7 @@ export PROMETHEUS_BR_COMP_DUR_BUCKETS=30,60,90,120,180,240,300,360,420,480
 make local
 ```
 
-When you deploy the build controller in a Kubernetes cluster, you need to extend the `spec.containers[0].spec.env` section of the sample deployment file, [`500-controller.yaml`](https://github.com/shipwright-io/build/blob/main/deploy/500-controller.yaml).  
-Add an additional entry:
+When you deploy the build controller in a Kubernetes cluster, you need to extend the `spec.containers[0].spec.env` section of the sample deployment file, [controller.yaml](../deploy/controller.yaml). Add an additional entry:
 
 ```yaml
 [...]
@@ -53,10 +52,10 @@ Add an additional entry:
 
 As the amount of buckets and labels has a direct impact on the number of Prometheus time series, you can selectively enable labels that you are interested in using the `PROMETHEUS_ENABLED_LABELS` environment variable. The supported labels are:
 
-* `buildstrategy`
-* `namespace`
-* `build`
-* `buildrun`
+* buildstrategy
+* namespace
+* build
+* buildrun
 
 Use a comma-separated value to enable multiple labels. For example:
 
@@ -72,8 +71,7 @@ export PROMETHEUS_ENABLED_LABELS=buildstrategy,namespace,build
 make local
 ```
 
-When you deploy the build controller in a Kubernetes cluster, you need to extend the `spec.containers[0].spec.env` section of the sample deployment file, [`500-controller.yaml`](https://github.com/shipwright-io/build/blob/main/deploy/500-controller.yaml).  
-Add an additional entry:
+When you deploy the build controller in a Kubernetes cluster, you need to extend the `spec.containers[0].spec.env` section of the sample deployment file, [controller.yaml](../deploy/controller.yaml). Add an additional entry:
 
 ```yaml
 [...]
