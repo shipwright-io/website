@@ -20,24 +20,11 @@ The resource `BuildRun` (`buildruns.dev/v1alpha1`) is the build process of a `Bu
 
 A `BuildRun` resource allows the user to define:
 
-- The `BuildRun` _name_, through which the user can monitor the status of the image construction.
+- The `BuildRun` name, through which the user can monitor the status of the image construction.
 - A referenced `Build` instance to use during the build construction.
-- A [service account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) for hosting all related secrets in order to build the image.
+- A service account for hosting all related secrets in order to build the image.
 
-A `BuildRun` invocation can be concise:
-
-```yaml
-apiVersion: build.dev/v1alpha1
-kind: BuildRun
-metadata:
-  name: kaniko-golang-buildrun
-spec:
-  buildRef:
-    name: kaniko-golang-build
-```
-
-As the build runs, the status of the `BuildRun` object is updated with the current progress. Work
-is in progress to standardize this status reporting with status conditions.
+A `BuildRun` is available within a namespace.
 
 ## BuildRun Controller
 
@@ -67,6 +54,7 @@ The `BuildRun` definition supports the following fields:
   - `spec.serviceAccount` - Refers to the SA to use when building the image. (_defaults to the `default` SA_)
   - `spec.timeout` - Defines a custom timeout. The value needs to be parsable by [ParseDuration](https://golang.org/pkg/time/#ParseDuration), for example `5m`. The value overwrites the value that is defined in the `Build`.
   - `spec.output.image` - Refers to a custom location where the generated image would be pushed. The value will overwrite the `output.image` value which is defined in `Build`. ( Note: other properties of the output, for example, the credentials cannot be specified in the buildRun spec. )
+  - `spec.output.credentials.name` - Reference an existing secret to get access to the container registry. This secret will be added to the service account along with the ones requested by the `Build`.
 
 ### Defining the BuildRef
 
@@ -84,7 +72,7 @@ spec:
 
 ### Defining the ServiceAccount
 
-A `BuildRun` resource can define a ServiceAccount to use. Usually this SA will host all related secrets referenced on the `Build` resource, for example:
+A `BuildRun` resource can define a serviceaccount to use. Usually this SA will host all related secrets referenced on the `Build` resource, for example:
 
 ```yaml
 apiVersion: shipwright.io/v1alpha1
@@ -136,11 +124,20 @@ The following table illustrates the different states a BuildRun can have under i
 
 | Status | Reason | CompletionTime is set | Description |
 | --- | --- | --- | --- |
-| Unknown | Pending   | No  | The BuildRun is waiting on a Pod in status Pending. |
-| Unknown | Running   | No  | The BuildRun has been validate and started to perform its work. |
-| True    | Succeeded | Yes | The BuildRun Pod is done. |
-| False    | Failed | Yes | The BuildRun failed in one of the steps. |
-| False    | BuildRunTimeout | Yes | The BuildRun timed out. |
+| Unknown | Pending                       | No  | The BuildRun is waiting on a Pod in status Pending. |
+| Unknown | Running                       | No  | The BuildRun has been validate and started to perform its work. |
+| True    | Succeeded                     | Yes | The BuildRun Pod is done. |
+| False    | Failed                       | Yes | The BuildRun failed in one of the steps. |
+| False    | BuildRunTimeout              | Yes | The BuildRun timed out. |
+| False    | UnknownStrategyKind          | Yes | The Build specified strategy Kind is unknown. (_options: ClusterBuildStrategy or BuildStrategy_) |
+| False    | ClusterBuildStrategyNotFound | Yes | The referenced cluster strategy was not found in the cluster. |
+| False    | BuildStrategyNotFound        | Yes | The referenced namespaced strategy was not found in the cluster. |
+| False    | SetOwnerReferenceFailed      | Yes | Setting ownerreferences from the BuildRun to the related TaskRun failed.  |
+| False    | TaskRunIsMissing             | Yes | The BuildRun related TaskRun was not found. |
+| False    | TaskRunGenerationFailed      | Yes | The generation of a TaskRun spec failed. |
+| False    | ServiceAccountNotFound       | Yes | The referenced service account was not found in the cluster. |
+| False    | BuildRegistrationFailed      | Yes | The related Build in the BuildRun is on a Failed state. |
+| False    | BuildNotFound                | Yes | The related Build in the BuildRun was not found. |
 
 _Note_: We heavily rely on the Tekton TaskRun [Conditions](https://github.com/tektoncd/pipeline/blob/main/docs/taskruns.md#monitoring-execution-status) for populating the BuildRun ones, with some exceptions.
 
