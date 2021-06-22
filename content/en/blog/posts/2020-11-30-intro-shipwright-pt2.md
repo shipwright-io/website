@@ -137,7 +137,7 @@ spec:
 ```
 
 Builds can be extended to push to private registries, use a different Dockerfile, and more. Read the
-[docs](https://github.com/shipwright-io/build/blob/master/docs/build.md) for a deeper dive on what
+[docs](https://github.com/shipwright-io/build/blob/main/docs/build.md) for a deeper dive on what
 is possible.
 
 ### BuildRun

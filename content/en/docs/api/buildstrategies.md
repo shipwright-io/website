@@ -32,7 +32,7 @@ There are two types of strategy API: the `ClusterBuildStrategy` (`clusterbuildst
 
 ## Available ClusterBuildStrategies
 
-Well-known strategies can be boostrapped from [GitHub](https://github.com/shipwright-io/build/tree/master/samples/buildstrategy). The current supported Cluster BuildStrategy are:
+Well-known strategies can be boostrapped from [GitHub](https://github.com/shipwright-io/build/tree/main/samples/buildstrategy). The current supported Cluster BuildStrategy are:
 
 - [buildah](../samples/buildstrategy/buildah/buildstrategy_buildah_cr.yaml)
 - [buildpacks-v3-heroku](../samples/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_cr.yaml)
