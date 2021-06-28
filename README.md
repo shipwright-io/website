@@ -18,7 +18,7 @@ To use this repository, you need the following installed locally:
 Once installed, clone the repository and navigate to the directory:
 
 ```bash
-$ git clone https://github.com/shipwright-io/website.git
+$ git clone --recurse-submodules --depth 1 https://github.com/shipwright-io/website.git
 $ cd website
 ```
 
