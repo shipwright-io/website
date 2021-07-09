@@ -48,9 +48,8 @@ Shipwright's Build API consists of four core
 1. [`Build`](/docs/api/build/) - defines what to build, and where the application should be delivered.
 1. [`BuildStrategy` and `ClusterBuildStrategy`](/docs/api/buildstrategies/) - defines how to build an application for an image
    building tool.
-1. [`BuildRun`](/docs/api/buildrun/) - invokes the build.  
+1. [`BuildRun`](/docs/api/buildrun/) - invokes the build.
    You create a `BuildRun` to tell Shipwright to start building your application.
-
 
 ### Build
 
@@ -126,9 +125,9 @@ spec:
 
 ### BuildRun
 
-Each `BuildRun` object invokes a build on your cluster. You can think of these as a Kubernetes 
+Each `BuildRun` object invokes a build on your cluster. You can think of these as a Kubernetes
 `Jobs` or Tekton `TaskRuns` - they represent a workload on your cluster, ultimately resulting in a
-running `Pod`. See [`BuildRun`](/docs/buildrun/) for more details.
+running `Pod`. See [`BuildRun`](/docs/api/buildrun/) for more details.
 
 ## Further reading
 
