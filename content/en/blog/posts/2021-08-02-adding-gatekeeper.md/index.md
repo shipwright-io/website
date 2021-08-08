@@ -16,7 +16,7 @@ resources:
 
 ## Only allow builds of allowed sources
 
-Unless you are using a tool like [source-to-image](https://github.com/openshift/source-to-image) to build images without root, there are risks to building arbitrary Docker images within your cluster. Because of these risks, an organization may want to limit builds to trusted sources, such as specific github organizations or an internally hosted git server. This is an example of how that can be configured using Gatekeeper.
+Unless you are able to build images without root access in the build-process, there are risks to building arbitrary [Open Container Initiative (OCI)](https://opencontainers.org/) images within your cluster. Because of these risks, an organization may want to limit builds to trusted sources, such as specific github organizations or an internally hosted git server. This is an example of how that can be configured using Gatekeeper.
 
 ### Step 0. Install Gatekeeper
 
