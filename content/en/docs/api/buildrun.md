@@ -55,6 +55,7 @@ The `BuildRun` definition supports the following fields:
   - `spec.timeout` - Defines a custom timeout. The value needs to be parsable by [ParseDuration](https://golang.org/pkg/time/#ParseDuration), for example `5m`. The value overwrites the value that is defined in the `Build`.
   - `spec.output.image` - Refers to a custom location where the generated image would be pushed. The value will overwrite the `output.image` value which is defined in `Build`. ( Note: other properties of the output, for example, the credentials cannot be specified in the buildRun spec. )
   - `spec.output.credentials.name` - Reference an existing secret to get access to the container registry. This secret will be added to the service account along with the ones requested by the `Build`.
+  - `spec.env` - Specifies additional environment variables that should be passed to the build container. Overrides any environment variables that are specified in the `Build` resource.
 
 ### Defining the BuildRef
 
@@ -84,6 +85,25 @@ spec:
     name: buildpack-nodejs-build-namespaced
   serviceAccount:
     name: pipeline
+```
+
+### Specifying Environment Variables
+
+A `BuildRun` resource can reference a `Build` resource, that indicates what image to build. For example:
+
+```yaml
+apiVersion: shipwright.io/v1alpha1
+kind: BuildRun
+metadata:
+  name: buildpack-nodejs-buildrun-namespaced
+spec:
+  buildRef:
+    name: buildpack-nodejs-build-namespaced
+  env:
+    - name: EXAMPLE_VAR_1
+      value: "example-value-1"
+    - name: EXAMPLE_VAR_2
+      value: "example-value-2"
 ```
 
 You can also use set the `spec.serviceAccount.generate` path to `true`. This will generate the service account during runtime for you.

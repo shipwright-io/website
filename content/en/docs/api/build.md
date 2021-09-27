@@ -24,6 +24,7 @@ A `Build` resource allows the user to define:
 - builder
 - dockerfile
 - output
+- envs
 
 A `Build` is available within a namespace.
 
@@ -54,6 +55,8 @@ In order to prevent users from triggering `BuildRuns` (_execution of a Build_) t
 | MultipleSecretRefNotFound | More than one secret is missing. At the moment, only three paths on a Build can specify a secret. |
 | RuntimePathsCanNotBeEmpty | The Runtime feature is used, but the runtime path was not defined. This is mandatory. |
 | RemoteRepositoryUnreachable | The defined `spec.source.url` was not found. This validation only take place for http/https protocols. |
+| SpecEnvNameCanNotBeBlank | Indicates that the name for a user provided environment variable is blank. |
+| SpecEnvValueCanNotBeBlank | Indicates that the value for a user provided environment variable is blank. |
 
 ## Configuring a Build
 
@@ -75,6 +78,7 @@ The `Build` definition supports the following fields:
   - `spec.sources` - [Sources](#Sources) describes a slice of artifacts that will be imported into project context, before the actual build process starts.
   - `spec.runtime` - Runtime-Image settings, to be used for a multi-stage build. ⚠️ Deprecated
   - `spec.timeout` - Defines a custom timeout. The value needs to be parsable by [ParseDuration](https://golang.org/pkg/time/#ParseDuration), for example `5m`. The default is ten minutes. The value can be overwritten in the `BuildRun`.
+  - `spec.env` - Specifies additional environment variables that should be passed to the build container.
   - `metadata.annotations[build.shipwright.io/build-run-deletion]` - Defines if delete all related BuildRuns when deleting the Build. The default is `false`.
 
 ### Defining the Source
@@ -142,6 +146,24 @@ spec:
   source:
     url: https://github.com/shipwright-io/sample-go
     contextDir: docker-build
+```
+
+Example of a `Build` that specifies environment variables:
+
+```yaml
+apiVersion: shipwright.io/v1alpha1
+kind: Build
+metadata:
+  name: buildah-golang-build
+spec:
+  source:
+    url: https://github.com/shipwright-io/sample-go
+    contextDir: docker-build
+  env:
+    - name: EXAMPLE_VAR_1
+      value: "example-value-1"
+    - name: EXAMPLE_VAR_2
+      value: "example-value-2"
 ```
 
 ### Defining the Strategy
