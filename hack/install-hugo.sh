@@ -10,6 +10,7 @@ mkdir -p ${tmpDir}
 pushd ${tmpDir}
 wget "https://github.com/gohugoio/hugo/releases/download/v${hugoVersion}/hugo_extended_${hugoVersion}_${hugoOS}-64bit.tar.gz"
 tar -xzvf "hugo_extended_${hugoVersion}_${hugoOS}-64bit.tar.gz"
+mkdir -p ${installDir}
 mv hugo ${installDir}
 popd
 rm -rf ${tmpDir}
