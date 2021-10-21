@@ -16,7 +16,7 @@ weight: 10
 
 ## Overview
 
-A `Build` resource allows the user to define:
+A `Build` resource enables the user to define:
 
 - source
 - sources
@@ -41,53 +41,53 @@ When the controller reconciles it:
 
 ## Build Validations
 
-In order to prevent users from triggering `BuildRuns` (_execution of a Build_) that will eventually fail because of wrong or missing dependencies or configuration settings, the Build controller will validate them in advance. If all validations are successful, users can expect a `Succeeded` `Status.Reason`, however if any of the validations failed, users can rely on the `Status.Reason` and `Status.Message` fields, in order to understand the root cause.
+To prevent users from triggering `BuildRuns` (_execution of a Build_) that will eventually fail because of wrong or missing dependencies or configuration settings, the Build controller will validate them in advance. If all validations are successful, users can expect a `Succeeded` `Status.Reason`. However, if any validations fail, users can rely on the `Status.Reason` and `Status.Message` fields to understand the root cause.
 
 | Status.Reason | Description |
 | --- | --- |
 | BuildStrategyNotFound   | The referenced namespace-scope strategy doesn't exist. |
 | ClusterBuildStrategyNotFound   | The referenced cluster-scope strategy doesn't exist. |
-| SetOwnerReferenceFailed   | Setting ownerreferences between a Build and a BuildRun failed. This is triggered when making use of the `build.shipwright.io/build-run-deletion` annotation in a Build. |
+| SetOwnerReferenceFailed   | Setting ownerreferences between a Build and a BuildRun failed. This message is triggered when making use of the `build.shipwright.io/build-run-deletion` annotation in a Build. |
 | SpecSourceSecretRefNotFound | The secret used to authenticate to git doesn't exist. |
 | SpecOutputSecretRefNotFound | The secret used to authenticate to the container registry doesn't exist. |
 | SpecBuilderSecretRefNotFound | The secret used to authenticate to the container registry doesn't exist.|
 | MultipleSecretRefNotFound | More than one secret is missing. At the moment, only three paths on a Build can specify a secret. |
-| RuntimePathsCanNotBeEmpty | The Runtime feature is used, but the runtime path was not defined. This is mandatory. |
-| RemoteRepositoryUnreachable | The defined `spec.source.url` was not found. This validation only take place for http/https protocols. |
+| RuntimePathsCanNotBeEmpty | The Runtime feature is used, but the runtime path was not defined. This path is mandatory. |
+| RemoteRepositoryUnreachable | The defined `spec.source.url` was not found. This validation only takes place for HTTP/HTTPS protocols. |
 
 ## Configuring a Build
 
 The `Build` definition supports the following fields:
 
 - Required:
-  - [`apiVersion`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Specifies the API version, for example `shipwright.io/v1alpha1`.
-  - [`kind`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Specifies the Kind type, for example `Build`.
-  - [`metadata`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Metadata that identify the CRD instance, for example the name of the `Build`.
-  - `spec.source.URL` - Refers to the Git repository containing the source code.
-  - `spec.strategy` - Refers to the `BuildStrategy` to be used, see the [examples](../samples/buildstrategy)
-  - `spec.builder.image` - Refers to the image containing the build tools to build the source code. (_Use this path for Dockerless strategies, this is just required for `source-to-image` buildStrategy_)
-  - `spec.output`- Refers to the location where the generated image would be pushed.
+  - [`apiVersion`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - The API version. For example, `shipwright.io/v1alpha1`.
+  - [`kind`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - The Kind type. For example, `Build`.
+  - [`metadata`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Metadata that identify the CRD instance. For example, the name of the `Build`.
+  - `spec.source.URL` - The Git repository containing the source code.
+  - `spec.strategy` - The `BuildStrategy` to be used, see the [examples](../samples/buildstrategy)
+  - `spec.builder.image` - The image containing the build tools to build the source code. (_Use this path for Dockerless strategies. This is required for the `source-to-image` buildStrategy_)
+  - `spec.output`- The location where the generated image is pushed.
   - `spec.output.credentials.name`- Reference an existing secret to get access to the container registry.
 
 - Optional:
-  - `spec.parameters` - Refers to a list of `name-value` that could be used to loosely type parameters in the `BuildStrategy`.
+  - `spec.parameters` - A list of `name-value` that could be used to loosely type parameters in the `BuildStrategy`.
   - `spec.dockerfile` - Path to a Dockerfile to be used for building an image. (_Use this path for strategies that require a Dockerfile_)
-  - `spec.sources` - [Sources](#Sources) describes a slice of artifacts that will be imported into project context, before the actual build process starts.
-  - `spec.runtime` - Runtime-Image settings, to be used for a multi-stage build. ⚠️ Deprecated
-  - `spec.timeout` - Defines a custom timeout. The value needs to be parsable by [ParseDuration](https://golang.org/pkg/time/#ParseDuration), for example `5m`. The default is ten minutes. The value can be overwritten in the `BuildRun`.
+  - `spec.sources` - [Sources](#Sources) describes a slice of artifacts to import into project context before the actual build process starts.
+  - `spec.runtime` - Runtime-Image settings to use for a multi-stage build. ⚠️ Deprecated
+  - `spec.timeout` - Defines a custom timeout. The value must be parsable by [ParseDuration](https://golang.org/pkg/time/#ParseDuration). For example, `5m`. The default is ten minutes. The value can be overwritten in the `BuildRun`.
   - `metadata.annotations[build.shipwright.io/build-run-deletion]` - Defines if delete all related BuildRuns when deleting the Build. The default is `false`.
 
 ### Defining the Source
 
 A `Build` resource can specify a Git source, together with other parameters like:
 
-- `source.credentials.name` - For private repositories, the name is a reference to an existing secret on the same namespace containing the `ssh` data.
-- `source.revision` - An specific revision to select from the source repository, this can be a commit or branch name. If not defined, it will fallback to the git repository default branch.
-- `source.contextDir` - For repositories where the source code is not located at the root folder, you can specify this path here. Currently, only supported by `buildah`, `kaniko` and `buildpacks` build strategies.
+- `source.credentials.name` - For private repositories, the name refers to an existing secret on the same namespace containing the `ssh` data.
+- `source.revision` - An specific revision to select from the source repository; this can be a commit or branch name. If not defined, it will fall back to the git repository default branch.
+- `source.contextDir` - For repositories where the source code is not located at the root folder, you can specify this path here. Currently, only supported by `buildah`, `kaniko`, and `buildpacks` build strategies.
 
 By default, the Build controller won't validate that the Git repository exists. If the validation is desired, users can define the `build.shipwright.io/verify.repository` annotation with `true` explicitly. For example:
 
-Example of a `Build` with the **build.shipwright.io/verify.repository** annotation, in order to enable the `spec.source.url` validation.
+Example of a `Build` with the **build.shipwright.io/verify.repository** annotation to enable the `spec.source.url` validation.
 
 ```yaml
 apiVersion: shipwright.io/v1alpha1
@@ -102,9 +102,11 @@ spec:
     contextDir: docker-build
 ```
 
-_Note_: The Build controller only validates two scenarios. The first one where the endpoint uses an `http/https` protocol, the second one when a `ssh` protocol (_e.g. `git@`_) is defined and none referenced secret was provided(_e.g. source.credentials.name_).
+_Note_: The Build controller validates only two scenarios:
+- When the endpoint uses an `http/https` protocol.
+- When the `ssh` protocol (_e.g., `git@`_) is defined but no referenced secret was provided(_e.g., source.credentials.name_).
 
-Example of a `Build` with a source with **credentials** defined by the user.
+The following example shows a `Build` where you use `credentials` to define a source:
 
 ```yaml
 apiVersion: shipwright.io/v1alpha1
@@ -118,7 +120,7 @@ spec:
       name: source-repository-credentials
 ```
 
-Example of a `Build` with a source that specifies an specific subfolder on the repository.
+Example of a `Build` with a source that specifies a subfolder on the repository.
 
 ```yaml
 apiVersion: shipwright.io/v1alpha1
@@ -131,7 +133,7 @@ spec:
     contextDir: renamed
 ```
 
-Example of a `Build` that specifies an specific branch on the git repository:
+Example of a `Build` that specifies a branch on the git repository:
 
 ```yaml
 apiVersion: shipwright.io/v1alpha1
@@ -155,7 +157,7 @@ A `Build` resource can specify the `BuildStrategy` to use, these are:
 - [ko](buildstrategies.md#ko)
 - [Source-to-Image](buildstrategies.md#source-to-image)
 
-Defining the strategy is straightforward, you need to define the `name` and the `kind`. For example:
+Defining the strategy is straightforward. You define the `name` and `kind`. For example:
 
 ```yaml
 apiVersion: shipwright.io/v1alpha1
@@ -170,7 +172,9 @@ spec:
 
 ### Defining the Builder or Dockerfile
 
-A `Build` resource can specify an image containing the tools to build the final image. Users can do this via the `spec.builder` or the `spec.dockerfile`. For example, the user choose  the `Dockerfile` file under the source repository.
+In a `Build` resource, you define the image that contains the tools for building the final image by specifying the value of `spec.dockerfile` or `spec.builder`.
+
+In the following example, the `Build` resource sets the value of `spec.dockerfile` to `Dockerfile` under the source repository:
 
 ```yaml
 apiVersion: shipwright.io/v1alpha1
@@ -187,7 +191,7 @@ spec:
   dockerfile: Dockerfile
 ```
 
-Another example, when the user chooses to use a `builder` image ( This is required for `source-to-image` buildStrategy, because for different code languages, they have different builders. ):
+Or, in the following example, the `Build` resource sets the value of `spec.builder.image` to an image that can build the source code. This part of the source-to-image (S2I) build strategy, which uses different builders for different code languages.
 
 ```yaml
 apiVersion: shipwright.io/v1alpha1
@@ -207,9 +211,9 @@ spec:
 
 ### Defining the Output
 
-A `Build` resource can specify the output where the image should be pushed. For external private registries it is recommended to specify a secret with the related data to access it.
+A `Build` resource can specify the output where the image should be pushed. For external private registries, it is recommended to specify a secret with the related data to access it.
 
-For example, the user specify a public registry:
+For example, the user specifies a public registry:
 
 ```yaml
 apiVersion: shipwright.io/v1alpha1
@@ -229,7 +233,7 @@ spec:
     image: image-registry.openshift-image-registry.svc:5000/build-examples/nodejs-ex
 ```
 
-Another example, is when the user specifies a private registry:
+Another example is when the user specifies a private registry:
 
 ```yaml
 apiVersion: shipwright.io/v1alpha1
@@ -266,25 +270,25 @@ spec:
       url: https://gist.github.com/project/image.png
 ```
 
-Under `.spec.sources` we have the following attributes:
+`.spec.sources` has the following attributes:
 
-- `.name`: represents the name of resource, required attribute.
-- `.url`: universal resource location (URL), required attribute.
+- `.name`: Required. The name of the resource.
+- `.url`: Required. The Universal Resource Locator (URL) of the resource.
 
-When downloading artifacts the process is executed in the same directory where the application source-code is located, by default `/workspace/source`.
+When downloading artifacts, the process runs in the same directory where the application source-code is located, by default `/workspace/source`.
 
-Additionally, we have plan to keep evolving `.spec.sources` by adding more types of remote data declaration, this API field works as an extension point to support external and internal resource locations.
+Additionally, we plan to keep evolving `.spec.sources` by adding more types of remote data declaration. This API field works as an extension point to support external and internal resource locations.
 
-At this initial stage, authentication is not supported therefore you can only download from sources without this mechanism in place.
+At this initial stage, authentication is not supported. Therefore, you can only download from sources without this mechanism in place.
 
 ### Runtime-Image
 
 **⚠️ Deprecated:** This feature is deprecated and will be removed in a future release.
 See https://github.com/shipwright-io/community/blob/main/ships/deprecate-runtime.md for more information.
 
-Runtime-image is a new image composed with build-strategy outcome. On which you can compose a multi-stage image build, copying parts out the original image into a new one. This feature allows replacing the base-image of any container-image, creating leaner images, and other use-cases.
+A runtime image is a new image composed with build strategy outcome. On which you can compose a multi-stage image build, copying parts from the original image into a new one. This feature enables replacing the base image of any container image, creating leaner images, and other use-cases.
 
-The following examples illustrates how to the `runtime`:
+The following examples illustrate how to the `runtime`:
 
 ```yml
 apiVersion: shipwright.io/v1alpha1
@@ -315,30 +319,30 @@ spec:
       - start
 ```
 
-This build will produce a Node.js based application where a single directory is imported from the image built by buildpacks strategy. The data copied is using the `.spec.runtime.user` directive, and the image also runs based on it.
+This build will produce a Node.js-based application where a single directory is imported from the image built by buildpacks strategy. The data copied uses the `.spec.runtime.user` directive, and the image also runs based on it.
 
 Please consider the description of the attributes under `.spec.runtime`:
 
-- `.base`: specifies the runtime base-image to be used, using Image as type
+- `.base`: The runtime base-image to be used, using Image as type
 - `.workDir`: path to WORKDIR in runtime-image
 - `.env`: runtime-image additional environment variables, key-value
 - `.labels`: runtime-image additional labels, key-value
 - `.run`: arbitrary commands to be executed as `RUN` blocks, before `COPY`
 - `.user.name`: username employed on `USER` directive, and also to change ownership of files copied to the runtime-image
 - `.user.group`: group name (or GID), employed to change ownership and on `USER` directive
-- `.paths`: list of files or directory paths to be copied to runtime-image, those can be defined as `<source>:<destination>` split by colon (`:`). You can use the `$(workspace)` placeholder to access the directory where your source repository is cloned, if `spec.source.contextDir` is defined, then `$(workspace)` to context directory location
+- `.paths`: list of files or directory paths to be copied to runtime-image, those can be defined as `<source>:<destination>` split by a colon (`:`). You can use the `$(workspace)` placeholder to access the directory where your source repository is cloned, if `spec.source.contextDir` is defined, then `$(workspace)` to context directory location
 - `.entrypoint`: entrypoint command, specified as a list
 
 > ⚠️ **Image Tag Overwrite**
 >
-> Specifying the runtime section will cause a `BuildRun` to push `spec.output.image` twice. First, the image produced by chosen `BuildStrategy` is pushed, and next it gets reused to construct the runtime-image, which is pushed again, overwriting `BuildStrategy` outcome.
-> Be aware, specially in situations where the image push action triggers automation steps. Since the same tag will be reused, you might need to take this in consideration when using runtime-images.
+> Specifying the runtime section causes a `BuildRun` to push `spec.output.image` twice. First, the image produced by chosen `BuildStrategy` is pushed, and next, it gets reused to construct the runtime image, which is pushed again, overwriting `BuildStrategy` outcome.
+> Be aware, especially in situations where the image push action triggers automation steps. Since the same tag is reused, you might need to consider this when using runtime images.
 
-Under the cover, the runtime image will be an additional step in the generated Task spec of the TaskRun. It uses [Kaniko](https://github.com/GoogleContainerTools/kaniko) to run a container build using the `gcr.io/kaniko-project/executor:v1.6.0` image. You can overwrite this image by adding the environment variable `KANIKO_CONTAINER_IMAGE` to the [build controller deployment](../deploy/controller.yaml).
+Under the cover, the runtime image will be an additional step in the generated `Task` spec of the `TaskRun`. It uses [Kaniko](https://github.com/GoogleContainerTools/kaniko) to run a container build using the `gcr.io/kaniko-project/executor:v1.6.0` image. You can overwrite this image by adding the environment variable `KANIKO_CONTAINER_IMAGE` to the [build controller deployment](../deploy/controller.yaml).
 
 ## BuildRun deletion
 
-A `Build` can automatically delete a related `BuildRun`. To enable this feature set the  `build.shipwright.io/build-run-deletion` annotation to `true` in the `Build` instance. By default the annotation is never present in a `Build` definition. See an example of how to define this annotation:
+A `Build` can automatically delete a related `BuildRun`. To enable this feature set the `build.shipwright.io/build-run-deletion` annotation to `true` in the `Build` instance. By default, the annotation is never present in a `Build` definition. See an example of how to define this annotation:
 
 ```yaml
 apiVersion: shipwright.io/v1alpha1

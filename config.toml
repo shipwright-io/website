@@ -3,7 +3,7 @@ title = "Shipwright"
 
 enableRobotsTXT = true
 
-# Hugo allows theme composition (and inheritance). The precedence is from left to right.
+# Hugo enables theme composition (and inheritance). The precedence is from left to right.
 theme = ["docsy"]
 
 # Will give values to .Lastmod etc.
@@ -82,13 +82,13 @@ copyright = "The Shipwright Contributors"
 # This menu appears only if you have at least one [params.versions] set.
 version_menu = "Releases"
 
-# Flag used in the "version-banner" partial to decide whether to display a 
+# Flag used in the "version-banner" partial to decide whether to display a
 # banner on every page indicating that this is an archived version of the docs.
 # Set this flag to "true" if you want to display the banner.
 archived_version = false
 
 # The version number for the version of the docs represented in this doc set.
-# Used in the "version-banner" partial to display a version number for the 
+# Used in the "version-banner" partial to display a version number for the
 # current doc set.
 version = "0.0"
 
@@ -132,12 +132,12 @@ footer_about_disable = false
 # add "hide_feedback: true" to the page's front matter.
 [params.ui.feedback]
 enable = true
-# The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
+# The responses that the reader sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
 yes = 'Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
 no = 'Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
 
 # Adds a reading time to the top of each doc.
-# If you want this feature, but occasionally need to remove the Reading time from a single page, 
+# If you want this feature, but occasionally need to remove the Reading time from a single page,
 # add "hide_readingtime: true" to the page's front matter
 [params.ui.readingtime]
 enable = false

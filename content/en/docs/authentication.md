@@ -50,7 +50,7 @@ There are two ways for authenticating into Git (_applies to both GitLab or GitHu
 
 ### SSH authentication
 
-For the SSH authentication you must use the tekton annotations to specify the hostname(s) of the git repository providers that you use. This is github.com for GitHub, or gitlab.com for GitLab.
+For the SSH authentication you must use the Tekton annotations to specify the hostname(s) of the git repository providers that you use. This is github.com for GitHub, or gitlab.com for GitLab.
 
 As seen in the following example, there are three things to notice:
 

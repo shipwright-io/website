@@ -1,5 +1,5 @@
 ---
-title: BuildStrategy and ClusterBuildStrategy 
+title: BuildStrategy and ClusterBuildStrategy
 weight: 20
 ---
 
@@ -32,7 +32,7 @@ weight: 20
 
 ## Overview
 
-There are two types of strategies, the `ClusterBuildStrategy` (`clusterbuildstrategies.shipwright.io/v1alpha1`) and the `BuildStrategy` (`buildstrategies.shipwright.io/v1alpha1`). Both strategies define a shared group of steps, needed to fullfil the application build.
+There are two types of strategies, the `ClusterBuildStrategy` (`clusterbuildstrategies.shipwright.io/v1alpha1`) and the `BuildStrategy` (`buildstrategies.shipwright.io/v1alpha1`). Both strategies define a shared group of steps that are needed to fulfill the application build.
 
 A `ClusterBuildStrategy` is available cluster-wide, while a `BuildStrategy` is available within a namespace.
 
@@ -87,11 +87,12 @@ The [buildpacks-v3][buildpacks] BuildStrategy/ClusterBuildStrategy uses a Cloud 
 
 You can install the `BuildStrategy` in your namespace or install the `ClusterBuildStrategy` at cluster scope so that it can be shared across namespaces.
 
-To install the cluster scope strategy, use (below is a heroku example, you can also use paketo sample):
+To install the cluster scope strategy, for example, use:
 
 ```sh
 kubectl apply -f samples/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_cr.yaml
 ```
+(Although the preceding example uses Heroku, you can also use Paketo.)
 
 To install the namespaced scope strategy, use:
 
@@ -119,7 +120,7 @@ kubectl apply -f samples/buildstrategy/kaniko/buildstrategy_kaniko_cr.yaml
 
 [BuildKit](https://github.com/moby/buildkit) is composed of the `buildctl` client and the `buildkitd` daemon. For the `buildkit` ClusterBuildStrategy, it runs on a [daemonless](https://github.com/moby/buildkit#daemonless) mode, where both client and ephemeral daemon run in a single container. In addition, it runs without privileges (_[rootless](https://github.com/moby/buildkit/blob/master/docs/rootless.md)_).
 
-The `buildkit-insecure` ClusterBuildStrategy exists to support users pushing to an insecure container registry. We use this strategy at the moment only for testing purposes against a local in-cluster registry. In the future, this strategy will be removed in favor of a single one where users can parameterize the secure/insecure behaviour.
+The `buildkit-insecure` ClusterBuildStrategy exists to support users pushing to an insecure container registry. We use this strategy at the moment only for testing purposes against a local in-cluster registry. In the future, this strategy will be removed in favor of a single one where users can parameterize the secure/insecure behavior.
 
 ### Cache Exporters
 
@@ -129,16 +130,16 @@ By default, the `buildkit` ClusterBuildStrategy will use caching to optimize the
 
 The `buildkit` ClusterBuildStrategy currently locks the following parameters:
 
-- A `Dockerfile` name needs to be `Dockerfile`, this is currently not configurable.
-- Exporter caches are enabled by default, this is currently not configurable.
+- A `Dockerfile` name must be `Dockerfile`. This is currently not configurable.
+- Exporter caches are enabled by default. This is currently not configurable.
 - To allow running rootless, it requires both [AppArmor](https://kubernetes.io/docs/tutorials/clusters/apparmor/) as well as [SecComp](https://kubernetes.io/docs/tutorials/clusters/seccomp/) to be disabled using the `unconfined` profile.
 
 ### Usage in Clusters with Pod Security Standards
 
-The BuildKit strategy contains fields with regards to security settings. It therefore depends on the respective cluster setup and administrative configuration. These settings are:
+The BuildKit strategy contains fields for security settings and therefore depends on the respective cluster setup and administrative configuration. These settings are:
 
-- Defining the `unconfined` profile for both AppArmor and seccomp as required by the underlying `rootlesskit`.
-- The `allowPrivilegeEscalation` settings is set to `true` to be able to use binaries that have the `setuid` bit set in order to run with "root" level privileges. In case of BuildKit, this is required by `rootlesskit` in order to set the user namespace mapping file `/proc/<pid>/uid_map`.
+- Defining the `unconfined` profile for both AppArmor and seccomp, as required by the underlying `rootlesskit`.
+- The `allowPrivilegeEscalation` setting is set to `true` to be able to use binaries that have the `setuid` bit set to run with "root" level privileges. In case of BuildKit, this is required by `rootlesskit` to set the user namespace mapping file `/proc/<pid>/uid_map`.
 - Use of non-root user with UID 1000/GID 1000 as the `runAsUser`.
 
 These settings have no effect in case Pod Security Standards are not used.
@@ -169,11 +170,11 @@ kubectl apply -f samples/buildstrategy/ko/buildstrategy_ko_cr.yaml
 
 **Note**: The build strategy currently uses the `spec.contextDir` of the Build in a different way than this property is designed for: the Git repository must be a Go module with the go.mod file at the root. The `contextDir` specifies the path to the main package. You can check the [example](../samples/build/build_ko_cr.yaml) which is set up to build the Shipwright Build controller. This behavior will eventually be corrected once [Exhaustive list of generalized Build API/CRD attributes #184](https://github.com/shipwright-io/build/issues/184) / [Custom attributes from the Build CR could be used as parameters while defining a BuildStrategy #537](https://github.com/shipwright-io/build/issues/537) are done.
 
-**Note**: The build strategy is setup to build for the platform that your Kubernetes cluster is running. Exposing the platform configuration to the Build requires the same features mentioned on the previous note.
+**Note**: The build strategy is set up to build for the platform that your Kubernetes cluster is running. Exposing the platform configuration to the Build requires the same features mentioned in the previous note.
 
 ## Source to Image
 
-This BuildStrategy is composed by [`source-to-image`][s2i] and [`kaniko`][kaniko] in order to generate a `Dockerfile` and prepare the application to be built later on with a builder.
+This BuildStrategy is composed by [`source-to-image`][s2i] and [`kaniko`][kaniko] to generate a `Dockerfile` and prepare the application to be built later on with a builder.
 
 `s2i` requires a specially crafted image, which can be informed as `builderImage` parameter on the `Build` resource.
 
@@ -187,7 +188,7 @@ kubectl apply -f samples/buildstrategy/source-to-image/buildstrategy_source-to-i
 
 ### Build Steps
 
-1. `s2i` in order to generate a `Dockerfile` and prepare source-code for image build;
+1. `s2i` to generate a `Dockerfile` and prepare source-code for image build;
 2. `kaniko` to create and push the container image to what is defined as `output.image`;
 
 [buildpacks]: https://buildpacks.io/
@@ -201,12 +202,12 @@ kubectl apply -f samples/buildstrategy/source-to-image/buildstrategy_source-to-i
 
 ## System parameters
 
-You can use parameters when defining the steps of a build strategy to access system information as well as information provided by the user in his Build or BuildRun. The following parameters are available:
+You can use parameters when defining the steps of a build strategy to access system information as well as information provided by the user in their Build or BuildRun. The following parameters are available:
 
 | Parameter                      | Description |
 | ------------------------------ | ----------- |
 | `$(params.shp-source-root)`    | The absolute path to the directory that contains the user's sources. |
-| `$(params.shp-source-context)` | The absolute path to the context directory of the user's sources. If the user specified no value for `spec.source.contextDir` in his Build, then this value will equal the value for `$(params.shp-source-root)`. Note that this directory is not guaranteed to exist at the time the container for your step is started, you can therefore not use this parameter as a step's working directory. |
+| `$(params.shp-source-context)` | The absolute path to the context directory of the user's sources. If the user specifies no value for `spec.source.contextDir` in their Build, then this value will equal the value for `$(params.shp-source-root)`. Note that this directory is not guaranteed to exist at the time the container for your step is started, you can therefore not use this parameter as a step's working directory. |
 | `$(params.shp-output-image)`      | The URL of the image that the user wants to push as specified in the Build's `spec.output.image`, or the override from the BuildRun's `spec.output.image`. |
 
 ## System results
@@ -222,11 +223,11 @@ You can look at sample build strategies, such as [Kaniko](../samples/buildstrate
 
 ## Steps Resource Definition
 
-All strategies steps can include a definition of resources(_limits and requests_) for CPU, memory and disk. For strategies with more than one step, each step(_container_) could require more resources than others. Strategy admins are free to define the values that they consider the best fit for each step. Also, identical strategies with the same steps that are only different in their name and step resources can be installed on the cluster to allow users to create a build with smaller and larger resource requirements.
+All strategy steps can include defining resources(_limits and requests_) for CPU, memory, and disk. For strategies with more than one step, each step(_container_) could require more resources than others. Strategy admins are free to define the values that they consider the best fit for each step. Also, identical strategies with the same steps that are only different in their name and step resources can be installed on the cluster to allow users to create a build with smaller and larger resource requirements.
 
 ### Strategies with different resources
 
-If the strategy admins would require to have multiple flavours of the same strategy, where one strategy has more resources that the other. Then, multiple strategies for the same type should be defined on the cluster. In the following example, we use Kaniko as the type:
+If strategy admins require variations of the same strategy, where one strategy has more resources than the other. Then, multiple strategies for the same type should be defined on the cluster. In the following example, we use Kaniko as the type:
 
 ```yaml
 ---
@@ -319,7 +320,7 @@ spec:
           memory: 1Gi
 ```
 
-The above provides more control and flexibility for the strategy admins. For `end-users`, all they need to do, is to reference the proper strategy. For example:
+The above provides more control and flexibility for the strategy admins. For `end-users`, all they need to do is to reference the proper strategy. For example:
 
 ```yaml
 ---
@@ -339,15 +340,15 @@ spec:
 
 ### How does Tekton Pipelines handle resources
 
-The **Build** controller relies on the Tekton [pipeline controller](https://github.com/tektoncd/pipeline) to schedule the `pods` that execute the above strategy steps. In a nutshell, the **Build** controller creates on run-time a Tekton **TaskRun**, and the **TaskRun** generates a new pod in the particular namespace. In order to build an image, the pod executes all the strategy steps one-by-one.
+The **Build** controller relies on the Tekton [pipeline controller](https://github.com/tektoncd/pipeline) to schedule the `pods` that execute the above strategy steps. In a nutshell, the **Build** controller creates on run-time a Tekton **TaskRun**, and the **TaskRun** generates a new pod in the particular namespace. To build an image, the pod executes all the strategy steps one-by-one.
 
-Tekton manage each step resources **request** in a very particular way, see the [docs](https://github.com/tektoncd/pipeline/blob/main/docs/tasks.md#defining-steps). From this document, it mentions the following:
+Tekton manages each step resources **request** in a very particular way, see the [docs](https://github.com/tektoncd/pipeline/blob/main/docs/tasks.md#defining-steps). From this document, it mentions the following:
 
-> The CPU, memory, and ephemeral storage resource requests will be set to zero, or, if specified, the minimums set through LimitRanges in that Namespace, if the container image does not have the largest resource request out of all container images in the Task. This ensures that the Pod that executes the Task only requests enough resources to run a single container image in the Task rather than hoard resources for all container images in the Task at once.
+> The CPU, memory, and ephemeral storage resource requests will be set to zero, or, if specified, the minimums set through LimitRanges in that Namespace, if the container image does not have the largest resource request out of all container images in the `Task`. This ensures that the Pod that executes the `Task` only requests enough resources to run a single container image in the `Task` rather than hoard resources for all container images in the `Task` at once.
 
 ### Examples of Tekton resources management
 
-For a more concrete example, let´s take a look on the following scenarios:
+For a more concrete example, let´s take a look at the following scenarios:
 
 ---
 
@@ -361,7 +362,7 @@ If we will apply the following resources:
 
 We will see some differences between the `TaskRun` definition and the `pod` definition.
 
-For the `TaskRun`, as expected we can see the resources on each `step`, as we previously define on our [strategy](../samples/buildstrategy/buildah/buildstrategy_buildah_cr.yaml).
+As expected, for the `TaskRun`, we can see the resources on each `step`, as we previously defined on our [strategy](../samples/buildstrategy/buildah/buildstrategy_buildah_cr.yaml).
 
 ```sh
 $ kubectl -n test-build get tr buildah-golang-buildrun-9gmcx-pod-lhzbc -o json | jq '.spec.taskSpec.steps[] | select(.name == "step-buildah-bud" ) | .resources'
@@ -419,7 +420,7 @@ $ kubectl -n test-build get pods buildah-golang-buildrun-9gmcx-pod-lhzbc -o json
 }
 ```
 
-In this scenario, only one container can have the `spec.resources.requests` definition. Even when both steps have the same values, only one container will get them, the others will be set to zero.
+In this scenario, only one container can have the `spec.resources.requests` definition. Even when both steps have the same values, only one container will get them; the others will be set to zero.
 
 ---
 
@@ -473,7 +474,7 @@ If we will apply the following resources:
           memory: 100Mi  <------ See how we provide more memory to step-buildah-push, compared to the 65Mi of the other step
   ```
 
-For the `TaskRun`, as expected we can see the resources on each `step`.
+For the `TaskRun`, as expected, we can see the resources on each `step`.
 
 ```sh
 $ kubectl -n test-build get tr buildah-golang-buildrun-skgrp -o json | jq '.spec.taskSpec.steps[] | select(.name == "step-buildah-bud" ) | .resources'
@@ -530,17 +531,17 @@ $ kubectl -n test-build get pods buildah-golang-buildrun-95xq8-pod-mww8d -o json
 }
 ```
 
-In the above scenario, we can see how the maximum numbers for resource requests are distributed between containers. The container `step-buildah-push` gets the `100mi` for the memory requests, while it was the one defining the highest number. At the same time, the container `step-buildah-bud` is assigned a `0` for its memory request.
+The above scenario shows how the maximum numbers for resource requests are distributed between containers. The container `step-buildah-push` gets the `100mi` for the memory requests, while it was the one defining the highest number. At the same time, the container `step-buildah-bud` is assigned a `0` for its memory request.
 
 ---
 
 **Scenario 3.**  Namespace **with** a `LimitRange`.
 
-When a `LimitRange` exists on the namespace, `Tekton Pipeline` controller will do the same approach as stated in the above two scenarios. The difference is that for the containers that have lower values, instead of zero, they will get the `minimum values of the LimitRange`.
+When a `LimitRange` exists on the namespace, `Tekton Pipeline` controller uses the same approach as stated in the above two scenarios. The difference is that for the containers that have lower values, instead of zero, they will get the `minimum values of the LimitRange`.
 
 ## Annotations
 
-Annotations can be defined for a BuildStrategy/ClusterBuildStrategy as for any other Kubernetes object. Annotations are propagated to the TaskRun and from there, Tekton propagates them to the Pod. Use cases for this are for example:
+Annotations can be defined for a BuildStrategy/ClusterBuildStrategy as for any other Kubernetes object. Annotations are propagated to the TaskRun and from there, Tekton propagates them to the Pod. Use cases for this are, for example:
 
 - The Kubernetes [Network Traffic Shaping](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/#support-traffic-shaping) feature looks for the `kubernetes.io/ingress-bandwidth` and `kubernetes.io/egress-bandwidth` annotations to limit the network bandwidth the `Pod` is allowed to use.
 - The [AppArmor profile of a container](https://kubernetes.io/docs/tutorials/clusters/apparmor/) is defined using the `container.apparmor.security.beta.kubernetes.io/<container_name>` annotation.

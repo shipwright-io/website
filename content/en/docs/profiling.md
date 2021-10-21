@@ -37,4 +37,4 @@ Now, you can setup a local webserver to browse through the profiling data.
 go tool pprof -http localhost:8080 http://localhost:8383/debug/pprof/heap
 ```
 
-_Please note:_ For it to work, you have to have `graphviz` installed on your system, for example using `brew install graphviz`, `apt-get install graphviz`, `yum install graphviz`, or similar.
+_Please note:_ For it to work, you have to have `graphviz` installed on your system. For example, using `brew install graphviz`, `apt-get install graphviz`, `yum install graphviz`, or similar.

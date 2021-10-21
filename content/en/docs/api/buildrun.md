@@ -18,11 +18,11 @@ weight: 40
 
 The resource `BuildRun` (`buildruns.dev/v1alpha1`) is the build process of a `Build` resource definition which is executed in Kubernetes.
 
-A `BuildRun` resource allows the user to define:
+A `BuildRun` resource enables the user to define:
 
 - The `BuildRun` name, through which the user can monitor the status of the image construction.
 - A referenced `Build` instance to use during the build construction.
-- A service account for hosting all related secrets in order to build the image.
+- A service account for hosting all related secrets to build the image.
 
 A `BuildRun` is available within a namespace.
 
@@ -35,9 +35,9 @@ The controller watches for:
 
 When the controller reconciles it:
 
-- Looks for any existing owned `TaskRuns` and update its parent `BuildRun` status.
-- Retrieves the specified `SA` and sets this with the specify output secret on the `Build` resource.
-- Generates a new tekton `TaskRun` if it does not exist, and set a reference to this resource(_as a child of the controller_).
+- Looks for any existing owned `TaskRuns` and updates its parent `BuildRun` status.
+- Retrieves the specified `SA` and sets this with the specified output secret on the `Build` resource.
+- Generates a new Tekton `TaskRun` if it does not exist, and set a reference to this resource(_as a child of the controller_).
 - On any subsequent updates on the `TaskRun`, the parent `BuildRun` resource instance will be updated.
 
 ## Configuring a BuildRun
@@ -45,20 +45,20 @@ When the controller reconciles it:
 The `BuildRun` definition supports the following fields:
 
 - Required:
-  - [`apiVersion`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Specifies the API version, for example `shipwright.io/v1alpha1`.
-  - [`kind`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Specifies the Kind type, for example `BuildRun`.
-  - [`metadata`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Metadata that identify the CRD instance, for example the name of the `BuildRun`.
+  - [`apiVersion`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - The API version. For example, `shipwright.io/v1alpha1`.
+  - [`kind`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - The Kind type. For example, `BuildRun`.
+  - [`metadata`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Metadata that identify the CRD instance. For example, the name of the `BuildRun`.
   - `spec.buildRef` - Specifies an existing `Build` resource instance to use.
 
 - Optional:
-  - `spec.serviceAccount` - Refers to the SA to use when building the image. (_defaults to the `default` SA_)
-  - `spec.timeout` - Defines a custom timeout. The value needs to be parsable by [ParseDuration](https://golang.org/pkg/time/#ParseDuration), for example `5m`. The value overwrites the value that is defined in the `Build`.
-  - `spec.output.image` - Refers to a custom location where the generated image would be pushed. The value will overwrite the `output.image` value which is defined in `Build`. ( Note: other properties of the output, for example, the credentials cannot be specified in the buildRun spec. )
+  - `spec.serviceAccount` - The SA to use when building the image. (_defaults to the `default` SA_)
+  - `spec.timeout` - Defines a custom timeout. The value must be parsable by [ParseDuration](https://golang.org/pkg/time/#ParseDuration). For example, `5m`. The value overwrites the value that is defined in the `Build`.
+  - `spec.output.image` - Refers to a custom location where the generated image is pushed. The value will overwrite the `output.image` value which is defined in `Build`. (Note: other properties of the output, such as the credentials, cannot be specified in the `buildRun` spec.)
   - `spec.output.credentials.name` - Reference an existing secret to get access to the container registry. This secret will be added to the service account along with the ones requested by the `Build`.
 
 ### Defining the BuildRef
 
-A `BuildRun` resource can reference a `Build` resource, that indicates what image to build. For example:
+A `BuildRun` resource can reference a `Build` resource that indicates what image to build. For example:
 
 ```yaml
 apiVersion: shipwright.io/v1alpha1
@@ -72,7 +72,7 @@ spec:
 
 ### Defining the ServiceAccount
 
-A `BuildRun` resource can define a serviceaccount to use. Usually this SA will host all related secrets referenced on the `Build` resource, for example:
+A `BuildRun` resource can define a serviceaccount to use. Usually, this SA will host all related secrets referenced on the `Build` resource, for example:
 
 ```yaml
 apiVersion: shipwright.io/v1alpha1
@@ -108,7 +108,7 @@ NAME                    SUCCEEDED   REASON      MESSAGE                         
 buildpacks-v3-buildrun  True        Succeeded   All Steps have completed executing   4m28s       16s
 ```
 
-The above allows users to get an overview of the building mechanism state.
+The above enables users to get an overview of the building mechanism state.
 
 ### Understanding the state of a BuildRun
 
@@ -118,14 +118,14 @@ A `BuildRun` resource stores the relevant information regarding the state of the
 
 For the `BuildRun` we use a Condition of the type `Succeeded`, which is a well-known type for resources that run to completion.
 
-The `Status.Conditions` hosts different fields, like `Status`, `Reason` and `Message`. Users can expect this fields to be populated with relevant information.
+The `Status.Conditions` hosts different fields, like `Status`, `Reason` and `Message`. Users can expect these fields to be populated with relevant information.
 
 The following table illustrates the different states a BuildRun can have under its `Status.Conditions`:
 
 | Status | Reason | CompletionTime is set | Description |
 | --- | --- | --- | --- |
 | Unknown | Pending                       | No  | The BuildRun is waiting on a Pod in status Pending. |
-| Unknown | Running                       | No  | The BuildRun has been validate and started to perform its work. |
+| Unknown | Running                       | No  | The BuildRun has been validated and started to perform its work. |
 | True    | Succeeded                     | Yes | The BuildRun Pod is done. |
 | False    | Failed                       | Yes | The BuildRun failed in one of the steps. |
 | False    | BuildRunTimeout              | Yes | The BuildRun timed out. |
@@ -143,16 +143,16 @@ _Note_: We heavily rely on the Tekton TaskRun [Conditions](https://github.com/te
 
 ### Understanding failed BuildRuns
 
-To make it easier for users to understand why did a BuildRun failed, users can infer from the `Status.FailedAt` field, the pod and container where the failure took place.
+To make it easier for users to understand why did a BuildRun failed, users can infer the pod and container where the failure took place from the `Status.FailedAt` field.
 
-In addition, the `Status.Conditions` will host under the `Message` field a compacted message containing the `kubectl` command to trigger, in order to retrieve the logs.
+In addition, the `Status.Conditions` will host under the `Message` field a compacted message containing the `kubectl` command to trigger, to retrieve the logs.
 
 ### Build Snapshot
 
-For every BuildRun controller reconciliation, the `buildSpec` in the Status of the `BuildRun` is updated if an existing owned `TaskRun` is present. During this update, a `Build` resource snapshot is generated and embedded into the `status.buildSpec` path of the `BuildRun`. A `buildSpec` is just a copy of the original `Build` spec, from where the `BuildRun` executed a particular image build. The snapshot approach allows developers to see the original `Build` configuration.
+For every BuildRun controller reconciliation, the `buildSpec` in the Status of the `BuildRun` is updated if an existing owned `TaskRun` is present. During this update, a `Build` resource snapshot is generated and embedded into the `status.buildSpec` path of the `BuildRun`. A `buildSpec` is just a copy of the original `Build` spec, from where the `BuildRun` executed a particular image build. The snapshot approach enables developers to see the original `Build` configuration.
 
 ## Relationship with Tekton Tasks
 
-The `BuildRun` resource abstracts the image construction by delegating this work to the Tekton Pipeline [TaskRun](https://github.com/tektoncd/pipeline/blob/main/docs/taskruns.md). Compared to a Tekton Pipeline [Task](https://github.com/tektoncd/pipeline/blob/main/docs/tasks.md), a `TaskRun` runs all `steps` until completion of the `Task` or until a failure occurs in the `Task`.
+The `BuildRun` resource abstracts the image construction by delegating this work to the Tekton Pipeline [TaskRun](https://github.com/tektoncd/pipeline/blob/main/docs/taskruns.md). Compared to a Tekton Pipeline [`Task`](https://github.com/tektoncd/pipeline/blob/main/docs/tasks.md), a `TaskRun` runs all `steps` until completion of the `Task` or until a failure occurs in the `Task`.
 
-The `BuildRun` controller during the Reconcile will generate a new `TaskRun`. During the execution, the controller will embed in the `TaskRun` `Task` definition the requires `steps` to execute. These `steps` are define in the strategy defined in the `Build` resource, either a `ClusterBuildStrategy` or a `BuildStrategy`.
+The `BuildRun` controller during the Reconcile will generate a new `TaskRun`. During the execution, the controller will embed in the `TaskRun` `Task` definition the requires `steps` to execute. These `steps` are defined in the strategy defined in the `Build` resource, either a `ClusterBuildStrategy` or a `BuildStrategy`.

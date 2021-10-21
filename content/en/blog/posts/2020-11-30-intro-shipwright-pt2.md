@@ -17,25 +17,25 @@ build container images on Kubernetes.
 
 ## Recap - From Binaries to Images
 
-Recall in [Part 1](/blog/2020/10/21/introducing-shipwright-part-1/), developers who moved from 
+Recall in [Part 1](/blog/2020/10/21/introducing-shipwright-part-1/), developers who moved from
 VM-based deployments to [Kubernetes](https://kubernetes.io/) needed to shift their unit of delivery
 from binaries to container images. Teams adopted various tools to accomplish this task, ranging
 from [Docker/Moby](https://mobyproject.org/) to [Cloud-Native Buildpacks](https://buildpacks.io/).
 New cloud-native applications like [Jenkins-X](https://jenkins-x.io/) and
 [Tekton](https://tekton.dev/) have emerged to deliver these container images on Kubernetes.
-[Jenkins](https://www.jenkins.io/) - the predecessor to Jenkins-X - has continued to play a 
+[Jenkins](https://www.jenkins.io/) - the predecessor to Jenkins-X - has continued to play a
 prominent role in automating the building and testing of applications.
 
 Building a container image on Kubernetes is not a simple feat. There are a wide variety of tools
 available, some which require knowledge on how to write a Dockerfile, others which do not or are
-tailored for specific programming languages. For CI/CD platforms like Tekton, setting up a build 
+tailored for specific programming languages. For CI/CD platforms like Tekton, setting up a build
 pipeline requires extensive configuration and customization. These are burdens that are difficult
 to overcome for many development teams.
 
 ## Shipwright Builds - A Framework for Building Images
 
 With Shipwright, we want to create an open and flexible framework that allows teams to easily build
-container images on Kubernetes. Much of the work has been inspired by OpenShift/okd, which provides 
+container images on Kubernetes. Much of the work has been inspired by OpenShift/okd, which provides
 its own API for building images. At the heart of every build are the following core components:
 
 1. Source code - the "what" you are trying to build
@@ -62,18 +62,18 @@ Developers who use docker are familiar with this process:
 
 The Build API consists of four core Custom Resource Definitions (CRDs):
 
-1. `BuildStrategy` and `ClusterBuildStrategy` - defines how to build an application for an image 
+1. `BuildStrategy` and `ClusterBuildStrategy` - defines how to build an application for an image
    building tool.
 2. `Build` - defines what to build, and where the application should be delivered.
 3. `BuildRun` - invokes the build, telling the Kubernetes cluster when to build your application.
 
 ### BuildStrategy and ClusterBuildStrategy
 
-`BuildStrategy` and `ClusterBuildStrategy` are related APIs to define how a given tool should be 
+`BuildStrategy` and `ClusterBuildStrategy` are related APIs to define how a given tool should be
 used to assemble an application. They are distinguished by their scope - `BuildStrategy` objects
 are namespace scoped, whereas `ClusterBuildStrategy` objects are cluster scoped.
 
-The spec consists of a `buildSteps` object, which look and feel like Kubernetes `Container` 
+The spec consists of a `buildSteps` object, which look and feel like Kubernetes `Container`
 specifications. Below is an example spec for Kaniko, which can build an image from a
 Dockerfile within a container:
 
@@ -142,7 +142,7 @@ is possible.
 
 ### BuildRun
 
-Each `BuildRun` object invokes a build on your cluster. You can think of these as a Kubernetes 
+Each `BuildRun` object invokes a build on your cluster. You can think of these as a Kubernetes
 `Jobs` or Tekton `TaskRuns` - they represent a workload on your cluster, ultimately resulting in a
 running `Pod`.
 
@@ -169,9 +169,9 @@ step:
 1. `/tekton/home`
 2. `/workspace`
 
-Where do these directories come from? Shipwright is built on top of [Tekton](https://tekton.dev/), 
-taking advantage of its features to simpify CI/CD workloads. Among the things that Tekton provides 
-is a Linux user `$HOME` directory (`/tekton/home`) and a workspace where the application can be 
+Where do these directories come from? Shipwright is built on top of [Tekton](https://tekton.dev/),
+taking advantage of its features to simplify CI/CD workloads. Among the things that Tekton provides
+is a Linux user `$HOME` directory (`/tekton/home`) and a workspace where the application can be
 assembled (`/workspace`).
 
 ## Try it!
@@ -182,9 +182,9 @@ Shipwright can be installed in one of two ways:
 2. As an operator via [OperatorHub](https://operatorhub.io/operator/shipwright-operator).
 
 If your cluster has [Operator Lifecycle Manager](https://olm.operatorframework.io/) installed,
-option 2 is the recommened approach. OLM will take care of installing Tekton as well as Shipwright.
+option 2 is the recommended approach. OLM will take care of installing Tekton as well as Shipwright.
 
 The samples contain build strategies for container-based image build tools like
-[Kaniko](https://github.com/GoogleContainerTools/kaniko), [Buildah](https://buildah.io/), 
-[Source-to-Image](https://github.com/openshift/source-to-image) and 
+[Kaniko](https://github.com/GoogleContainerTools/kaniko), [Buildah](https://buildah.io/),
+[Source-to-Image](https://github.com/openshift/source-to-image) and
 [Cloud-Native Buildpacks](https://buildpacks.io/).
