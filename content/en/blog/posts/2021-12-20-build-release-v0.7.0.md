@@ -124,7 +124,7 @@ spec:
 
 ## What's next ?
 
-We have cool stuff being under development. So, let me list three items that are all cool and are in the makings.
+We have cool stuff being under development. So, let me list four items that are all cool and are in the makings.
 
 Soon you should be able to see an evolution of parameters: build strategy authors will be able to define array parameters which is required for scenarios such as build-args for Dockerfile-based builds, and Build users will be able to define that the value should be retrieved from a ConfigMap or Secret.
 
