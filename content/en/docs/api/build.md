@@ -215,12 +215,12 @@ spec:
 
 A `Build` resource can specify the `BuildStrategy` to use, these are:
 
-- [Buildah](buildstrategies.md#buildah)
-- [Buildpacks-v3](buildstrategies.md#buildpacks-v3)
-- [BuildKit](buildstrategies.md#buildkit)
-- [Kaniko](buildstrategies.md#kaniko)
-- [ko](buildstrategies.md#ko)
-- [Source-to-Image](buildstrategies.md#source-to-image)
+- [Buildah](/docs/api/buildstrategies/#buildah)
+- [Buildpacks-v3](/docs/api/buildstrategies/#buildpacks-v3)
+- [BuildKit](/docs/api/buildstrategies/#buildkit)
+- [Kaniko](/docs/api/buildstrategies/#kaniko)
+- [ko](/docs/api/buildstrategies/#ko)
+- [Source-to-Image](/docs/api/buildstrategies/#source-to-image)
 
 Defining the strategy is straightforward, you need to define the `name` and the `kind`. For example:
 
