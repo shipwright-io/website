@@ -7,7 +7,7 @@ author: "Sascha Schwarze ([@SaschaSchwarze0](https://github.com/SaschaSchwarze0)
 
 Ready for Christmas? We are, and our v0.7.0 release just made it!
 
-Is it a big thing just like our [previous v0.6.0 release](2021-10-26-build-release-v0.6.0.md)? No, but we have still done a couple of nice things:
+Is it a big thing just like our [previous v0.6.0 release](/blog/2021/10/26/shipwright-v0.6.0-is-here/)? No, but we have still done a couple of nice things:
 
 ## What's New
 

@@ -1,5 +1,5 @@
 ---
-title: "Latest Shipwright release comes with better parameterization of builds, a CLI, and more"
+title: "Shipwright v0.6.0 Is Here"
 date: 2021-10-26T10:30:00-04:00
 draft: false
 author: "Sascha Schwarze ([@SaschaSchwarze0](https://github.com/SaschaSchwarze0))"
