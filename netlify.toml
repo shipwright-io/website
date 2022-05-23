@@ -1,6 +1,6 @@
 [build]
 publish="public/"
-command="git submodule update --init --recursive --depth 1 && make build"
+command="make netlify"
 
 [build.environment]
-HUGO_VERSION="0.74.3"
+HUGO_VERSION="0.99.1"
