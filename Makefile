@@ -1,4 +1,4 @@
-.PHONY: all build travis
+.PHONY: all build install netlify
 
 all: build
 
@@ -9,6 +9,11 @@ build:
 serve:
 	hugo -t docsy server
 
-travis:
-	hack/install-hugo.sh
+install:
+	bundle
 	npm install
+
+netlify:
+	git submodule update --init --recursive --depth 1
+	$(MAKE) install
+	$(MAKE) build
