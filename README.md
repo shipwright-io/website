@@ -14,6 +14,7 @@ To use this repository, you need the following installed locally:
 
 * npm - this can be obtained by installing [Node.js](https://nodejs.org/en/download/) on your system
 * [Hugo](https://gohugo.io/getting-started/installing/) - be sure to install the **extended version**.
+* [Ruby](https://www.ruby-lang.org/en/)
 
 Once installed, clone the repository and navigate to the directory:
 
@@ -21,6 +22,8 @@ Once installed, clone the repository and navigate to the directory:
 $ git clone --recurse-submodules --depth 1 https://github.com/shipwright-io/website.git
 $ cd website
 ```
+
+Then install any additional dependencies by running `make install`
 
 ### Running the website locally
 
