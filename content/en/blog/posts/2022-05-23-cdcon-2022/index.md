@@ -22,14 +22,14 @@ The Shipwright Community will be available both on-site and virtually on **_Thur
 
 > **On-site**: Find us at room **_209_** in the Conference Venue.
 
-> **Virtually**: We will be hosting a virtual session in Zoom. Meeting **_link_** will be available soon.
+> **Virtually**: We will be hosting a virtual session in Zoom. Join us on [https://zoom.us/j/97487770299](https://zoom.us/j/97487770299).
 
 
 ## What to expect
 
 | Topic      | Description |
 | ----------- | ----------- |
-| _Ask us Anything_ | We prepare in advance a Github [discussion](https://github.com/shipwright-io/community/discussions/89), so you could drop there any questions you might want to discuss. |
+| _Ask us Anything_ | We prepared in advance a [GitHub discussion](https://github.com/shipwright-io/community/discussions/89), so you could drop there any questions you might want to discuss. |
 | _Contributors Introduction_ | We would like to tell you a little more on who we are, how to reach out and how to engage with the community. |
 | _Demo Festival_ | Let's show some of the Shipwright capabilities, and how you can leverage them! |
 | _Roadmap_ | Discussion on the upcoming big items, both from a technical and community point of view. |
