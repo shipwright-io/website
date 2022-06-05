@@ -1,5 +1,5 @@
 ---
-title: "Documentation"
+title: "Welcome to Shipwright"
 linkTitle: "Documentation"
 draft: false
 weight: 20
