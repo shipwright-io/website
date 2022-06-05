@@ -1,7 +1,10 @@
----
-title: Build Controller Metrics
-linkTitle: Metrics
----
+<!--
+Copyright The Shipwright Contributors
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
+# Build Controller Metrics
 
 The Build component exposes several metrics to help you monitor the health and behavior of your build resources.
 
