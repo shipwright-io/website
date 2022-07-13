@@ -21,6 +21,7 @@ disableKinds = ["taxonomy", "taxonomyTerm"]
 # Highlighting config
 pygmentsCodeFences = true
 pygmentsUseClasses = false
+pygmentsCodefencesGuessSyntax = true
 # Use the new Chroma Go highlighter in Hugo.
 pygmentsUseClassic = false
 #pygmentsOptions = "linenos=table"
@@ -60,6 +61,7 @@ languageName ="English"
 weight = 1
 
 [markup]
+  defaultMarkdownHandler = 'goldmark'
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
@@ -67,7 +69,13 @@ weight = 1
       # See a complete list of available styles at https://xyproto.github.io/splash/docs/all.html
       style = "tango"
       # Uncomment if you want your chosen highlight style used for code blocks without a specified language
-      # guessSyntax = "true"
+      guessSyntax = "true"
+
+  # https://gohugo.io/getting-started/configuration-markup/#table-of-contents
+  [markup.tableOfContents]
+    endLevel = 3
+    ordered = false
+    startLevel = 2
 
 # Everything below this are Site Params
 
@@ -82,13 +90,13 @@ copyright = "The Shipwright Contributors"
 # This menu appears only if you have at least one [params.versions] set.
 version_menu = "Releases"
 
-# Flag used in the "version-banner" partial to decide whether to display a 
+# Flag used in the "version-banner" partial to decide whether to display a
 # banner on every page indicating that this is an archived version of the docs.
 # Set this flag to "true" if you want to display the banner.
 archived_version = false
 
 # The version number for the version of the docs represented in this doc set.
-# Used in the "version-banner" partial to display a version number for the 
+# Used in the "version-banner" partial to display a version number for the
 # current doc set.
 version = "0.0"
 
@@ -137,7 +145,7 @@ yes = 'Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/i
 no = 'Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
 
 # Adds a reading time to the top of each doc.
-# If you want this feature, but occasionally need to remove the Reading time from a single page, 
+# If you want this feature, but occasionally need to remove the Reading time from a single page,
 # add "hide_readingtime: true" to the page's front matter
 [params.ui.readingtime]
 enable = false
