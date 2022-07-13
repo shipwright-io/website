@@ -1,4 +1,6 @@
-= Authentication during builds
+---
+title: Authentication during builds
+---
 
 The following document provides an introduction around the different authentication methods that can take place during an image build when using the Build controller.
 

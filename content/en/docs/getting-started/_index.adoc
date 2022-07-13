@@ -1,4 +1,6 @@
-= Getting Started
-:draft: false
-:linkTitle: Getting Started
-:weight: 10
+---
+title: "Getting Started"
+linkTitle: "Getting Started"
+draft: false
+weight: 10
+---

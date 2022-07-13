@@ -1,5 +1,7 @@
-= Shipwright Builds
-:draft: false
-:linkTitle: Builds
-:no_list: true
-:weight: 20
+---
+title: "Shipwright Builds"
+linkTitle: "Builds"
+draft: false
+weight: 20
+no_list: true
+---

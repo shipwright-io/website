@@ -3,8 +3,10 @@ Copyright The Shipwright Contributors
 
 SPDX-License-Identifier: Apache-2.0
 ////
-= Build
-:weight: 10
+---
+title: Build
+weight: 10
+---
 
 * <<overview,Overview>>
 * <<build-controller,Build Controller>>

@@ -3,9 +3,11 @@ Copyright The Shipwright Contributors
 
 SPDX-License-Identifier: Apache-2.0
 ////
-= BuildRun
-:draft: false
-:weight: 40
+---
+title: "BuildRun"
+draft: false
+weight: 40
+---
 
 * <<overview,Overview>>
 * <<buildrun-controller,BuildRun Controller>>

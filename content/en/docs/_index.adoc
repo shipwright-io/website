@@ -1,9 +1,13 @@
-= Welcome to Shipwright
-:draft: false
-:linkTitle: Documentation
-:menu: {"main"=>{"weight"=>20}}
-:no_list: true
-:weight: 20
+---
+title: "Welcome to Shipwright"
+linkTitle: "Documentation"
+draft: false
+weight: 20
+no_list: true
+menu:
+  main:
+    weight: 20
+---
 
 Shipwright is an extensible framework for building container images on Kubernetes.
 

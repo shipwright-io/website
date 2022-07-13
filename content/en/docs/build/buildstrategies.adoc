@@ -3,8 +3,10 @@ Copyright The Shipwright Contributors
 
 SPDX-License-Identifier: Apache-2.0
 ////
-= BuildStrategies
-:weight: 20
+---
+title: BuildStrategies
+weight: 20
+---
 
 * <<overview,Overview>>
 * <<available-clusterbuildstrategies,Available ClusterBuildStrategies>>
