@@ -8,6 +8,3 @@ PLATFORMS
 
 DEPENDENCIES
   asciidoctor (~> 2.0, >= 2.0.17)
-
-BUNDLED WITH
-   2.3.7
