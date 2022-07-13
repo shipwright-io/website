@@ -4,26 +4,6 @@ draft: false
 weight: 40
 ---
 
-* <<overview,Overview>>
-* <<buildrun-controller,BuildRun Controller>>
-* <<configuring-a-buildrun,Configuring a BuildRun>>
- ** <<defining-the-buildref,Defining the BuildRef>>
- ** <<defining-the-buildspec,Defining the BuildSpec>>
- ** <<defining-paramvalues,Defining ParamValues>>
- ** <<defining-the-serviceaccount,Defining the ServiceAccount>>
- ** <<defining-retention-parameters,Defining Retention Parameters>>
- ** <<defining-volumes,Defining Volumes>>
-* <<canceling-a-buildrun,Canceling a `BuildRun`>>
-* <<automatic-buildrun-deletion,Automatic `BuildRun` deletion>>
-* <<specifying-environment-variables,Specifying Environment Variables>>
-* <<buildrun-status,BuildRun Status>>
- ** <<understanding-the-state-of-a-buildrun,Understanding the state of a BuildRun>>
- ** <<understanding-failed-buildruns,Understanding failed BuildRuns>>
-  *** <<understanding-failed-git-source-step,Understanding failed git-source step>>
- ** <<step-results-in-buildrun-status,Step Results in BuildRun Status>>
- ** <<build-snapshot,Build Snapshot>>
-* <<relationship-with-tekton-tasks,Relationship with Tekton Tasks>>
-
 == Overview
 
 The resource `BuildRun` (`buildruns.shipwright.io/v1alpha1`) is the build process of a `Build` resource definition executed in Kubernetes.

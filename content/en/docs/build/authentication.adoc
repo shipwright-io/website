@@ -4,17 +4,6 @@ title: Authentication during builds
 
 The following document provides an introduction around the different authentication methods that can take place during an image build when using the Build controller.
 
-* <<overview,Overview>>
-* <<build-secrets-annotation,Build Secrets Annotation>>
-* <<authentication-for-git,Authentication for Git>>
- ** <<basic-authentication,Basic authentication>>
- ** <<ssh-authentication,SSH authentication>>
- ** <<usage-of-git-secret,Usage of git secret>>
-* <<authentication-to-container-registries,Authentication to container registries>>
- ** <<docker-hub,Docker Hub>>
- ** <<usage-of-registry-secret,Usage of registry secret>>
-* <<references,References>>
-
 == Overview
 
 There are two places where users might need to define authentication when building images. Authentication to a container registry is the most common one, but also users might have the need to define authentications for pulling source-code from Git. Overall, the authentication is done via the definition of https://kubernetes.io/docs/concepts/configuration/secret/[secrets] in which the require sensitive data will be stored.

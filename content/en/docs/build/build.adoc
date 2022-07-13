@@ -3,19 +3,6 @@ title: Build
 weight: 10
 ---
 
-* <<overview,Overview>>
-* <<build-controller,Build Controller>>
-* <<build-validations,Build Validations>>
-* <<configuring-a-build,Configuring a Build>>
- ** <<defining-the-source,Defining the Source>>
- ** <<defining-the-strategy,Defining the Strategy>>
- ** <<defining-paramvalues,Defining ParamValues>>
- ** <<defining-the-builder-or-dockerfile,Defining the Builder or Dockerfile>>
- ** <<defining-the-output,Defining the Output>>
- ** <<defining-retention-parameters,Defining Retention Parameters>>
- ** <<defining-volumes,Defining Volumes>>
-* <<BuildRun-deletion,BuildRun deletion>>
-
 == Overview
 
 A `Build` resource allows the user to define:

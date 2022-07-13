@@ -3,41 +3,6 @@ title: BuildStrategies
 weight: 20
 ---
 
-* <<overview,Overview>>
-* <<available-clusterbuildstrategies,Available ClusterBuildStrategies>>
-* <<available-buildstrategies,Available BuildStrategies>>
-* <<buildah,Buildah>>
- ** <<installing-buildah-strategy,Installing Buildah Strategy>>
-* <<buildpacks-v3,Buildpacks v3>>
- ** <<installing-buildpacks-v3-strategy,Installing Buildpacks v3 Strategy>>
-* <<kaniko,Kaniko>>
- ** <<installing-kaniko-strategy,Installing Kaniko Strategy>>
-  *** <<scanning-with-trivy,Scanning with Trivy>>
-* <<buildkit,BuildKit>>
- ** <<cache-exporters,Cache Exporters>>
- ** <<build-args-and-secrets,Build-args and secrets>>
- ** <<multi-platform-builds,Multi-platform builds>>
- ** <<known-limitations,Known Limitations>>
- ** <<usage-in-clusters-with-pod-security-standards,Usage in Clusters with Pod Security Standards>>
- ** <<installing-buildkit-strategy,Installing BuildKit Strategy>>
-* <<ko,ko>>
- ** <<installing-ko-strategy,Installing ko Strategy>>
- ** <<parameters,Parameters>>
-* <<source-to-image,Source to Image>>
- ** <<installing-source-to-image-strategy,Installing Source to Image Strategy>>
- ** <<build-steps,Build Steps>>
-* <<strategy-parameters,Strategy parameters>>
-* <<system-parameters,System parameters>>
-* <<system-parameters-vs-strategy-parameters-comparison,System parameters vs Strategy Parameters Comparison>>
-* <<securely-referencing-string-parameters,Securely referencing string parameters>>
-* <<system-results,System results>>
-* <<steps-resource-definition,Steps Resource Definition>>
- ** <<strategies-with-different-resources,Strategies with different resources>>
- ** <<how-does-tekton-pipelines-handle-resources,How does Tekton Pipelines handle resources>>
- ** <<examples-of-tekton-resources-management,Examples of Tekton resources management>>
-* <<annotations,Annotations>>
-* <<volumes-and-volumemounts,Volumes and VolumeMounts>>
-
 == Overview
 
 There are two types of strategies, the `ClusterBuildStrategy` (`clusterbuildstrategies.shipwright.io/v1alpha1`) and the `BuildStrategy` (`buildstrategies.shipwright.io/v1alpha1`). Both strategies define a shared group of steps, needed to fullfil the application build.
