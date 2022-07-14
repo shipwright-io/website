@@ -54,7 +54,7 @@ NOTE: The `BuildRef` and `BuildSpec` are mutually exclusive. Furthermore, the ov
 
 A `BuildRun` resource can reference a `Build` resource, that indicates what image to build. For example:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: BuildRun
@@ -69,7 +69,7 @@ spec:
 
 Alternatively to `BuildRef`, a complete `BuildSpec` can be embedded into the `BuildRun` for the build.
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: BuildRun
@@ -93,7 +93,7 @@ A `BuildRun` resource can define _paramValues_ for parameters specified in the b
 
 For example, the following `BuildRun` overrides the value for _sleep-time_ param, which is defined in the _a-build_ `Build` resource.
 
-[,yaml]
+[source,yaml]
 ----
 ---
 apiVersion: shipwright.io/v1alpha1
@@ -133,7 +133,7 @@ See more about _paramValues_ usage in the related link:./build.md#defining-param
 
 A `BuildRun` resource can define a serviceaccount to use. Usually this SA will host all related secrets referenced on the `Build` resource, for example:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: BuildRun
@@ -161,7 +161,7 @@ As part of the buildrun retention parameters, we have the following fields:
 
 An example of a user using buildrun TTL parameters.
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: BuildRun
@@ -190,7 +190,7 @@ all the usual `volumeSource` types are supported.
 
 Here is an example of `BuildRun` object that overrides `volumes`:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: BuildRun
@@ -213,7 +213,7 @@ When you cancel a `BuildRun`, the underlying `TaskRun` is marked as canceled per
 
 Example of canceling a `BuildRun`:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: BuildRun
@@ -242,7 +242,7 @@ We have two controllers that ensure that buildruns can be deleted automatically 
 
 An example of a `BuildRun` that specifies environment variables:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: BuildRun
@@ -261,7 +261,7 @@ spec:
 Example of a `BuildRun` that uses the Kubernetes Downward API to
 expose a `Pod` field as an environment variable:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: BuildRun
@@ -280,7 +280,7 @@ spec:
 Example of a `BuildRun` that uses the Kubernetes Downward API to
 expose a `Container` field as an environment variable:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: BuildRun
@@ -301,7 +301,7 @@ spec:
 
 The `BuildRun` resource is updated as soon as the current image building status changes:
 
-[,sh]
+[source,sh]
 ----
 $ kubectl get buildrun buildpacks-v3-buildrun
 NAME                    SUCCEEDED   REASON    MESSAGE   STARTTIME   COMPLETIONTIME
@@ -310,7 +310,7 @@ buildpacks-v3-buildrun  Unknown     Pending   Pending   1s
 
 And finally:
 
-[,sh]
+[source,sh]
 ----
 $ kubectl get buildrun buildpacks-v3-buildrun
 NAME                    SUCCEEDED   REASON      MESSAGE                              STARTTIME   COMPLETIONTIME
@@ -499,7 +499,7 @@ The message and reason are only included if the build strategy provides them.
 
 Example of failed BuildRun:
 
-[,yaml]
+[source,yaml]
 ----
 # [...]
 status:
@@ -557,7 +557,7 @@ the link:buildstrategies.md#system-results[output step] will be surfaced to the 
 
 Example of a `BuildRun` with surfaced results for `git` source (note that the `branchName` is only included if the Build does not specify any `revision`):
 
-[,yaml]
+[source,yaml]
 ----
 # [...]
 status:
@@ -576,7 +576,7 @@ status:
 
 Another example of a `BuildRun` with surfaced results for local source code(`bundle`) source:
 
-[,yaml]
+[source,yaml]
 ----
 # [...]
 status:

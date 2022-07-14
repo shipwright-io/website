@@ -62,7 +62,7 @@ The `buildah` ClusterBuildStrategy consists of using https://github.com/containe
 
 To install use:
 
-[,sh]
+[source,sh]
 ----
 kubectl apply -f samples/buildstrategy/buildah/buildstrategy_buildah_cr.yaml
 ----
@@ -83,14 +83,14 @@ You can install the `BuildStrategy` in your namespace or install the `ClusterBui
 
 To install the cluster scope strategy, use (below is a heroku example, you can also use paketo sample):
 
-[,sh]
+[source,sh]
 ----
 kubectl apply -f samples/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_cr.yaml
 ----
 
 To install the namespaced scope strategy, use:
 
-[,sh]
+[source,sh]
 ----
 kubectl apply -f samples/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_namespaced_cr.yaml
 ----
@@ -105,7 +105,7 @@ The `kaniko` ClusterBuildStrategy is composed by Kaniko's `executor` https://git
 
 To install the cluster scope strategy, use:
 
-[,sh]
+[source,sh]
 ----
 kubectl apply -f samples/buildstrategy/kaniko/buildstrategy_kaniko_cr.yaml
 ----
@@ -116,7 +116,7 @@ You can also incorporate scanning into the ClusterBuildStrategy. The `kaniko-tri
 
 To install the cluster scope strategy, use:
 
-[,sh]
+[source,sh]
 ----
 kubectl apply -f samples/buildstrategy/kaniko/buildstrategy_kaniko-trivy_cr.yaml
 ----
@@ -163,7 +163,7 @@ _Please note:_ At this point in time, there is no way to run `rootlesskit` to st
 
 To install the cluster scope strategy, use:
 
-[,sh]
+[source,sh]
 ----
 kubectl apply -f samples/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml
 ----
@@ -178,7 +178,7 @@ The `ko` ClusterBuilderStrategy is using https://github.com/google/ko[ko]'s publ
 
 To install the cluster scope strategy, use:
 
-[,sh]
+[source,sh]
 ----
 kubectl apply -f samples/buildstrategy/ko/buildstrategy_ko_cr.yaml
 ----
@@ -230,7 +230,7 @@ This BuildStrategy is composed by https://github.com/openshift/source-to-image[`
 
 To install the cluster scope strategy use:
 
-[,sh]
+[source,sh]
 ----
 kubectl apply -f samples/buildstrategy/source-to-image/buildstrategy_source-to-image_cr.yaml
 ----
@@ -255,7 +255,7 @@ Users defining _parameters_ under their strategies require to understand the fol
 +
 Arrays are referenced using `$(params.your-array-parameter-name[*])`, and can only be used in as the value for `args` or `command` because the defined as arrays by Kubernetes. For every item in the array, an arg will be set. For example, if you specify this in your build strategy step:
 +
-[,yaml]
+[source,yaml]
 ----
 spec:
   parameters:
@@ -272,7 +272,7 @@ spec:
 +
 If the build user sets the value of tool-args to ["--some-arg", "some-value"], then the Pod will contain these args:
 +
-[,yaml]
+[source,yaml]
 ----
 spec:
   containers:
@@ -288,7 +288,7 @@ NOTE: Users can provide parameter values as simple strings or as references to k
 
 The following example is from the link:../samples/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml[BuildKit sample build strategy]. It defines and uses several parameters:
 
-[,yaml]
+[source,yaml]
 ----
 ---
 apiVersion: shipwright.io/v1alpha1
@@ -440,7 +440,7 @@ Contrary to the strategy `spec.parameters`, you can use system parameters and th
 
 In build strategy steps, string parameters are referenced using `$(params.PARAM_NAME)`. This applies to system parameters, and those parameters defined in the build strategy. You can reference those parameters at many locations in the build steps, such as environment variables values, arguments, image, and more. In the Pod, all `$(params.PARAM_NAME)` tokens will be replaced by simple string replaces. This is safe in most locations but requires your attention when you define an inline script using an argument. For example:
 
-[,yaml]
+[source,yaml]
 ----
 spec:
   parameters:
@@ -461,7 +461,7 @@ spec:
 
 This opens the door to script injection, for example if the user sets the `sample-parameter` to `argument-value" && malicious-command && echo "`, the resulting pod argument will look like this:
 
-[,yaml]
+[source,yaml]
 ----
         - |
           set -euo pipefail
@@ -473,7 +473,7 @@ To securely pass a parameter value into a script-style argument, you can chose b
 
 . Using environment variables. This is used in some of our sample strategies, for example link:../samples/buildstrategy/ko/buildstrategy_ko_cr.yaml[ko], or link:../samples/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml[buildpacks]. Basically, instead of directly using the parameter inside the script, you pass it via environment variable. Using quoting, shells ensure that no command injection is possible:
 +
-[,yaml]
+[source,yaml]
 ----
 spec:
   parameters:
@@ -497,7 +497,7 @@ spec:
 
 . Using arguments. This is used in some of our sample build strategies, for example link:../samples/buildstrategy/buildah/buildstrategy_buildah_cr.yaml[buildah]. Here, you use arguments to your own inline script. Appropriate shell quoting guards against command injection.
 +
-[,yaml]
+[source,yaml]
 ----
 spec:
   parameters:
@@ -538,7 +538,7 @@ You can look at sample build strategies, such as link:../samples/buildstrategy/k
 
 This information will be available in the `.status.output` field of the BuildRun.
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: BuildRun
@@ -567,7 +567,7 @@ Reason is intended to be a one-word CamelCase classification of the error source
 Error details are only propagated if the build container terminates with a non-zero exit code.
 This information will be available in the `.status.failureDetails` field of the BuildRun.
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: BuildRun
@@ -591,7 +591,7 @@ All strategies steps can include a definition of resources(_limits and requests_
 
 If the strategy admins would require to have multiple flavours of the same strategy, where one strategy has more resources that the other. Then, multiple strategies for the same type should be defined on the cluster. In the following example, we use Kaniko as the type:
 
-[,yaml]
+[source,yaml]
 ----
 ---
 apiVersion: shipwright.io/v1alpha1
@@ -685,7 +685,7 @@ spec:
 
 The above provides more control and flexibility for the strategy admins. For `end-users`, all they need to do, is to reference the proper strategy. For example:
 
-[,yaml]
+[source,yaml]
 ----
 ---
 apiVersion: shipwright.io/v1alpha1
@@ -730,7 +730,7 @@ We will see some differences between the `TaskRun` definition and the `pod` defi
 
 For the `TaskRun`, as expected we can see the resources on each `step`, as we previously define on our link:../samples/buildstrategy/buildah/buildstrategy_buildah_cr.yaml[strategy].
 
-[,sh]
+[source,sh]
 ----
 $ kubectl -n test-build get tr buildah-golang-buildrun-9gmcx-pod-lhzbc -o json | jq '.spec.taskSpec.steps[] | select(.name == "step-buildah-bud" ) | .resources'
 {
@@ -759,7 +759,7 @@ $ kubectl -n test-build get tr buildah-golang-buildrun-9gmcx-pod-lhzbc -o json |
 
 The pod definition is different, while Tekton will only use the *highest* values of one container, and set the rest(lowest) to zero:
 
-[,sh]
+[source,sh]
 ----
 $ kubectl -n test-build get pods buildah-golang-buildrun-9gmcx-pod-lhzbc -o json | jq '.spec.containers[] | select(.name == "step-step-buildah-bud" ) | .resources'
 {
@@ -800,7 +800,7 @@ If we will apply the following resources:
 * link:../samples/buildrun/buildrun_buildah_cr.yaml[buildahBuildRun]
 * We will use a modified buildah strategy, with the following steps resources:
 +
-[,yaml]
+[source,yaml]
 ----
   - name: buildah-bud
     image: quay.io/containers/buildah:v1.20.1
@@ -845,7 +845,7 @@ If we will apply the following resources:
 
 For the `TaskRun`, as expected we can see the resources on each `step`.
 
-[,sh]
+[source,sh]
 ----
 $ kubectl -n test-build get tr buildah-golang-buildrun-skgrp -o json | jq '.spec.taskSpec.steps[] | select(.name == "step-buildah-bud" ) | .resources'
 {
@@ -874,7 +874,7 @@ $ kubectl -n test-build get tr buildah-golang-buildrun-skgrp -o json | jq '.spec
 
 The pod definition is different, while Tekton will only use the *highest* values of one container, and set the rest(lowest) to zero:
 
-[,sh]
+[source,sh]
 ----
 $ kubectl -n test-build get pods buildah-golang-buildrun-95xq8-pod-mww8d -o json | jq '.spec.containers[] | select(.name == "step-step-buildah-bud" ) | .resources'
 {

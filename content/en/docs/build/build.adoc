@@ -121,7 +121,7 @@ By default, the Build controller does not validate that the Git repository exist
 
 Example of a `Build` with the *build.shipwright.io/verify.repository* annotation to enable the `spec.source.url` validation.
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -139,7 +139,7 @@ NOTE: The Build controller only validates two scenarios. The first one is when t
 
 Example of a `Build` with a source with *credentials* defined by the user.
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -154,7 +154,7 @@ spec:
 
 Example of a `Build` with a source that specifies a specific subfolder on the repository.
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -168,7 +168,7 @@ spec:
 
 Example of a `Build` that specifies the tag `v.0.1.0` for the git repository:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -183,7 +183,7 @@ spec:
 
 Example of a `Build` that specifies environment variables:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -203,7 +203,7 @@ spec:
 Example of a `Build` that uses the Kubernetes Downward API to
 expose a `Pod` field as an environment variable:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -223,7 +223,7 @@ spec:
 Example of a `Build` that uses the Kubernetes Downward API to
 expose a `Container` field as an environment variable:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -254,7 +254,7 @@ A `Build` resource can specify the `BuildStrategy` to use, these are:
 
 Defining the strategy is straightforward. You define the `name` and the `kind`. For example:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -285,7 +285,7 @@ In general, _paramValues_ are tightly bound to Strategy _parameters_. Please mak
 
 The link:../samples/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml[BuildKit sample `BuildStrategy`] contains various parameters. Two of them are outlined here:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: ClusterBuildStrategy
@@ -309,7 +309,7 @@ spec:
 
 The `cache` parameter is a simple string. You can provide it like this in your Build:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -331,7 +331,7 @@ spec:
 
 If you have multiple Builds and want to control this parameter centrally, then you can create a ConfigMap:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: v1
 kind: ConfigMap
@@ -344,7 +344,7 @@ data:
 
 You reference the ConfigMap as a parameter value like this:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -368,7 +368,7 @@ spec:
 
 The `build-args` parameter is defined as an array. In the BuildKit strategy, you use `build-args` to set the https://docs.docker.com/engine/reference/builder/#arg[`ARG` values in the Dockerfile], specified as key-value pairs separated by an equals sign, for example, `NODE_VERSION=16`. Your Build then looks like this (the value for `cache` is retained to outline how multiple _paramValue_ can be set):
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -395,7 +395,7 @@ spec:
 
 Like simple values, you can also reference ConfigMaps and Secrets for every item in the array. Example:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -440,7 +440,7 @@ Here, we pass three items in the `build-args` array:
 
 In the `Build` resource, you use the `spec.builder` or `spec.dockerfile` parameters to specify the image that contains the tools to build the final image. For example, the following Build definition specifies a `Dockerfile` image.
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -458,7 +458,7 @@ spec:
 
 Another example is when the user chooses the `builder` image for a specific language as part of the `source-to-image` buildStrategy:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -483,7 +483,7 @@ A `Build` resource can specify the output where it should push the image. For ex
 
 For example, the user specifies a public registry:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -504,7 +504,7 @@ spec:
 
 Another example is when the user specifies a private registry:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -527,7 +527,7 @@ spec:
 
 Example of user specifies image annotations and labels:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -556,14 +556,14 @@ spec:
 
 Annotations added to the output image can be verified by running the command:
 
-[,sh]
+[source,sh]
 ----
   docker manifest inspect us.icr.io/source-to-image-build/nodejs-ex | jq ".annotations"
 ----
 
 You can verify which labels were added to the output image that is available on the host machine by running the command:
 
-[,sh]
+[source,sh]
 ----
   docker inspect us.icr.io/source-to-image-build/nodejs-ex | jq ".[].Config.Labels"
 ----
@@ -581,7 +581,7 @@ As part of the retention parameters, we have the following fields:
 
 An example of a user using both TTL and Limit retention fields. In case of such a configuration, BuildRun will get deleted once the first criteria is met.
 
-[,yaml]
+[source,yaml]
 ----
   apiVersion: shipwright.io/v1alpha1
   kind: Build
@@ -614,7 +614,7 @@ all the usual `volumeSource` types are supported.
 
 Here is an example of `Build` object that overrides `volumes`:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -639,7 +639,7 @@ spec:
 
 Sources represent remote artifacts, as in external entities added to the build context before the actual Build starts. Therefore, you may employ `.spec.sources` to download artifacts from external repositories.
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build
@@ -666,7 +666,7 @@ At this initial stage, authentication is not supported; therefore, you can only 
 
 A `Build` can automatically delete a related `BuildRun`. To enable this feature set the  `build.shipwright.io/build-run-deletion` annotation to `true` in the `Build` instance. This annotation is not present in a `Build` definition by default. See an example of how to define this annotation:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: shipwright.io/v1alpha1
 kind: Build

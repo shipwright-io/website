@@ -9,7 +9,7 @@ The build controller supports a `pprof` profiling mode, which is omitted from th
 
 In the Kubernetes cluster, edit the `shipwright-build-controller` deployment to use the container tag with the `debug` suffix.
 
-[,sh]
+[source,sh]
 ----
 kubectl --namespace <namespace> set image \
   deployment/shipwright-build-controller \
@@ -20,7 +20,7 @@ kubectl --namespace <namespace> set image \
 
 Depending on the respective setup, there could be multiple build controller pods for high availability reasons. In this case, you have to look-up the current leader first. The following command can be used to verify the currently active leader:
 
-[,sh]
+[source,sh]
 ----
 kubectl --namespace <namespace> get configmap shipwright-build-controller-lock --output json \
   | jq --raw-output '.metadata.annotations["control-plane.alpha.kubernetes.io/leader"]' \
@@ -29,14 +29,14 @@ kubectl --namespace <namespace> get configmap shipwright-build-controller-lock -
 
 The `pprof` endpoint is not exposed in the cluster and can only be used from inside the container. Therefore, set-up port-forwarding to make the `pprof` port available locally.
 
-[,sh]
+[source,sh]
 ----
 kubectl --namespace <namespace> port-forward <controller-pod-name> 8383:8383
 ----
 
 Now, you can setup a local webserver to browse through the profiling data.
 
-[,sh]
+[source,sh]
 ----
 go tool pprof -http localhost:8080 http://localhost:8383/debug/pprof/heap
 ----

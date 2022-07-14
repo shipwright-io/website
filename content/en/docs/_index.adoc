@@ -27,14 +27,14 @@ Developers who use Docker are familiar with this process:
 . Clone source from a git-based repository ("what")
 . Build the container image ("when" and "how")
 
-[,bash]
+[source,bash]
 ----
   docker build -t registry.mycompany.com/myorg/myapp:latest .
 ----
 
 . Push the container image to your registry ("where")
 
-[,bash]
+[source,bash]
 ----
   docker push registry.mycompany.com/myorg/myapp:latest
 ----
@@ -56,7 +56,7 @@ You create a `BuildRun` to tell Shipwright to start building your application.
 The `Build` object provides a playbook on how to assemble your specific application. The simplest
 build consists of a git source, a build strategy, and an output image:
 
-[,yaml]
+[source,yaml]
 ----
 apiVersion: build.dev/v1alpha1
 kind: Build
@@ -86,7 +86,7 @@ The spec of a `BuildStrategy` or `ClusterBuildStrategy` consists of a `buildStep
 specifications. Below is an example spec for Kaniko, which can build an image from a
 Dockerfile within a container:
 
-[,yaml]
+[source,yaml]
 ----
 # this is a fragment of a manifest
 spec:

@@ -24,7 +24,7 @@ Before installation, ensure that OLM has been deployed on your cluster by follow
 
 Once OLM has been deployed, use the following command to install the latest operator release from https://operatorhub.io/operator/shipwright-operator[operatorhub.io]:
 
-[,sh]
+[source,sh]
 ----
 $ kubectl apply -f https://operatorhub.io/install/shipwright-operator.yaml
 ----
@@ -37,7 +37,7 @@ first make sure this operator is installed and running.
 
 Next, create the following:
 
-[,yaml]
+[source,yaml]
 ----
 ---
 apiVersion: operator.shipwright.io/v1alpha1
@@ -58,7 +58,7 @@ Refer to the xref:docs/shipwrightbuild.adoc[ShipwrightBuild documentation] for m
 We also publish a Kubernetes manifest that installs Shipwright directly into the `shipwright-build` namespace.
 Applying this manifest requires cluster administrator permissions:
 
-[,bash]
+[source,bash]
 ----
 $ kubectl apply -f https://github.com/shipwright-io/build/releases/download/v0.10.0/release.yaml
 ----
@@ -69,7 +69,7 @@ $ kubectl apply -f https://github.com/shipwright-io/build/releases/download/v0.1
 The Shipwright community maintains a curated set of build strategies for popular build tools.
 These can be optionally installed after Shipwright Builds has been deployed:
 
-[,bash]
+[source,bash]
 ----
 $ kubectl apply -f https://github.com/shipwright-io/build/releases/download/v0.10.0/sample-strategies.yaml
 ----
