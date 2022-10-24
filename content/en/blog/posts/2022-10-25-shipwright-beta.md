@@ -2,6 +2,7 @@
 title: "Bringing Shipwright to Beta - and Beyond!"
 date: 2022-10-25T17:00:00-04:00
 draft: false
+author: "Adam Kaplan [@adambkaplan](https://github.com/adambkaplan)"
 ---
 
 Recently, the Shipwright community came together to define a beta API for the
@@ -32,11 +33,11 @@ Artifacts like image scans, signatures,
 for the cloud.
 Shipwright can, and should, rise up to meet these demands.
 
-We also decided that Shipwright will continue to run on on cloud-native
+We also decided that Shipwright will continue to run on cloud-native
 infrastructure, powered by [Kubernetes](https://kubernetes.io) and
 [Tekton](https://tekton.dev).
 We can go further, though, and plug Shipwright into the vast cloud-native
-ecosystem, through integrations with [cdEvents](https://cdevents.dev),
+ecosystem, through integrations with [CDEvents](https://cdevents.dev),
 [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), and more.
 Shipwright is just getting started in this effort through the
 [Triggers](https://github.com/shipwright-io/triggers) and
