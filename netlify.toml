@@ -4,3 +4,6 @@ command="make netlify"
 
 [build.environment]
 HUGO_VERSION="0.99.1"
+
+[context.deploy-preview]
+command="make netlify-preview"
