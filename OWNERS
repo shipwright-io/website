@@ -1,10 +1,16 @@
 approvers:
-- sbose78
 - qu1queee
 - adambkaplan
 - otaviof
+- SaschaSchwarze0
+
 reviewers:
 - SaschaSchwarze0
-- gabemontero
 - HeavyWombat
 - rolfedh
+
+emeritus_approvers:
+- sbose78
+
+emeritus_reviewers:
+- gabemontero
