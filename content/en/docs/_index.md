@@ -46,8 +46,8 @@ Shipwright's Build API consists of four core
 (CRDs):
 
 1. [`Build`](/docs/api/build/) - defines what to build, and where the application should be delivered.
-1. [`BuildStrategy` and `ClusterBuildStrategy`](/docs/api/buildstrategies/) - defines how to build an application for an image
-   building tool.
+1. [`BuildStrategy`](/docs/api/buildstrategies/) - defines how to build an application for an image building tool.
+1. [`ClusterBuildStrategy`](/docs/api/buildstrategies/) - as above, at the cluster level.
 1. [`BuildRun`](/docs/api/buildrun/) - invokes the build.
    You create a `BuildRun` to tell Shipwright to start building your application.
 
