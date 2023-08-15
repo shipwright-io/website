@@ -10,7 +10,7 @@ resources:
 ---
 
 
-[Gatekeeper](https://github.com/open-policy-agent/gatekeeper) is a customizable [admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#what-are-admission-webhooks) for Kubernetes, which allows you to configure [policy](https://www.openpolicyagent.org/docs/latest/policy-language/) over what resources can be created in the cluster. In particular, we can use Gatekeeper to add policy to Shipwright [`Build`](/docs/api/build/)s. In this example, you can see how you can use a policy to control what source repositories Shipwright is allowed to build, so that you can have more control over what code executes inside your cluster.
+[Gatekeeper](https://github.com/open-policy-agent/gatekeeper) is a customizable [admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#what-are-admission-webhooks) for Kubernetes, which allows you to configure [policy](https://www.openpolicyagent.org/docs/latest/policy-language/) over what resources can be created in the cluster. In particular, we can use Gatekeeper to add policy to Shipwright [`Build`](/docs/build/)s. In this example, you can see how you can use a policy to control what source repositories Shipwright is allowed to build, so that you can have more control over what code executes inside your cluster.
 
 [![Gatekeeper](opa.png)](https://github.com/securekubernetes/securekubernetes/blob/master/docs/img/opa.png)
 
