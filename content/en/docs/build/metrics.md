@@ -71,7 +71,7 @@ export PROMETHEUS_ENABLED_LABELS=buildstrategy,namespace,build
 make local
 ```
 
-When you deploy the build controller in a Kubernetes cluster, you need to extend the `spec.containers[0].spec.env` section of the sample deployment file, [controller.yaml](../deploy/controller.yaml). Add an additional entry:
+When you deploy the build controller in a Kubernetes cluster, you need to extend the `spec.containers[0].spec.env` section of the sample deployment file, [controller.yaml](https://github.com/shipwright-io/build/blob/main/deploy/500-controller.yaml). Add an additional entry:
 
 ```yaml
 [...]

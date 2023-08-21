@@ -44,7 +44,7 @@ spec:
 
 The operator will deploy Shipwright Builds in the provided `targetNamespace`.
 When `.spec.targetNamespace` is not set, the namespace will default to `shipwright-build`.
-Refer to the [ShipwrightBuild documentation](docs/shipwrightbuild.md) for more information about this custom resource.
+Refer to the [ShipwrightBuild documentation](https://github.com/shipwright-io/build/tree/main/docs) for more information about this custom resource.
 
 ## Installing Shipwright Builds Directly
 

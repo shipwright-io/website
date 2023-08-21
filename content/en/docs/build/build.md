@@ -79,7 +79,7 @@ The `Build` definition supports the following fields:
   - [`kind`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Specifies the Kind type, for example `Build`.
   - [`metadata`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Metadata that identify the CRD instance, for example the name of the `Build`.
   - `spec.source` - Refers to the location of the source code, for example a Git repository or source bundle image.
-  - `spec.strategy` - Refers to the `BuildStrategy` to be used, see the [examples](../samples/buildstrategy)
+  - `spec.strategy` - Refers to the `BuildStrategy` to be used, see the [examples](https://github.com/shipwright-io/build/tree/main/samples/buildstrategy)
   - `spec.builder.image` - Refers to the image containing the build tools to build the source code. (_Use this path for Dockerless strategies, this is just required for `source-to-image` buildStrategy_)
   - `spec.output`- Refers to the location where the generated image would be pushed.
   - `spec.output.credentials.name`- Reference an existing secret to get access to the container registry.
@@ -267,7 +267,7 @@ In general, _paramValues_ are tightly bound to Strategy _parameters_. Please mak
 
 #### Example
 
-The [BuildKit sample `BuildStrategy`](../samples/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml) contains various parameters. Two of them are outlined here:
+The [BuildKit sample `BuildStrategy`](https://github.com/shipwright-io/build/blob/main/samples/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml) contains various parameters. Two of them are outlined here:
 
 ```yaml
 apiVersion: shipwright.io/v1alpha1
@@ -579,7 +579,7 @@ An example of a user using both TTL and Limit retention fields. In case of such 
 `Builds` can declare `volumes`. They must override `volumes` defined by the according `BuildStrategy`. If a `volume`
 is not `overridable` then the `BuildRun` will eventually fail.
 
-`Volumes` follow the declaration of [Pod Volumes](https://kubernetes.io/docs/concepts/storage/volumes/), so 
+`Volumes` follow the declaration of [Pod Volumes](https://kubernetes.io/docs/concepts/storage/volumes/), so
 all the usual `volumeSource` types are supported.
 
 Here is an example of `Build` object that overrides `volumes`:
