@@ -12,7 +12,7 @@ resources:
 
 What is Shipwright? Which problems does this project try to solve?
 
-In [Part 1](/blog/2020/10/15/introducing-shipwright-part-1) of this series, we'll look back at the history of delivering software applications,
+In [Part 1](/blog/2020/10/21/introducing-shipwright-part-1) of this series, we'll look back at the history of delivering software applications,
 and how that has changed in the age of Kubernetes and cloud-native development.
 
 In [Part 2](/blog/2020/11/30/introducing-shipwright-part-2) of this series, we'll introduce Shipwright and the Build APIs that make it simple to
@@ -31,7 +31,7 @@ laptops, and uploading the JAR to our client's SFTP site. After submitting a tic
 a change control review with our client's IT department, our software would be released during a
 scheduled maintenance window.
 
-{{< imgproc deploy-java-vm Resize "640x360" >}} 
+{{< imgproc deploy-java-vm Resize "640x360" >}}
 {{< /imgproc >}}
 
 For engineers in larger enterprises, this experience should feel familiar. You may have used C#,
@@ -46,7 +46,7 @@ tools like Hudson and Jenkins.
 
 The emergence of [Docker/Moby](https://mobyproject.org/) and [Kubernetes](https://kubernetes.io/)
 changed the unit of delivery. With both of these platforms, developers package their software in
-container images rather than executables, JAR files, or script bundles. Moving to this method of 
+container images rather than executables, JAR files, or script bundles. Moving to this method of
 delivery was not a simple task, since many teams had to learn entirely new sets of skills to deploy
 their code.
 
@@ -61,7 +61,7 @@ Along the way, we had to learn the intricacies of Docker, assembling our image v
 [Dockerfiles](https://docs.docker.com/engine/reference/builder/), and running Python inside a
 container.
 
-{{< imgproc deploy-k8s-image Resize "640x360" >}} 
+{{< imgproc deploy-k8s-image Resize "640x360" >}}
 {{< /imgproc >}}
 
 What we could not do was build our applications directly on our Kubernetes clusters. At the time,
@@ -82,7 +82,7 @@ tools like [Source-to-Image](https://github.com/openshift/source-to-image) and
 source code, without the need to write a Dockerfile. There are even image building tools optimized
 for specific programming languages, such as [Jib](https://github.com/GoogleContainerTools/jib).
 
-{{< imgproc container-tools Resize "640x360" >}} 
+{{< imgproc container-tools Resize "640x360" >}}
 {{< /imgproc >}}
 
 When it comes to delivering applications on Kubernetes, there is a wide variety of tooling and

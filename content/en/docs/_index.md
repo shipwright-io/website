@@ -45,10 +45,10 @@ Shipwright's Build API consists of four core
 [CustomResourceDefinitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions)
 (CRDs):
 
-1. [`Build`](/docs/build/) - defines what to build, and where the application should be delivered.
-1. [`BuildStrategy` and `ClusterBuildStrategy`](/docs/build/buildstrategies/) - defines how to build an application for an image
+1. [`Build`](https://github.com/shipwright-io/build/blob/main/docs/build.md) - defines what to build, and where the application should be delivered.
+1. [`BuildStrategy` and `ClusterBuildStrategy`](https://github.com/shipwright-io/build/blob/main/docs/buildstrategies.md) - defines how to build an application for an image
    building tool.
-1. [`BuildRun`](/docs/build/buildrun/) - invokes the build.
+1. [`BuildRun`](https://github.com/shipwright-io/build/blob/main/docs/buildrun.md) - invokes the build.
    You create a `BuildRun` to tell Shipwright to start building your application.
 
 ### Build
@@ -127,11 +127,11 @@ spec:
 
 Each `BuildRun` object invokes a build on your cluster. You can think of these as a Kubernetes
 `Jobs` or Tekton `TaskRuns` - they represent a workload on your cluster, ultimately resulting in a
-running `Pod`. See [`BuildRun`](/docs/build/buildrun/) for more details.
+running `Pod`. See [`BuildRun`](https://github.com/shipwright-io/build/blob/main/docs/buildrun.md) for more details.
 
 ## Further reading
 
-- [Configuration](/docs/configuration/)
+- [Configuration](https://github.com/shipwright-io/build/blob/main/docs/configuration.md)
 - Build controller observability
-  - [Metrics](/docs/metrics/)
-  - [Profiling](/docs/profiling/)
+  - [Metrics](https://github.com/shipwright-io/build/blob/main/docs/metrics.md)
+  - [Profiling](https://github.com/shipwright-io/build/blob/main/docs/profiling.md)
