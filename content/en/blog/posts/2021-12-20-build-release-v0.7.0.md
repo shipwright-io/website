@@ -29,7 +29,7 @@ The following checks were performed on each of these signatures:
 [{"critical":{"identity":{"docker-reference":"ghcr.io/shipwright-io/build/shipwright-build-controller"},"image":{"docker-manifest-digest":"sha256:887b76092d0e6f3c4f4c7b781589f41fde1c967ae9ae62f3a6bdbb18251a562f"},"type":"cosign container image signature"}...
 ```
 
-Our signing process takes advantage of the new [keyless mode](https://github.com/sigstore/cosign/blob/main/KEYLESS.md) for cosign and support for [OIDC tokens in GitHub actions](https://chainguard.dev/posts/2021-12-01-zero-friction-keyless-signing).
+Our signing process takes advantage of the new [keyless mode](https://github.com/sigstore/cosign/blob/main/KEYLESS.md) for cosign and support for OIDC tokens in GitHub actions.
 
 ### shp - New `buildrun delete` Command
 

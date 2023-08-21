@@ -4,7 +4,7 @@ date: 2022-09-28T14:50:04-04:00
 draft: false
 ---
 
-{{< imgproc hacktoberfest2022-logo Resize "600x460" >}} 
+{{< imgproc hacktoberfest2022-logo Resize "600x460" >}}
 {{< /imgproc >}}
 
 ## Get your code on!
@@ -15,7 +15,7 @@ We would love to see you join our community!
 
 ## Getting Started
 
-* Review our [Contributing Guide](https://github.com/shipwright-io/community/blob/main/CONTRIBUTING.md).
+* Review our [Contributing Guide](https://github.com/shipwright-io/.github/blob/main/CONTRIBUTING.md).
 * Join the `#shipwright` channel on [Kubernetes Slack](https://kubernetes.slack.com/messages/shipwright).
 * (optional) Join the contributors [mailing list](https://lists.shipwright.io/archives/list/shipwright-dev@lists.shipwright.io/).
 
