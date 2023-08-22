@@ -20,7 +20,7 @@ We concluded that Shipwright is and should remain a framework for building
 container images.
 Shipwright will continue to make it simple to build a container image from
 source, using tools that are actively maintained by a community of experts.
-Our separation of [build strategy]({{% ref "/docs/build/buildstrategies" %}})
+Our separation of [build strategy]({{% ref "/docs/builds/buildstrategies" %}})
 from build definition and execution will remain a cornerstone of the Shipwright
 framework.
 
@@ -46,7 +46,7 @@ Shipwright is just getting started in this effort through the
 ## Core Values
 
 Over the past two years, the Shipwright community has coalesced around three
-core values: simplicity, flexibility, and security. 
+core values: simplicity, flexibility, and security.
 
 Simplicity means that we provide an experience that is intuitive and
 consistent.
@@ -82,7 +82,7 @@ future.
 
 ## Bringing Shipwright to Beta
 
-Starting in version 0.12, Shipwright will introduce the beta [Build API]({{% ref "/docs/build/build" %}})
+Starting in version 0.12, Shipwright will introduce the beta [Build API]({{% ref "/docs/builds/build" %}})
 and begin phasing out the current alpha API.
 We encourage current and future users to provide feedback as we roll this new
 API out.

@@ -230,12 +230,12 @@ spec:
 
 A `Build` resource can specify the `BuildStrategy` to use, these are:
 
-- [Buildah](buildstrategies.md#buildah)
-- [Buildpacks-v3](buildstrategies.md#buildpacks-v3)
-- [BuildKit](buildstrategies.md#buildkit)
-- [Kaniko](buildstrategies.md#kaniko)
-- [ko](buildstrategies.md#ko)
-- [Source-to-Image](buildstrategies.md#source-to-image)
+- [Buildah](https://github.com/shipwright-io/build/blob/main/docs/buildstrategies.md#buildah)
+- [Buildpacks-v3](https://github.com/shipwright-io/build/blob/main/docs/buildstrategies.md#buildpacks-v3)
+- [BuildKit](https://github.com/shipwright-io/build/blob/main/docs/buildstrategies.md#buildkit)
+- [Kaniko](https://github.com/shipwright-io/build/blob/main/docs/buildstrategies.md#kaniko)
+- [ko](https://github.com/shipwright-io/build/blob/main/docs/buildstrategies.md#ko)
+- [Source-to-Image](https://github.com/shipwright-io/build/blob/main/docs/buildstrategies.md#source-to-image)
 
 Defining the strategy is straightforward. You define the `name` and the `kind`. For example:
 
