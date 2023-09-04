@@ -10,7 +10,12 @@ with our operator.
 
 ## Prerequsites
 
-Shipwright runs on top of [Kubernetes](https://kubernetes.io/), and requires a cluster running version 1.21 or higher.
+- [Kubernetes](https://kubernetes.io/) 1.21 or later.
+- [Tekton pipelines](https://tekton.dev/docs/installation/) v0.41 or later. 
+
+  ```bash
+  kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
+  ```
 
 ## Installing Shipwright Builds with the Operator
 
@@ -52,7 +57,7 @@ We also publish a Kubernetes manifest that installs Shipwright directly into the
 Applying this manifest requires cluster administrator permissions:
 
 ```bash
-$ kubectl apply -f https://github.com/shipwright-io/build/releases/download/v0.10.0/release.yaml
+$ kubectl apply -f https://github.com/shipwright-io/build/releases/latest/download/release.yaml
 ```
 
 ## Installing Sample Build Strategies
@@ -61,5 +66,5 @@ The Shipwright community maintains a curated set of build strategies for popular
 These can be optionally installed after Shipwright Builds has been deployed:
 
 ```bash
-$ kubectl apply -f https://github.com/shipwright-io/build/releases/download/v0.10.0/sample-strategies.yaml
+$ kubectl apply -f https://github.com/shipwright-io/build/releases/latest/download/sample-strategies.yaml
 ```
