@@ -9,8 +9,8 @@ Shipwright is back with the v0.12.0 release, moving our API from _alpha_ to _bet
 
 Some key points to consider:
 
-- Starting with the _v0.12.0_ release, a conversion webhook is deployed, to guarantees support for both _v1alpha1_ and _v1beta1_ API versions.
-- Users are encourage to adopt the _v1beta1_ API.
+- Starting with the _v0.12.0_ release, a conversion webhook is deployed to provide support for both _v1alpha1_ and _v1beta1_ API versions.
+- Users are encouraged to adopt the _v1beta1_ API.
 - Support for _v1alpha1_ will continue for some additional releases. Part of the _v1alpha1_ API is already deprecated and not available in _v1beta1_.
 
 
@@ -68,7 +68,7 @@ shp help
 
 ### Operator
 
-To deploy and manage Shipwright Builds in your cluster, first make sure the operator v0.12.0 is installed and running on your cluster. You can follow the instructions on [OperatorHub](https://operatorhub.io/operator/shipwright-operator).
+To deploy and manage Shipwright Builds in your cluster, first ensure the operator v0.12.0 is installed and running on your cluster. You can follow the instructions on [OperatorHub](https://operatorhub.io/operator/shipwright-operator).
 
 Next, create the following:
 
