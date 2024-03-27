@@ -2,6 +2,11 @@
 title: Build Controller Profiling
 linkTitle: Profiling
 ---
+<!--
+Copyright The Shipwright Contributors
+
+SPDX-License-Identifier: Apache-2.0
+-->
 
 The build controller supports a `pprof` profiling mode, which is omitted from the binary by default. To use the profiling, use the controller image that was built with `pprof` enabled.
 
