@@ -49,12 +49,12 @@ Further details can be found in [PR 1504](https://github.com/shipwright-io/build
 
 As the usage of the webhook increased over the last months, we've made enhancements to address certain gaps:
 
-- Previously, there was an issue with the proper conversion of BuildRuns from v1alpha1 to v1beta1 when a generated service account was utilized. This has been resolved.
+- Previously, there was an issue with the proper conversion of `BuildRun` instances from v1alpha1 to v1beta1 when a generated service account was utilized. This has been resolved.
 - Additionally, a bug was identified where patching a completed v1beta1 BuildRun would inadvertently remove its status. This issue has been resolved.
 
 ### OCIArtifacts
 
-When implementing prevention measures against path traversal during the extraction of an OCI artifact, we were too strict. We only needed to prevent /../ because this means to go one directory up. We still must allow `..` because a directory or file can contain two subsequent dots in its name. You can now use files and directories with two subsequent dots in its name when using an OCI artifact as source.
+When implementing prevention measures against path traversal during the extraction of an OCI artifact, we were too strict. We only needed to prevent /../ because this means to go one directory up. We still must allow `..` because a directory or file can contain two subsequent dots in its name. You can now use files and directories with two subsequent dots in their names when using an OCI artifact as source.
 
 ### Builds
 
