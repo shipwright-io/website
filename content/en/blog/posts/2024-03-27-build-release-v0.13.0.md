@@ -125,18 +125,3 @@ shp version
 shp help
 ```
 
-### Operator
-
-To deploy and manage Shipwright Builds in your cluster, first ensure the operator v0.13.0 is installed and running on your cluster. You can follow the instructions on [OperatorHub](https://operatorhub.io/operator/shipwright-operator).
-
-Next, create the following:
-
-```yaml
----
-apiVersion: operator.shipwright.io/v1alpha1
-kind: ShipwrightBuild
-metadata:
-  name: shipwright-operator
-spec:
-  targetNamespace: shipwright-build
-```
