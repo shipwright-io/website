@@ -16,7 +16,7 @@ defaultContentLanguageInSubdir = false
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
 
-disableKinds = ["taxonomy", "taxonomyTerm"]
+disableKinds = ["term", "taxonomy"]
 
 # Highlighting config
 pygmentsCodeFences = true
@@ -52,12 +52,13 @@ anchor = "smart"
 # Language configuration
 
 [languages]
-[languages.en]
-title = "Shipwright"
-description = "A framework for building container images on Kubernetes"
-languageName ="English"
-# Weight used for sorting.
-weight = 1
+  [languages.en]
+    title = "Shipwright"
+    languageName ="English"
+    # Weight used for sorting.
+    weight = 1
+    [languages.en.params]
+      description = "A framework for building container images on Kubernetes"
 
 [markup]
   [markup.goldmark]
