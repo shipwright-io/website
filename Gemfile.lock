@@ -4,6 +4,7 @@ GEM
     asciidoctor (2.0.17)
 
 PLATFORMS
+  universal-darwin-23
   x86_64-linux
 
 DEPENDENCIES

@@ -1,55 +1,98 @@
-{{ $links := .Site.Params.links }}
-<footer class="bg-dark py-5 row d-print-none">
-  <div class="container-fluid mx-sm-5">
-    <div class="row">
-      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
-        {{ with $links }}
-        {{ with index . "user"}}
-        {{ template "footer-links-block"  . }}
-        {{ end }}
-        {{ end }}
+{{ if .IsHome }}
+<footer class="bg-white">
+    <div class="footer-content">
+      <div class="footer-left">
+        <div class="footer-image-text">
+            <img src="img/cncf-logo.png" alt="Footer image">        
+            <p class="mt-4">
+                {{ .Site.Params.footer_cncf_note }}
+            </p>
+            <p class="mt-4">
+              {{ .Site.Params.footer_note }}
+            </p>
+            <p class="mt-4">
+                &copy; {{ .Site.Params.copyright }}.
+            </p>
+
+
+            <div class="footer-icons">
+                {{- if .Site.Params.links.social }}
+                <p class="mt-4">Find us on</p>
+                {{ range .Site.Params.links.social }}
+                      <a href="{{ .url}}" target="_blank" aria-label="{{ .name }}">
+                          <i class="{{ .icon }}"></i>
+                      </a>
+                {{- end }}
+                {{- end }}
+              </div>
+        </div>
       </div>
-      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
-        {{ with $links }}
-        {{ with index . "developer"}}
-        {{ template "footer-links-block"  . }}
-        {{ end }}
-        {{ end }}
-      </div>
-      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        {{ with .Site.Params.copyright }}<small class="text-white">&copy; {{ now.Year}} {{ T "main_license" | safeHTML }}</small>{{ end }}
-        <small class="text-white"></small>
-        {{ with .Site.Params.privacy_policy }}<small class="ml-1"><a href="{{ . }}" target="_blank">{{ T "footer_privacy_policy" }}</a></small>{{ end }}
-	{{ if not .Site.Params.ui.footer_about_disable }}
-		{{ with .Site.GetPage "about" }}<p class="mt-2"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>{{ end }}
-  {{ end }}
+      <div class="footer-right">
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h4> Community </h4>
+                <ul>
+                    {{ with .Site.Params.links.footer.community.links }}
+                        {{ range . }}
+                        <li>
+                            <a href="{{ .url }}" target="_blank" class="listss">
+                                {{ .name }}
+                              </a>
+                        </li>
+                        {{ end }}
+                    {{ end }}
+                </ul>
+            </div>
+    
+            <div class="footer-column">
+                <h4> Developer Resources </h4>
+                <ul>
+                    {{ with .Site.Params.links.footer.developer.links }}
+                        {{ range . }}
+                        <li>
+                            <a href="{{ .url }}" target="_blank" class="listss">
+                                {{ .name }}
+                              </a>
+                        </li>
+                        {{ end }}
+                    {{ end }}
+                </ul>
+            </div>
+
+
+            <div class="footer-column">
+                <h4> Useful Links </h4>
+                <ul>
+                    {{ with .Site.Params.links.footer.help.links }}
+                        {{ range . }}
+                        <li>
+                            <a href="{{ .url }}" target="_blank" class="listss">
+                                {{ .name }}
+                              </a>
+                        </li>
+                        {{ end }}
+                    {{ end }}
+                </ul>
+            </div>
+
+
+            <div class="footer-column">
+                <h4> Policies</h4>
+                <ul>
+                    {{ with .Site.Params.links.footer.policies.links }}
+                        {{- range . }}
+                            <li>
+                                <a href="{{ .url }}" target="_blank" class="listss">
+                                    {{ .name }}
+                                  </a>
+                                </li>
+                        {{ end }}
+                    {{ end }}
+                </ul>
+            </div>
+
+          </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col text-left order-sm-2">
-        <a href="https://cd.foundation">
-          <img class="height-50" src="https://raw.githubusercontent.com/cdfoundation/artwork/main/cdf/stacked/white/cdf-stacked-white.svg" alt="CD Foundation" />
-        </a>
-      </div>
-      <div class="col text-center order-sm-2">
-        <small class="text-white">A <a href="https://cd.foundation">CD Foundation</a> Incubating Project</small>
-      </div>
-      <div class="col text-right order-sm-2">
-        <a href="https://www.netlify.com">
-          <img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg" alt="Deploys by Netlify" />
-        </a>
-      </div>
-    </div>
-  </div>
-</footer>
-{{ define "footer-links-block" }}
-<ul class="list-inline mb-0">
-  {{ range . }}
-  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="{{ .name }}" aria-label="{{ .name }}">
-    <a class="text-white" target="_blank" rel="noopener noreferrer" href="{{ .url }}">
-      <i class="{{ .icon }}"></i>
-    </a>
-  </li>
-  {{ end }}
-</ul>
+  </footer>
 {{ end }}

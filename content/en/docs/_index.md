@@ -1,12 +1,8 @@
 ---
-title: "Welcome to Shipwright"
-linkTitle: "Documentation"
-draft: false
+title: "Documentation"
+linkTitle: "Docs"
 weight: 20
-no_list: true
-menu:
-  main:
-    weight: 20
+menu: {main: {weight: 20}}
 ---
 
 
