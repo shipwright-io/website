@@ -1,62 +1,77 @@
-+++
-title = "Shipwright"
-linkTitle = "Shipwright"
-
-+++
-
-{{< blocks/cover title="Shipwright: A framework for building container images on Kubernetes" image_anchor="top" height="full" color="orange" >}}
-<div class="mx-auto">
-	<!-- <a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref "/docs" >}}">
-		Learn More <i class="fas fa-arrow-alt-circle-right ml-2"></i>
-	</a>
-	<a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://github.com/shipwright-io/build">
-		Download <i class="fab fa-github ml-2 "></i>
-	</a> -->
-	{{< blocks/link-down color="info" >}}
-</div>
-{{< /blocks/cover >}}
-
+---
+title: "Shipwright"
+---
 
 {{% blocks/lead color="primary" %}}
+<div class="lead-block-container">
+	<div class="lead-block-left">
+		<h1 class="left-lead-title">
+			Simplicity, Security <br> <span class="left-head-title-other">and Flexibility</span>
+		  </h1>
+		<div class="lead-subtitle">An extensible framework for building <br> container images in Kubernetes.</div>
+		<div class="lead-buttons">
+			<a href="/docs/getting-started/"class="btn-qs">
+				<span class="text">Quick Start</span>
+			</a>
+			<a href="https://github.com/shipwright-io/build" class="btn-with-icon">
+				<img src="/index/star.svg" alt="Icon" class="icon" href="https://github.com/shipwright-io/build">
+				<span class="separator"></span>
+				<span class="text">Star us on Github  </span>
+			</a>
+		</div>
+	</div>
+	<div class="lead-block-center">
+		<img src="/index/shipwright-logo-stacked-1color-darkbg.svg" alt="Logo" class="logo">
+	</div>
 
-Shipwright is an extensible framework for building container images on Kubernetes.
 
-Declare and reuse build strategies to build your container images.
-
-Shipwright supports popular tools such as
-[Kaniko](https://github.com/GoogleContainerTools/kaniko),
-[Cloud Native Buildpacks](https://buildpacks.io/), [Buildah](https://buildah.io/), and more!
-
+</div>
 {{% /blocks/lead %}}
 
-{{< blocks/section color="dark" >}}
-
-{{% blocks/feature icon="fab" %}}
-{{% /blocks/feature %}}
-
-{{% blocks/feature icon="fa-ship" title="Release v0.13.0 Available!" %}}
-
-Our latest release is now available on GitHub (<a href="https://github.com/shipwright-io/build/releases/tag/v0.13.0">Build Controller</a>, <a href="https://github.com/shipwright-io/cli/releases/tag/v0.13.0" target="_blank">CLI</a>, and <a href="https://github.com/shipwright-io/operator/releases/tag/v0.13.0">Operator</a>).
-Read more in our <a href="/blog/2024/03/27/shipwright-v0.13.0-is-here/">blog post</a>.
-
-{{% /blocks/feature %}}
-
+{{% blocks/section color="300" type="container" height="auto" %}}
+	<section class="image-row-section">
+		<div class="image-row">
+			<img src="/index/ko-with-name.svg" alt="Icon" class="imgko">
+			<img src="/index/build-tool-bp.png" alt="Icon">
+			<img src="/index/build-tool-buildah.png" alt="Icon">
+			<img src="/index/build-tool-kaniko.svg" alt="Icon">
+		</div>
+	<div class="text-content">
+		<h2>Shipwright supports popular tools such as ko, Cloud Native Buildpacks, and more!
+			<br> to build your container images.</h2>
+	</div>
+</section>
 {{< /blocks/section >}}
 
-{{< blocks/section >}}
+{{% blocks/section color="white" type="container" height="min" %}}
+  <div class="video-content">
+	<div class="video-text">
+		<h2 class="video-title">Watch the latest video!</h2>
+		<p class="video-description">
+			Secure and Reliable Container Image Creation with Shipwright.
+			@cdCon + GitOpsCon 2023
+		</p>
+	</div>
+  	<div class="video-embed">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/7AdQX6p09nE?si=LUgaxJvi85mHCp4F" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
+  </div>
+{{< /blocks/section >}}
 
-{{% blocks/feature icon="fab" %}}
+
+
+{{% blocks/section color="dark" type="row" %}}
+{{% blocks/feature icon="fa-brands fa-github" title="Release v0.13.0 Available!" %}}
+Our latest release is now available on GitHub (<a href="https://github.com/shipwright-io/build/releases/tag/v0.13.0">Build Controller</a>, <a href="https://github.com/shipwright-io/cli/releases/tag/v0.13.0" target="_blank">CLI</a>, and <a href="https://github.com/shipwright-io/operator/releases/tag/v0.13.0">Operator</a>).
+Read more in our <a href="/blog/2024/03/27/shipwright-v0.13.0-is-here/">blog post</a>.
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fab fa-github" title="Contributions welcome!" %}}
+{{% blocks/feature icon="fa-solid fa-heart" title="Contributions welcome!" %}}
 Our source code is available on [GitHub](https://github.com/shipwright-io/build). Feel free to submit a [pull request](https://github.com/shipwright-io/build/pulls) - new users are always welcome!
 {{% /blocks/feature %}}
 
-
-{{% blocks/feature icon="fab" %}}
+{{% blocks/feature icon="fa-sharp fa-light fa-people-group" title="Join Us!" %}}
+Attend one of our community meetings - <br> see our public [calendar](https://calendar.google.com/calendar/embed?src=shipwright-admin%40lists.shipwright.io&ctz=America%2FNew_York)!.
 {{% /blocks/feature %}}
 
-
 {{< /blocks/section >}}
-
-<small class="text-left"><a href="https://www.flickr.com/photos/95012874@N00/2483655809">"Container ship"</a><span> by <a href="https://www.flickr.com/photos/95012874@N00">Martin Pettitt</a></span> is licensed under <a href="https://creativecommons.org/licenses/by/2.0/?ref=ccsearch&atype=html" style="margin-right: 5px;">CC BY 2.0</a><a href="https://creativecommons.org/licenses/by/2.0/?ref=ccsearch&atype=html" target="_blank" rel="noopener noreferrer" style="display: inline-block;white-space: none;margin-top: 2px;margin-left: 3px;height: 22px !important;"><img style="height: inherit;margin-right: 3px;display: inline-block;" src="https://search.creativecommons.org/static/img/cc_icon.svg" /><img style="height: inherit;margin-right: 3px;display: inline-block;" src="https://search.creativecommons.org/static/img/cc-by_icon.svg" /></a></small>

@@ -1,8 +1,6 @@
 ---
 title: "Contact Us"
 linkTitle: "Contact"
-draft: false
-weight: 30
 menu:
   main:
     weight: 30
