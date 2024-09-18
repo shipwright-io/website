@@ -3,11 +3,11 @@ all: build
 
 .PHONY: build
 build: clean ## build the site
-	hugo -t docsy --minify
+	hugo -F --minify
 
 .PHONY: build-preview
 build-preview: clean ## build a preview, with future-dated content allowed.
-	hugo -t docsy -F --minify
+	hugo -F --minify
 
 .PHONY: clean
 clean: ## clean the build assets
@@ -17,15 +17,17 @@ clean: ## clean the build assets
 install: ## install dependencies
 	bundle
 	npm install
+	hugo mod get
+	hugo mod graph
+	hugo mod get github.com/google/docsy
 
 .PHONY: netlify
-netlify: submodule-init ## build the site for Netlify
-	git submodule update --init --recursive --depth 1
+netlify:
 	$(MAKE) install
 	$(MAKE) build
 
 .PHONY: netlify-preview
-netlify-preview: submodule-init ## build a preview of the site for Netlify
+netlify-preview: ## build a preview of the site for Netlify
 	$(MAKE) install
 	$(MAKE) build-preview
 
@@ -36,7 +38,3 @@ serve: ## serve the content locally for testing
 .PHONY: serve-preview
 serve-preview: ## serve the preview content locally for testing
 	hugo -t docsy server -F
-
-.PHONY: submodule-init
-submodule-init:
-	git submodule update --init --recursive --depth 1
