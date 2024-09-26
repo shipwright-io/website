@@ -1,0 +1,14 @@
+<div class="cncf">
+	<div class="tradem">
+		{{ $cncf := resources.Get "/img/cncf-logo.png" }}
+		<h2>We are a Cloud Native Computing Foundation sandbox project.</h2>
+		<img src="{{ $cncf.RelPermalink }}" alt="opened box" loading="lazy"/>
+		<p>The Linux Foundation® (TLF) has registered trademarks and uses trademarks. For a list of TLF trademarks, see <a href="https://www.linuxfoundation.org/trademark-usage/" target="_blank">Trademark Usage</a>.</p>
+	</div>
+</div>
+{{ with .Site.Params.copyright -}}
+<span>&copy; {{ now.Year }} {{ . }} {{ T "footer_all_rights_reserved" }}</span>
+{{- end }}
+{{ with .Site.Params.privacy_policy -}}
+<span class="ms-1"><a href="{{ . }}" target="_blank" rel="noopener">{{ T "footer_privacy_policy" }}</a></span>
+{{- end }}
