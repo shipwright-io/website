@@ -54,17 +54,17 @@ A `ClusterBuildStrategy` is available cluster-wide, while a `BuildStrategy` is a
 
 ## Available ClusterBuildStrategies
 
-Well-known strategies can be bootstrapped from [here](../samples/v1beta1/buildstrategy). The currently supported Cluster BuildStrategy are:
+Well-known strategies can be bootstrapped from [here](https://github.com/shipwright-io/build/tree/main/samples/v1beta1/buildstrategy). The currently supported Cluster BuildStrategy are:
 
 | Name | Supported platforms |
 | ---- | ------------------- |
-| [buildah](../samples/v1beta1/buildstrategy/buildah) | all |
-| [BuildKit](../samples/v1beta1/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml) | all |
-| [buildpacks-v3-heroku](../samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_cr.yaml) | linux/amd64 only |
-| [buildpacks-v3](../samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml) | linux/amd64 only |
+| [buildah](https://github.com/shipwright-io/build/tree/main/samples/v1beta1/buildstrategy/buildah) | all |
+| [BuildKit](https://github.com/shipwright-io/build/blob/main/samples/v1beta1/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml) | all |
+| [buildpacks-v3-heroku](https://github.com/shipwright-io/build/blob/main/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_cr.yaml) | linux/amd64 only |
+| [buildpacks-v3](https://github.com/shipwright-io/build/blob/main/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml) | linux/amd64 only |
 | [kaniko](../samples/v1beta1/buildstrategy/kaniko/buildstrategy_kaniko_cr.yaml) | all |
-| [ko](../samples/v1beta1/buildstrategy/ko/buildstrategy_ko_cr.yaml) | all |
-| [source-to-image](../samples/v1beta1/buildstrategy/source-to-image/buildstrategy_source-to-image_cr.yaml) | linux/amd64 only |
+| [ko](https://github.com/shipwright-io/build/tree/main/samples/v1beta1/buildstrategy/kaniko) | all |
+| [source-to-image](https://github.com/shipwright-io/build/blob/main/samples/v1beta1/buildstrategy/source-to-image/buildstrategy_source-to-image_cr.yaml) | linux/amd64 only |
 
 ## Available BuildStrategies
 
@@ -72,8 +72,8 @@ The current supported namespaces BuildStrategy are:
 
 | Name | Supported platforms |
 | ---- | ------------------- |
-| [buildpacks-v3-heroku](../samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_namespaced_cr.yaml) | linux/amd64 only |
-| [buildpacks-v3](../samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_namespaced_cr.yaml) | linux/amd64 only |
+| [buildpacks-v3-heroku](https://github.com/shipwright-io/build/blob/main/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_namespaced_cr.yaml) | linux/amd64 only |
+| [buildpacks-v3](https://github.com/shipwright-io/build/blob/main/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_namespaced_cr.yaml) | linux/amd64 only |
 
 ---
 
@@ -83,8 +83,8 @@ The `buildah` ClusterBuildStrategy uses [`buildah`](https://github.com/container
 
 The strategy is available in two formats:
 
-- [`buildah-shipwright-managed-push`](../samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push%20copy_cr.yaml)
-- [`buildah-strategy-managed-push`](../samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_strategy_managed_push_cr.yaml)
+- [`buildah-shipwright-managed-push`](https://github.com/shipwright-io/build/blob/main/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push_cr.yaml)
+- [`buildah-strategy-managed-push`](https://github.com/shipwright-io/build/blob/main/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_strategy_managed_push_cr.yaml)
 
 Learn more about the differences of [shipwright-, or strategy-managed push](#output-directory-vs-output-image)
 
