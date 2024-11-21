@@ -57,7 +57,7 @@ We also publish a Kubernetes manifest that installs Shipwright directly into the
 Applying this manifest requires cluster administrator permissions:
 
 ```bash
-$ kubectl apply -f https://github.com/shipwright-io/build/releases/latest/download/release.yaml
+$ kubectl apply -f https://github.com/shipwright-io/build/releases/latest/download/release.yaml --server-side=true
 ```
 
 ## Installing Sample Build Strategies
