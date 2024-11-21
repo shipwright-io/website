@@ -1,6 +1,6 @@
 ---
 title: Build
-weight: 10
+weight: 20
 ---
 <!--
 Copyright The Shipwright Contributors
@@ -15,12 +15,17 @@ SPDX-License-Identifier: Apache-2.0
   - [Defining the Source](#defining-the-source)
   - [Defining the Strategy](#defining-the-strategy)
   - [Defining ParamValues](#defining-paramvalues)
+    - [Example](#example)
   - [Defining the Builder or Dockerfile](#defining-the-builder-or-dockerfile)
   - [Defining the Output](#defining-the-output)
+  - [Defining the vulnerabilityScan](#defining-the-vulnerabilityscan)
   - [Defining Retention Parameters](#defining-retention-parameters)
   - [Defining Volumes](#defining-volumes)
   - [Defining Triggers](#defining-triggers)
-- [BuildRun deletion](#buildrun-deletion)
+    - [GitHub](#github)
+    - [Image](#image)
+    - [Tekton Pipeline](#tekton-pipeline)
+- [BuildRun Deletion](#buildrun-deletion)
 
 ## Overview
 
@@ -35,6 +40,7 @@ A `Build` resource allows the user to define:
 - env
 - retention
 - volumes
+- nodeSelector
 
 A `Build` is available within a namespace.
 
@@ -99,7 +105,7 @@ The `Build` definition supports the following fields:
   - [`kind`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Specifies the Kind type, for example `Build`.
   - [`metadata`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Metadata that identify the custom resource instance, especially the name of the `Build`, and in which [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) you place it. **Note**: You should use your own namespace, and not put your builds into the shipwright-build namespace where Shipwright's system components run.
   - `spec.source` - Refers to the location of the source code, for example a Git repository or OCI artifact image.
-  - `spec.strategy` - Refers to the `BuildStrategy` to be used, see the [examples](../samples/v1beta1/buildstrategy)
+  - `spec.strategy` - Refers to the `BuildStrategy` to be used, see the [examples](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/buildstrategy)
   - `spec.output`- Refers to the location where the generated image would be pushed.
   - `spec.output.pushSecret`- Reference an existing secret to get access to the container registry.
 
@@ -113,12 +119,14 @@ The `Build` definition supports the following fields:
     - Use string `SourceTimestamp` to set the image timestamp to the source timestamp, i.e. the timestamp of the Git commit that was used.
     - Use string `BuildTimestamp` to set the image timestamp to the timestamp of the build run.
     - Use any valid UNIX epoch seconds number as a string to set this as the image timestamp.
+  - `spec.output.vulnerabilityScan` to enable a security vulnerability scan for your generated image. Further options in vulnerability scanning are defined [here](#defining-the-vulnerabilityscan)
   - `spec.env` - Specifies additional environment variables that should be passed to the build container. The available variables depend on the tool that is being used by the chosen build strategy.
   - `spec.retention.atBuildDeletion` - Defines if all related BuildRuns needs to be deleted when deleting the Build. The default is false.
   - `spec.retention.ttlAfterFailed` - Specifies the duration for which a failed buildrun can exist.
   - `spec.retention.ttlAfterSucceeded` - Specifies the duration for which a successful buildrun can exist.
   - `spec.retention.failedLimit` - Specifies the number of failed buildrun that can exist.
   - `spec.retention.succeededLimit` - Specifies the number of successful buildrun can exist.
+  - `spec.nodeSelector` - Specifies a selector which must match a node's labels for the build pod to be scheduled on that node.
 
 ### Defining the Source
 
@@ -127,7 +135,7 @@ A `Build` resource can specify a source type, such as a Git repository or an OCI
 - `source.type` - Specify the type of the data-source. Currently, the supported types are "Git", "OCIArtifact", and "Local".
 - `source.git.url` - Specify the source location using a Git repository.
 - `source.git.cloneSecret` - For private repositories or registries, the name references a secret in the namespace that contains the SSH private key or Docker access credentials, respectively.
-- `source.git.revision` - A specific revision to select from the source repository, this can be a commit, tag or branch name. If not defined, it will fallback to the Git repository default branch.
+- `source.git.revision` - A specific revision to select from the source repository, this can be a commit, tag or branch name. If not defined, it will fall back to the Git repository default branch.
 - `source.contextDir` - For repositories where the source code is not located at the root folder, you can specify this path here.
 
 By default, the Build controller does not validate that the Git repository exists. If the validation is desired, users can explicitly define the `build.shipwright.io/verify.repository` annotation with `true`. For example:
@@ -262,12 +270,12 @@ spec:
 
 A `Build` resource can specify the `BuildStrategy` to use, these are:
 
-- [Buildah](buildstrategies.md#buildah)
-- [Buildpacks-v3](buildstrategies.md#buildpacks-v3)
-- [BuildKit](buildstrategies.md#buildkit)
-- [Kaniko](buildstrategies.md#kaniko)
-- [ko](buildstrategies.md#ko)
-- [Source-to-Image](buildstrategies.md#source-to-image)
+- [Buildah](../buildstrategies#buildah)
+- [Buildpacks-v3](../buildstrategies#buildpacks-v3)
+- [BuildKit](../buildstrategies#buildkit)
+- [Kaniko](../buildstrategies#kaniko)
+- [ko](../buildstrategies#ko)
+- [Source-to-Image](../buildstrategies#source-to-image)
 
 Defining the strategy is straightforward. You define the `name` and the `kind`. For example:
 
@@ -284,7 +292,7 @@ spec:
 
 ### Defining ParamValues
 
-A `Build` resource can specify _paramValues_ for parameters that are defined in the referenced `BuildStrategy`. You specify these parameter values to control how the steps of the build strategy behave. You can overwrite values in the `BuildRun` resource. See the related [documentation](./buildrun.md#defining-params) for more information.
+A `Build` resource can specify _paramValues_ for parameters that are defined in the referenced `BuildStrategy`. You specify these parameter values to control how the steps of the build strategy behave. You can overwrite values in the `BuildRun` resource. See the related [documentation](../buildrun#defining-paramvalues) for more information.
 
 The build strategy author can define a parameter as either a simple string or an array. Depending on that, you must specify the value accordingly. The build strategy parameter can be specified with a default value. You must specify a value in the `Build` or `BuildRun` for parameters without a default.
 
@@ -299,7 +307,7 @@ In general, _paramValues_ are tightly bound to Strategy _parameters_. Please mak
 
 #### Example
 
-The [BuildKit sample `BuildStrategy`](../samples/v1beta1/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml) contains various parameters. Two of them are outlined here:
+The [BuildKit sample `BuildStrategy`](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml) contains various parameters. Two of them are outlined here:
 
 ```yaml
 apiVersion: shipwright.io/v1beta1
@@ -592,6 +600,48 @@ spec:
     image: some.registry.com/namespace/image:tag
     pushSecret: credentials
     timestamp: SourceTimestamp
+```
+
+### Defining the vulnerabilityScan
+
+`vulnerabilityScan` provides configurations to run a scan for your generated image.
+
+- `vulnerabilityScan.enabled` - Specify whether to run vulnerability scan for image. The supported values are true and false.
+- `vulnerabilityScan.failOnFinding` - indicates whether to fail the build run if the vulnerability scan results in vulnerabilities. The supported values are true and false. This field is optional and false by default.
+- `vulnerabilityScan.ignore.issues` - references the security issues to be ignored in vulnerability scan
+- `vulnerabilityScan.ignore.severity` - denotes the severity levels of security issues to be ignored, valid values are:
+  - `low`: it will exclude low severity vulnerabilities, displaying only medium, high and critical vulnerabilities
+  - `medium`: it will exclude low and medium severity vulnerabilities, displaying only high and critical vulnerabilities
+  - `high`: it will exclude low, medium and high severity vulnerabilities, displaying only the critical vulnerabilities
+- `vulnerabilityScan.ignore.unfixed` - indicates to ignore vulnerabilities for which no fix exists. The supported types are true and false.
+
+Example of user specified image vulnerability scanning options:
+
+```yaml
+apiVersion: shipwright.io/v1beta1
+kind: Build
+metadata:
+  name: sample-go-build
+spec:
+  source:
+    type: Git
+    git:
+      url: https://github.com/shipwright-io/sample-go
+    contextDir: source-build
+  strategy:
+    name: buildkit
+    kind: ClusterBuildStrategy
+  output:
+    image: some.registry.com/namespace/image:tag
+    pushSecret: credentials
+    vulnerabilityScan:
+      enabled: true
+      failOnFinding: true
+      ignore:
+        issues:
+          - CVE-2022-12345
+        severity: Low
+        unfixed: true
 ```
 
 Annotations added to the output image can be verified by running the command:
