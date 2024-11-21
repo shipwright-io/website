@@ -1,6 +1,6 @@
 ---
-title: BuildStrategies
-weight: 20
+title: Build Strategies
+weight: 10
 ---
 <!--
 Copyright The Shipwright Contributors
@@ -13,11 +13,12 @@ SPDX-License-Identifier: Apache-2.0
 - [Available BuildStrategies](#available-buildstrategies)
 - [Buildah](#buildah)
   - [Installing Buildah Strategy](#installing-buildah-strategy)
+- [Multi-arch Native Buildah](#multi-arch-native-buildah)
+  - [Installing Multi-arch Native Buildah Strategy](#installing-multi-arch-native-buildah-strategy) 
 - [Buildpacks v3](#buildpacks-v3)
   - [Installing Buildpacks v3 Strategy](#installing-buildpacks-v3-strategy)
 - [Kaniko](#kaniko)
   - [Installing Kaniko Strategy](#installing-kaniko-strategy)
-    - [Scanning with Trivy](#scanning-with-trivy)
 - [BuildKit](#buildkit)
   - [Cache Exporters](#cache-exporters)
   - [Build-args and secrets](#build-args-and-secrets)
@@ -54,26 +55,27 @@ A `ClusterBuildStrategy` is available cluster-wide, while a `BuildStrategy` is a
 
 ## Available ClusterBuildStrategies
 
-Well-known strategies can be bootstrapped from [here](../samples/v1beta1/buildstrategy). The currently supported Cluster BuildStrategy are:
+Well-known strategies can be bootstrapped from [here](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/buildstrategy). The currently supported Cluster BuildStrategy are:
 
-| Name | Supported platforms |
-| ---- | ------------------- |
-| [buildah](../samples/v1beta1/buildstrategy/buildah) | all |
-| [BuildKit](../samples/v1beta1/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml) | all |
-| [buildpacks-v3-heroku](../samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_cr.yaml) | linux/amd64 only |
-| [buildpacks-v3](../samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml) | linux/amd64 only |
-| [kaniko](../samples/v1beta1/buildstrategy/kaniko/buildstrategy_kaniko_cr.yaml) | all |
-| [ko](../samples/v1beta1/buildstrategy/ko/buildstrategy_ko_cr.yaml) | all |
-| [source-to-image](../samples/v1beta1/buildstrategy/source-to-image/buildstrategy_source-to-image_cr.yaml) | linux/amd64 only |
+| Name                                                                                                              | Supported platforms |
+|-------------------------------------------------------------------------------------------------------------------|---------------------|
+| [buildah](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/buildstrategy/buildah)                                                               | all                 |
+| [multiarch-native-buildah](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/buildstrategy/multiarch-native-buildah)                             | all                 |
+| [BuildKit](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/buildstrategy/buildkit)                              | all                 |
+| [buildpacks-v3-heroku](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_cr.yaml) | linux/amd64 only    |
+| [buildpacks-v3](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml)               | linux/amd64 only    |
+| [kaniko](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/buildstrategy/kaniko)                                    | all                 |
+| [ko](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/buildstrategy/ko)                                                | all                 |
+| [source-to-image](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/buildstrategy/source-to-image)         | linux/amd64 only    |
 
 ## Available BuildStrategies
 
 The current supported namespaces BuildStrategy are:
 
-| Name | Supported platforms |
-| ---- | ------------------- |
-| [buildpacks-v3-heroku](../samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_namespaced_cr.yaml) | linux/amd64 only |
-| [buildpacks-v3](../samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_namespaced_cr.yaml) | linux/amd64 only |
+| Name                                                                                                                         | Supported platforms |
+|------------------------------------------------------------------------------------------------------------------------------|---------------------|
+| [buildpacks-v3-heroku](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_namespaced_cr.yaml) | linux/amd64 only    |
+| [buildpacks-v3](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_namespaced_cr.yaml)               | linux/amd64 only    |
 
 ---
 
@@ -83,8 +85,8 @@ The `buildah` ClusterBuildStrategy uses [`buildah`](https://github.com/container
 
 The strategy is available in two formats:
 
-- [`buildah-shipwright-managed-push`](../samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push%20copy_cr.yaml)
-- [`buildah-strategy-managed-push`](../samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_strategy_managed_push_cr.yaml)
+- [`buildah-shipwright-managed-push`](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push_cr.yaml)
+- [`buildah-strategy-managed-push`](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_strategy_managed_push_cr.yaml)
 
 Learn more about the differences of [shipwright-, or strategy-managed push](#output-directory-vs-output-image)
 
@@ -99,6 +101,110 @@ kubectl apply -f samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_str
 
 ---
 
+## Multi-arch Native buildah
+
+The [`multiarch-native-buildah` ClusterBuildStrategy](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/multiarch-native-buildah/buildstrategy_multiarch_native_buildah_cr.yaml) uses [`buildah`](https://github.com/containers/buildah) to build and push a container image, out of a `Dockerfile`.
+
+The strategy will build the image for the platforms that are listed in the `architectures` parameter of a `Build` object
+that refers it.
+The strategy will require the cluster to have the necessary infrastructure to run the builds: worker nodes
+for each architecture that is listed in the `architectures` parameter. 
+
+The ClusterBuildStrategy runs a main orchestrator pod. 
+The orchestrator pod will create one auxiliary job for each architecture requested by the Build. 
+The auxiliary jobs are responsible for building the container image and 
+coordinate with the orchestrator pod.
+
+When all the builds are completed, the orchestrator pod will compose a manifest-list image and push it to the target registry.
+
+The service account that runs the strategy must be bound to a role able to `create`, `list`, `get` and `watch` 
+`batch/v1` `jobs` and `core/v1` `pods` resources. 
+The role also needs to allow the `create` verb for the `pods/exec` resource.
+Finally, when running in OKD or OpenShift clusters, the service account must be able to use the 
+`privileged` SecurityContextConstraint.
+
+### Installing Multi-arch Native buildah Strategy
+
+To install the cluster-scoped strategy, use:
+
+```sh
+kubectl apply -f samples/v1beta1/buildstrategy/multiarch-native-buildah/buildstrategy_multiarch_native_buildah_cr.yaml
+```
+
+For each namespace where you want to use the strategy, you also need to apply the RBAC rules that allow the service
+account to run the strategy. If the service account is named `pipeline` (default), you can use:
+
+```sh
+kubectl apply -n <namespace> -f  samples/v1beta1/buildstrategy/multiarch-native-buildah/
+```
+
+### Parameters
+
+The build strategy provides the following parameters that you can set in a Build or BuildRun to control its behavior:
+
+| Parameter             | Description                                                                                                                                                                                                                                              | Default      |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| `architectures`       | The list of architectures to build the image for                                                                                                                                                                                                         | \[ "amd64" ] |
+| `build-args`          | The values for the args in the Dockerfile. Values must be in the format KEY=VALUE.                                                                                                                                                                       | empty array  |
+| `dockerfile`          | The path to the Dockerfile to be used for building the image.                                                                                                                                                                                            | `Dockerfile` |
+| `from`                | Image name used to replace the value in the first FROM instruction in the Dockerfile.                                                                                                                                                                    | empty string |
+| `runtime-stage-from`  | Image name used to replace the value in the last FROM instruction in the Dockerfile.                                                                                                                                                                     | empty string |
+| `build-contexts`      | Specify an additional build context using its short name and its location. Additional build contexts can be referenced in the same manner as we access different stages in COPY instruction. Use values in the form "name=value". See man buildah-build. | empty array  |
+| `registries-block`    | A list of registries to block. Images from these registries will not be pulled during the build.                                                                                                                                                         | empty array  |
+| `registries-insecure` | A list of registries that are insecure. Images from these registries will be pulled without verifying the TLS certificate.                                                                                                                               | empty array  |
+| `registries-search`   | A list of registries to search for short name images. Images missing the fully-qualified name of a registry will be looked up in these registries.                                                                                                       | empty array  |
+| `request-cpu`         | The CPU request to set for the auxiliary jobs.                                                                                                                                                                                                           | `250m`       |
+| `request-memory`      | The memory request to set for the auxiliary jobs.                                                                                                                                                                                                        | `64Mi`       |
+| `limit-cpu`           | The CPU limit to set for the auxiliary jobs.                                                                                                                                                                                                             | no limit     |
+| `limit-memory`        | The memory limit to set for the auxiliary jobs.                                                                                                                                                                                                          | `2Gi`        |
+
+### Volumes
+
+| Volume              | Description                                                                                                                                                                                                                                                                                                                                |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| oci-archive-storage | Volume to contain the temporary single-arch images manifests in OCI format. It can be set to a persistent volume, e.g., for large images. The default is an emptyDir volume which means that the cached data is discarded at the end of a BuildRun and will make use of ephemeral storage (according to the cluster infrastructure setup). |
+
+### Example build
+
+```yaml
+---
+apiVersion: shipwright.io/v1beta1
+kind: Build
+metadata:
+  name: multiarch-native-buildah-ex
+spec:
+  source:
+    type: Git
+    git:
+      url: https://github.com/shipwright-io/sample-go
+    contextDir: docker-build
+  strategy:
+    name: multiarch-native-buildah
+    kind: ClusterBuildStrategy
+  paramValues:
+    - name: architectures
+      values:
+        # This will require a cluster with both arm64 and amd64 nodes
+        - value: "amd64"
+        - value: "arm64"
+    - name: build-contexts
+      values:
+        - value: "ghcr.io/shipwright-io/shipwright-samples/golang:1.18=docker://ghcr.io/shipwright-io/shipwright-samples/golang:1.18"
+    # The buildah `--from` replaces the first FROM statement
+    - name: from
+      value: "" # Using the build-contexts for this example
+    # The runtime-stage-from implements the logic to replace the last stage FROM image of a Dockerfile
+    - name: runtime-stage-from
+      value: docker://gcr.io/distroless/static:nonroot
+    - name: dockerfile
+      value: Dockerfile
+  output:
+    image: image-registry.openshift-image-registry.svc:5000/build-examples/taxi-app
+
+```
+
+---
+
 ## Buildpacks v3
 
 The [buildpacks-v3][buildpacks] BuildStrategy/ClusterBuildStrategy uses a Cloud Native Builder ([CNB][cnb]) container image, and is able to implement [lifecycle commands][lifecycle].
@@ -107,7 +213,7 @@ The [buildpacks-v3][buildpacks] BuildStrategy/ClusterBuildStrategy uses a Cloud 
 
 You can install the `BuildStrategy` in your namespace or install the `ClusterBuildStrategy` at cluster scope so that it can be shared across namespaces.
 
-To install the cluster scope strategy, you can chose between the Paketo and Heroku buildpacks family:
+To install the cluster scope strategy, you can choose between the Paketo and Heroku buildpacks family:
 
 ```sh
 # Paketo
@@ -117,7 +223,7 @@ kubectl apply -f samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_build
 kubectl apply -f samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_cr.yaml
 ```
 
-To install the namespaced scope strategy, you can chose between the Paketo and Heroku buildpacks family:
+To install the namespaced scope strategy, you can choose between the Paketo and Heroku buildpacks family:
 
 ```sh
 # Paketo
@@ -131,7 +237,7 @@ kubectl apply -f samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_build
 
 ## Kaniko
 
-The `kaniko` ClusterBuildStrategy is composed by Kaniko's `executor` [kaniko], with the objective of building a container-image, out of a `Dockerfile` and context directory. The `kaniko-trivy` ClusterBuildStrategy adds [trivy](https://github.com/aquasecurity/trivy) scanning and refuses to push images with critical vulnerabilities.
+The `kaniko` ClusterBuildStrategy is composed by Kaniko's `executor` [kaniko], with the objective of building a container-image, out of a `Dockerfile` and context directory.
 
 ### Installing Kaniko Strategy
 
@@ -141,18 +247,6 @@ To install the cluster scope strategy, use:
 kubectl apply -f samples/v1beta1/buildstrategy/kaniko/buildstrategy_kaniko_cr.yaml
 ```
 
-#### Scanning with Trivy
-
-You can also incorporate scanning into the ClusterBuildStrategy. The `kaniko-trivy` ClusterBuildStrategy builds the image with `kaniko`, then scans with [trivy](https://github.com/aquasecurity/trivy). The BuildRun will then exit with an error if there is a critical vulnerability, instead of pushing the vulnerable image into the container registry.
-
-To install the cluster scope strategy, use:
-
-```sh
-kubectl apply -f samples/v1beta1/buildstrategy/kaniko/buildstrategy_kaniko-trivy_cr.yaml
-```
-
-*Note: doing image scanning is not a substitute for trusting the Dockerfile you are building. The build process itself is also susceptible if the Dockerfile has a vulnerability. Frameworks/strategies such as build-packs or source-to-image (which avoid directly building a Dockerfile) should be considered if you need guardrails around the code you want to build.*
-
 ---
 
 ## BuildKit
@@ -161,11 +255,11 @@ kubectl apply -f samples/v1beta1/buildstrategy/kaniko/buildstrategy_kaniko-trivy
 
 ### Cache Exporters
 
-By default, the `buildkit` ClusterBuildStrategy will use caching to optimize the build times. When pushing an image to a registry, it will use the inline export cache, which appends cache information to the image that is built. Please refer to [export-cache docs](https://github.com/moby/buildkit#export-cache) for more information. Caching can be disabled by setting the `cache` parameter to `"disabled"`. See [Defining ParamValues](build.md#defining-paramvalues) for more information.
+By default, the `buildkit` ClusterBuildStrategy will use caching to optimize the build times. When pushing an image to a registry, it will use the inline export cache, which appends cache information to the image that is built. Please refer to [export-cache docs](https://github.com/moby/buildkit#export-cache) for more information. Caching can be disabled by setting the `cache` parameter to `"disabled"`. See [Defining ParamValues](../build#defining-paramvalues) for more information.
 
 ### Build-args and secrets
 
-The sample build strategy contains array parameters to set values for [`ARG`s in your Dockerfile](https://docs.docker.com/engine/reference/builder/#arg), and for [mounts with type=secret](https://docs.docker.com/develop/develop-images/build_enhancements/#new-docker-build-secret-information). The parameter names are `build-args` and `secrets`. [Defining ParamValues](build.md#defining-paramvalues) contains example usage.
+The sample build strategy contains array parameters to set values for [`ARG`s in your Dockerfile](https://docs.docker.com/engine/reference/builder/#arg), and for [mounts with type=secret](https://docs.docker.com/develop/develop-images/build_enhancements/#new-docker-build-secret-information). The parameter names are `build-args` and `secrets`. [Defining ParamValues](../build#defining-paramvalues) contains example usage.
 
 ### Multi-platform builds
 
@@ -175,11 +269,11 @@ The sample build strategy contains a `platforms` array parameter that you can se
 
 The `buildkit` ClusterBuildStrategy currently locks the following parameters:
 
-- To allow running rootless, it requires both [AppArmor](https://kubernetes.io/docs/tutorials/clusters/apparmor/) as well as [SecComp](https://kubernetes.io/docs/tutorials/clusters/seccomp/) to be disabled using the `unconfined` profile.
+- To allow running rootless, it requires both [AppArmor](https://kubernetes.io/docs/tutorials/clusters/apparmor/) and [SecComp](https://kubernetes.io/docs/tutorials/clusters/seccomp/) to be disabled using the `unconfined` profile.
 
 ### Usage in Clusters with Pod Security Standards
 
-The BuildKit strategy contains fields with regards to security settings. It therefore depends on the respective cluster setup and administrative configuration. These settings are:
+The BuildKit strategy contains fields with regard to security settings. It therefore depends on the respective cluster setup and administrative configuration. These settings are:
 
 - Defining the `unconfined` profile for both AppArmor and seccomp as required by the underlying `rootlesskit`.
 - The `allowPrivilegeEscalation` settings is set to `true` to be able to use binaries that have the `setuid` bit set in order to run with "root" level privileges. In case of BuildKit, this is required by `rootlesskit` in order to set the user namespace mapping file `/proc/<pid>/uid_map`.
@@ -215,18 +309,18 @@ kubectl apply -f samples/v1beta1/buildstrategy/ko/buildstrategy_ko_cr.yaml
 
 The build strategy provides the following parameters that you can set in a Build or BuildRun to control its behavior:
 
-| Parameter | Description | Default |
-| -- | -- | -- |
-| `go-flags` | Value for the GOFLAGS environment variable. | Empty |
-| `go-version` | Version of Go, must match a tag from [the golang image](https://hub.docker.com/_/golang?tab=tags) | `1.21` |
-| `ko-version` | Version of ko, must be either `latest` for the newest release, or a [ko release name](https://github.com/ko-build/ko/releases) | `latest` |
-| `package-directory` | The directory inside the context directory containing the main package. | `.` |
-| `target-platform` | Target platform to be built. For example: `linux/arm64`. Multiple platforms can be provided separated by comma, for example: `linux/arm64,linux/amd64`. The value `all` will build all platforms supported by the base image. The value `current` will build the platform on which the build runs. | `current` |
+| Parameter           | Description                                                                                                                                                                                                                                                                                        | Default   |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
+| `go-flags`          | Value for the GOFLAGS environment variable.                                                                                                                                                                                                                                                        | Empty     |
+| `go-version`        | Version of Go, must match a tag from [the golang image](https://hub.docker.com/_/golang?tab=tags)                                                                                                                                                                                                  | `1.22`    |
+| `ko-version`        | Version of ko, must be either `latest` for the newest release, or a [ko release name](https://github.com/ko-build/ko/releases)                                                                                                                                                                     | `latest`  |
+| `package-directory` | The directory inside the context directory containing the main package.                                                                                                                                                                                                                            | `.`       |
+| `target-platform`   | Target platform to be built. For example: `linux/arm64`. Multiple platforms can be provided separated by comma, for example: `linux/arm64,linux/amd64`. The value `all` will build all platforms supported by the base image. The value `current` will build the platform on which the build runs. | `current` |
 
 ### Volumes
 
-| Volume  | Description |
-| ------- | ----------- |
+| Volume  | Description                                                                                                                                                                                                                  |
+|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | gocache | Volume to contain the GOCACHE. Can be set to a persistent volume to optimize compilation performance for rebuilds. The default is an emptyDir volume which means that the cached data is discarded at the end of a BuildRun. |
 
 ## Source to Image
@@ -265,7 +359,7 @@ Users defining _parameters_ under their strategies require to understand the fol
 
 - **Definition**: A list of parameters should be defined under `spec.parameters`. Each list item should consist of a _name_, a _description_, a _type_ (either `"array"` or `"string"`) and optionally a _default_ value (for type=string), or _defaults_ values (for type=array). If no default(s) are provided, then the user must define a value in the Build or BuildRun.
 - **Usage**: In order to use a parameter in the strategy steps, use the following syntax for type=string: `$(params.your-parameter-name)`. String parameters can be used in all places in the `buildSteps`. Some example scenarios are:
-  - `image`: to use a custom tag, for example `golang:$(params.go-version)` as it is done in the [ko sample build strategy](../samples/v1beta1/buildstrategy/ko/buildstrategy_ko_cr.yaml))
+  - `image`: to use a custom tag, for example `golang:$(params.go-version)` as it is done in the [ko sample build strategy](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/ko/buildstrategy_ko_cr.yaml)
   - `args`: to pass data into your builder command
   - `env`: to force a user to provide a value for an environment variable.
   
@@ -299,9 +393,9 @@ Users defining _parameters_ under their strategies require to understand the fol
 
 - **Parameterize**: Any `Build` or `BuildRun` referencing your strategy, can set a value for _your-parameter-name_ parameter if needed.
 
-**Note**: Users can provide parameter values as simple strings or as references to keys in [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/) and [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/). If they use a ConfigMap or Secret, then the value can only be used if the parameter is used in the `command`, `args`, or `env` section of the `buildSteps`. For example, the above mentioned scenario to set a step's `image` to `golang:$(params.go-version)` does not allow the usage of ConfigMaps or Secrets.
+**Note**: Users can provide parameter values as simple strings or as references to keys in [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/) and [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/). If they use a ConfigMap or Secret, then the value can only be used if the parameter is used in the `command`, `args`, or `env` section of the `buildSteps`. For example, the above-mentioned scenario to set a step's `image` to `golang:$(params.go-version)` does not allow the usage of ConfigMaps or Secrets.
 
-The following example is from the [BuildKit sample build strategy](../samples/v1beta1/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml). It defines and uses several parameters:
+The following example is from the [BuildKit sample build strategy](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml). It defines and uses several parameters:
 
 ```yaml
 ---
@@ -335,7 +429,7 @@ spec:
   steps:
     ...
     - name: build-and-push
-      image: moby/buildkit:nightly-rootless
+      image: moby/buildkit:v0.17.0-rootless
       imagePullPolicy: Always
       workingDir: $(params.shp-source-root)
       ...
@@ -421,19 +515,19 @@ spec:
         - $(params.secrets[*])
 ```
 
-See more information on how to use these parameters in a `Build` or `BuildRun` in the related [documentation](./build.md#defining-paramvalues).
+See more information on how to use these parameters in a `Build` or `BuildRun` in the related [documentation](../build#defining-paramvalues).
 
 ## System parameters
 
 Contrary to the strategy `spec.parameters`, you can use system parameters and their values defined at runtime when defining the steps of a build strategy to access system information as well as information provided by the user in their Build or BuildRun. The following parameters are available:
 
-| Parameter                      | Description |
-| ------------------------------ | ----------- |
-| `$(params.shp-source-root)`    | The absolute path to the directory that contains the user's sources. |
-| `$(params.shp-source-context)` | The absolute path to the context directory of the user's sources. If the user specified no value for `spec.source.contextDir` in their `Build`, then this value will equal the value for `$(params.shp-source-root)`. Note that this directory is not guaranteed to exist at the time the container for your step is started, you can therefore not use this parameter as a step's working directory. |
-| `$(params.shp-output-directory)` | The absolute path to a directory that the build strategy should store the image in. You can store a single tarball containing a single image, or an OCI image layout. |
-| `$(params.shp-output-image)`     | The URL of the image that the user wants to push, as specified in the Build's `spec.output.image` or as an override from the BuildRun's `spec.output.image`. |
-| `$(params.shp-output-insecure)`  |  A flag that indicates the output image's registry location is insecure because it uses a certificate not signed by a certificate authority, or uses HTTP. |
+| Parameter                        | Description                                                                                                                                                                                                                                                                                                                                                                                           |
+|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `$(params.shp-source-root)`      | The absolute path to the directory that contains the user's sources.                                                                                                                                                                                                                                                                                                                                  |
+| `$(params.shp-source-context)`   | The absolute path to the context directory of the user's sources. If the user specified no value for `spec.source.contextDir` in their `Build`, then this value will equal the value for `$(params.shp-source-root)`. Note that this directory is not guaranteed to exist at the time the container for your step is started, you can therefore not use this parameter as a step's working directory. |
+| `$(params.shp-output-directory)` | The absolute path to a directory that the build strategy should store the image in. You can store a single tarball containing a single image, or an OCI image layout.                                                                                                                                                                                                                                 |
+| `$(params.shp-output-image)`     | The URL of the image that the user wants to push, as specified in the Build's `spec.output.image` or as an override from the BuildRun's `spec.output.image`.                                                                                                                                                                                                                                          |
+| `$(params.shp-output-insecure)`  | A flag that indicates the output image's registry location is insecure because it uses a certificate not signed by a certificate authority, or uses HTTP.                                                                                                                                                                                                                                             |
 
 ### Output directory vs. output image
 
@@ -446,19 +540,19 @@ When you use the `$(params.shp-output-directory)` parameter, then Shipwright wil
 
 If you are uncertain about how to implement your build strategy, then follow this guidance:
 
-1. If your build strategy tool cannot locally store an image but always pushes it, then you must do the push operation. An example is the [Buildpacks strategy](../samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml). You SHOULD respect the `$(params.shp-output-insecure)` parameter.
+1. If your build strategy tool cannot locally store an image but always pushes it, then you must do the push operation. An example is the [Buildpacks strategy](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml). You SHOULD respect the `$(params.shp-output-insecure)` parameter.
 2. If your build strategy tool can locally store an image, then the choice depends on how you expect your build users to make use of your strategy, and the nature of your strategy.
    1. Some build strategies do not produce all layers of an image, but use a common base image and put one or more layers on top with the application. An example is `ko`. Such base image layers are often already present in the destination registry (like in rebuilds). If the strategy can perform the push operation, then it can optimize the process and can omit the download of the base image when it is not required to push it. In the case of a shipwright-managed push, the complete image must be locally stored in `$(params.shp-output-directory)`, which implies that a base image must always be downloaded.
-   2. Some build strategy tools do not make it easy to determine the digest or size of the image, which can make it complex for your to set the [strategy results](#system-results). In the case of a shipwright-managed push, Shipwright has the responsibility to set them.
+   2. Some build strategy tools do not make it easy to determine the digest or size of the image, which can make it complex for you to set the [strategy results](#system-results). In the case of a shipwright-managed push, Shipwright has the responsibility to set them.
    3. Build users can configure the build to amend additional annotations, or labels to the final image. In the case of a shipwright-managed push, these can be set directly and the image will only be pushed once. In a strategy-managed push scenario, your build strategy will push the first version of the image without those annotations and labels. Shipwright will then mutate the image and push it again with the updated annotations and labels. Such a duplicate push can cause unexpected behavior with registries that trigger other actions when an image gets pushed, or that do not allow overwriting a tag.
    4. The Shipwright maintainers plan to provide more capabilities in the future that need the image locally, such as vulnerability scanning, or software bill of material (SBOM) creation. These capabilities may be only fully supported with shipwright-managed push.
 
 ## System parameters vs Strategy Parameters Comparison
 
-| Parameter Type     | User Configurable | Definition    |
-| ------------------ | ------------ | ------------- |
-| System Parameter   |    No        |  At run-time, by the `BuildRun` controller.  |
-| Strategy Parameter |    Yes       |  At build-time, during the `BuildStrategy` creation. |
+| Parameter Type     | User Configurable | Definition                                          |
+|--------------------|-------------------|-----------------------------------------------------|
+| System Parameter   | No                | At run-time, by the `BuildRun` controller.          |
+| Strategy Parameter | Yes               | At build-time, during the `BuildStrategy` creation. |
 
 ## Securely referencing string parameters
 
@@ -491,9 +585,9 @@ This opens the door to script injection, for example if the user sets the `sampl
           some-tool --sample-argument "argument-value" && malicious-command && echo ""
 ```
 
-To securely pass a parameter value into a script-style argument, you can chose between these two approaches:
+To securely pass a parameter value into a script-style argument, you can choose between these two approaches:
 
-1. Using environment variables. This is used in some of our sample strategies, for example [ko](../samples/v1beta1/buildstrategy/ko/buildstrategy_ko_cr.yaml), or [buildpacks](../samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml). Basically, instead of directly using the parameter inside the script, you pass it via environment variable. Using quoting, shells ensure that no command injection is possible:
+1. Using environment variables. This is used in some of our sample strategies, for example [ko](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/ko/buildstrategy_ko_cr.yaml), or [buildpacks](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml). Basically, instead of directly using the parameter inside the script, you pass it via environment variable. Using quoting, shells ensure that no command injection is possible:
 
    ```yaml
    spec:
@@ -516,7 +610,7 @@ To securely pass a parameter value into a script-style argument, you can chose b
              some-tool --sample-argument "${PARAM_SAMPLE_PARAMETER}"
    ```
 
-2. Using arguments. This is used in some of our sample build strategies, for example [buildah](../samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_cr.yaml). Here, you use arguments to your own inline script. Appropriate shell quoting guards against command injection.
+2. Using arguments. This is used in some of our sample build strategies, for example [buildah](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push_cr.yaml). Here, you use arguments to your own inline script. Appropriate shell quoting guards against command injection.
 
    ```yaml
    spec:
@@ -545,11 +639,11 @@ To securely pass a parameter value into a script-style argument, you can chose b
 If you are using a strategy-managed push, see [output directory vs output image](#output-directory-vs-output-image), you can optionally store the size and digest of the image your build strategy created to a set of files.
 
 | Result file                        | Description                                     |
-| ---------------------------------- | ----------------------------------------------- |
+|------------------------------------|-------------------------------------------------|
 | `$(results.shp-image-digest.path)` | File to store the digest of the image.          |
 | `$(results.shp-image-size.path)`   | File to store the compressed size of the image. |
 
-You can look at sample build strategies, such as [Buildpacks](../samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml), to see how they fill some or all of the results files.
+You can look at sample build strategies, such as [Buildpacks](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml), to see how they fill some or all of the results files.
 
 This information will be available in the `.status.output` section of the BuildRun.
 
@@ -567,9 +661,9 @@ status:
 
 Additionally, you can store error details for debugging purposes when a BuildRun fails using your strategy.
 
-| Result file                        | Description                                     |
-| ---------------------------------- | ----------------------------------------------- |
-| `$(results.shp-error-reason.path)` | File to store the error reason.          |
+| Result file                         | Description                      |
+|-------------------------------------|----------------------------------|
+| `$(results.shp-error-reason.path)`  | File to store the error reason.  |
 | `$(results.shp-error-message.path)` | File to store the error message. |
 
 Reason is intended to be a one-word CamelCase classification of the error source, with the first letter capitalized.
@@ -604,7 +698,7 @@ spec:
 
 This runAs configuration will be used for all shipwright-managed steps such as the step that retrieves the source code, and for the steps you define in the build strategy. This configuration ensures that all steps share the same runAs configuration which eliminates file permission problems.
 
-Without a `securityContext` for the build strategy, shipwright-managed steps will run with the `runAsUser` and `runAsGroup` that is defined in the [configuration's container templates](configuration.md) that is potentially a different user than you use in your build strategy. This can result in issues when for example source code is downloaded as user A as defined by the Git container template, but your strategy accesses it as user B.
+Without a `securityContext` for the build strategy, shipwright-managed steps will run with the `runAsUser` and `runAsGroup` that is defined in the [configuration's container templates](../configuration) that is potentially a different user than you use in your build strategy. This can result in issues when for example source code is downloaded as user A as defined by the Git container template, but your strategy accesses it as user B.
 
 In build strategy steps you can define a step-specific `securityContext` that matches [Kubernetes' security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) where you can configure other security aspects such as capabilities or privileged containers.
 
@@ -614,7 +708,7 @@ All strategies steps can include a definition of resources(_limits and requests_
 
 ### Strategies with different resources
 
-If the strategy admins would require to have multiple flavours of the same strategy, where one strategy has more resources that the other. Then, multiple strategies for the same type should be defined on the cluster. In the following example, we use Kaniko as the type:
+If the strategy admins required to have multiple flavours of the same strategy, where one strategy has more resources that the other. Then, multiple strategies for the same type should be defined on the cluster. In the following example, we use Kaniko as the type:
 
 ```yaml
 ---
@@ -625,7 +719,7 @@ metadata:
 spec:
   steps:
     - name: build-and-push
-      image: gcr.io/kaniko-project/executor:v1.21.1
+      image: gcr.io/kaniko-project/executor:v1.23.2
       workingDir: $(params.shp-source-root)
       securityContext:
         runAsUser: 0
@@ -674,7 +768,7 @@ metadata:
 spec:
   steps:
     - name: build-and-push
-      image: gcr.io/kaniko-project/executor:v1.21.1
+      image: gcr.io/kaniko-project/executor:v1.23.2
       workingDir: $(params.shp-source-root)
       securityContext:
         runAsUser: 0
@@ -754,15 +848,15 @@ For a more concrete example, let´s take a look on the following scenarios:
 
 **Scenario 1.**  Namespace without `LimitRange`, both steps with the same resource values.
 
-If we will apply the following resources:
+If we apply the following resources:
 
-- [buildahBuild](../samples/build/build_buildah_cr.yaml)
-- [buildahBuildRun](../samples/buildrun/buildrun_buildah_cr.yaml)
-- [buildahClusterBuildStrategy](../samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_cr.yaml)
+- [buildahBuild](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/build/build_buildah_shipwright_managed_push_cr.yaml)
+- [buildahBuildRun](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/buildrun/buildrun_buildah_cr.yaml)
+- [buildahClusterBuildStrategy](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push_cr.yaml)
 
 We will see some differences between the `TaskRun` definition and the `pod` definition.
 
-For the `TaskRun`, as expected we can see the resources on each `step`, as we previously define on our [strategy](../samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_cr.yaml).
+For the `TaskRun`, as expected we can see the resources on each `step`, as we previously define on our [strategy](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push_cr.yaml).
 
 ```sh
 $ kubectl -n test-build get tr buildah-golang-buildrun-9gmcx-pod-lhzbc -o json | jq '.spec.taskSpec.steps[] | select(.name == "step-buildah-bud" ) | .resources'
@@ -826,15 +920,15 @@ In this scenario, only one container can have the `spec.resources.requests` defi
 
 **Scenario 2.**  Namespace without `LimitRange`, steps with different resources:
 
-If we will apply the following resources:
+If we apply the following resources:
 
-- [buildahBuild](../samples/build/build_buildah_cr.yaml)
-- [buildahBuildRun](../samples/buildrun/buildrun_buildah_cr.yaml)
+- [buildahBuild](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/build/build_buildah_shipwright_managed_push_cr.yaml)
+- [buildahBuildRun](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/buildrun/buildrun_buildah_cr.yaml)
 - We will use a modified buildah strategy, with the following steps resources:
 
   ```yaml
     - name: buildah-bud
-      image: quay.io/containers/buildah:v1.34.0
+      image: quay.io/containers/buildah:v1.37.5
       workingDir: $(params.shp-source-root)
       securityContext:
         privileged: true
@@ -856,7 +950,7 @@ If we will apply the following resources:
         - name: buildah-images
           mountPath: /var/lib/containers/storage
     - name: buildah-push
-      image: quay.io/containers/buildah:v1.34.0
+      image: quay.io/containers/buildah:v1.37.5
       securityContext:
         privileged: true
       command:
