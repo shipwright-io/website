@@ -1,5 +1,6 @@
 ---
 title: Authentication during builds
+weight: 40
 ---
 
 The following document provides an introduction around the different authentication methods that can take place during an image build when using the Build controller.
@@ -7,8 +8,8 @@ The following document provides an introduction around the different authenticat
 - [Overview](#overview)
 - [Build Secrets Annotation](#build-secrets-annotation)
 - [Authentication for Git](#authentication-for-git)
-  - [Basic authentication](#basic-authentication)
   - [SSH authentication](#ssh-authentication)
+  - [Basic authentication](#basic-authentication)
   - [Usage of git secret](#usage-of-git-secret)
 - [Authentication to container registries](#authentication-to-container-registries)
   - [Docker Hub](#docker-hub)
@@ -17,7 +18,7 @@ The following document provides an introduction around the different authenticat
 
 ## Overview
 
-There are two places where users might need to define authentication when building images. Authentication to a container registry is the most common one, but also users might have the need to define authentications for pulling source-code from Git. Overall, the authentication is done via the definition of [secrets](https://kubernetes.io/docs/concepts/configuration/secret/) in which the require sensitive data will be stored.
+There are two places where users might need to define authentication when building images. Authentication to a container registry is the most common one, but also users might have the need to define authentications for pulling source-code from Git. Overall, the authentication is done via the definition of [secrets](https://kubernetes.io/docs/concepts/configuration/secret/) in which the required sensitive data will be stored.
 
 ## Build Secrets Annotation
 
@@ -74,7 +75,10 @@ data:
 The Basic authentication is very similar to the ssh one, but with the following differences:
 
 - The Kubernetes secret should be of the type `kubernetes.io/basic-auth`
-- The `stringData` should host your user and password in clear text.
+- The `stringData` should host your user and personal access token in clear text.
+
+Note: GitHub and GitLab no longer accept account passwords when authenticating Git operations.
+Instead, you must use token-based authentication for all authenticated Git operations. You can create your own personal access token on [GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) and [GitLab](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html).
 
 ```yaml
 apiVersion: v1
@@ -86,7 +90,7 @@ metadata:
 type: kubernetes.io/basic-auth
 stringData:
   username: <cleartext username>
-  password: <cleartext password>
+  password: <cleartext token>
 ```
 
 ### Usage of git secret
@@ -98,29 +102,29 @@ Depending on the secret type, there are two ways of doing this:
 When using ssh auth, users should follow:
 
 ```yaml
-apiVersion: shipwright.io/v1alpha1
+apiVersion: shipwright.io/v1beta1
 kind: Build
 metadata:
   name: buildah-golang-build
 spec:
   source:
-    url: git@gitlab.com:eduardooli/newtaxi.git
-    credentials:
-      name: secret-git-ssh-auth
+    git:
+      url: git@gitlab.com:eduardooli/newtaxi.git
+      cloneSecret: secret-git-ssh-auth
 ```
 
 When using basic auth, users should follow:
 
 ```yaml
-apiVersion: shipwright.io/v1alpha1
+apiVersion: shipwright.io/v1beta1
 kind: Build
 metadata:
   name: buildah-golang-build
 spec:
   source:
-    url: https://gitlab.com/eduardooli/newtaxi.git
-    credentials:
-      name: secret-git-basic-auth
+    git:
+      url: https://gitlab.com/eduardooli/newtaxi.git
+      cloneSecret: secret-git-basic-auth
 ```
 
 ## Authentication to container registries
@@ -146,18 +150,17 @@ _Notes:_ The value of `PASSWORD` can be your user docker hub password, or an acc
 ### Usage of registry secret
 
 With the right secret in place (_note: Ensure creation of secret in the proper Kubernetes namespace_), users should reference it on their Build YAML definitions.
-For container registries, the secret should be placed under the `spec.output.credentials` path.
+For container registries, the secret should be placed under the `spec.output.pushSecret` path.
 
 ```yaml
-apiVersion: shipwright.io/v1alpha1
+apiVersion: shipwright.io/v1beta1
 kind: Build
 metadata:
   name: buildah-golang-build
   ...
   output:
     image: docker.io/foobar/sample:latest
-    credentials:
-      name: <CONTAINER_REGISTRY_SECRET_NAME>
+    pushSecret: <CONTAINER_REGISTRY_SECRET_NAME>
 ```
 
 ## References

@@ -1,7 +1,6 @@
 ---
-title: "BuildRun"
-draft: false
-weight: 40
+title: BuildRun
+weight: 30
 ---
 <!--
 Copyright The Shipwright Contributors
@@ -14,6 +13,7 @@ SPDX-License-Identifier: Apache-2.0
 - [Configuring a BuildRun](#configuring-a-buildrun)
   - [Defining the Build Reference](#defining-the-build-reference)
   - [Defining the Build Specification](#defining-the-build-specification)
+  - [Defining the Build Source](#defining-the-build-source)
   - [Defining ParamValues](#defining-paramvalues)
   - [Defining the ServiceAccount](#defining-the-serviceaccount)
   - [Defining Retention Parameters](#defining-retention-parameters)
@@ -24,6 +24,7 @@ SPDX-License-Identifier: Apache-2.0
 - [BuildRun Status](#buildrun-status)
   - [Understanding the state of a BuildRun](#understanding-the-state-of-a-buildrun)
   - [Understanding failed BuildRuns](#understanding-failed-buildruns)
+  - [Understanding failed BuildRuns due to VulnerabilitiesFound](#understanding-failed-buildruns-due-to-vulnerabilitiesfound)
     - [Understanding failed git-source step](#understanding-failed-git-source-step)
   - [Step Results in BuildRun Status](#step-results-in-buildrun-status)
   - [Build Snapshot](#build-snapshot)
@@ -73,7 +74,9 @@ The `BuildRun` definition supports the following fields:
   - `spec.output.image` - Refers to a custom location where the generated image would be pushed. The value will overwrite the `output.image` value defined in `Build`. (**Note**: other properties of the output, for example, the credentials, cannot be specified in the buildRun spec. )
   - `spec.output.pushSecret` - Reference an existing secret to get access to the container registry. This secret will be added to the service account along with the ones requested by the `Build`.
   - `spec.output.timestamp` - Overrides the output timestamp configuration of the referenced build to instruct the build to change the output image creation timestamp to the specified value. When omitted, the respective build strategy tool defines the output image timestamp.
+  - `spec.output.vulnerabilityScan` - Overrides the output vulnerabilityScan configuration of the referenced build to run the vulnerability scan for the generated image.
   - `spec.env` - Specifies additional environment variables that should be passed to the build container. Overrides any environment variables that are specified in the `Build` resource. The available variables depend on the tool used by the chosen build strategy.
+  - `spec.nodeSelector` - Specifies a selector which must match a node's labels for the build pod to be scheduled on that node.
 
 **Note**: The `spec.build.name` and `spec.build.spec` are mutually exclusive. Furthermore, the overrides for `timeout`, `paramValues`, `output`, and `env` can only be combined with `spec.build.name`, but **not** with `spec.build.spec`.
 
@@ -173,7 +176,7 @@ spec:
     value: registry
 ```
 
-See more about _paramValues_ usage in the related [Build](./build.md#defining-paramvalues) resource docs.
+See more about _paramValues_ usage in the related [Build](../build#defining-paramvalues) resource docs.
 
 ### Defining the ServiceAccount
 
@@ -394,6 +397,7 @@ The following table illustrates the different states a BuildRun can have under i
 | False   | BuildRunAmbiguousBuild                  | Yes                   | The defined `BuildRun` uses both `spec.build.name` and `spec.build.spec`. Only one of them is allowed at the same time.                                                                                                                                                                               |
 | False   | BuildRunBuildFieldOverrideForbidden     | Yes                   | The defined `BuildRun` uses an override (e.g. `timeout`, `paramValues`, `output`, or `env`) in combination with `spec.build.spec`, which is not allowed. Use the `spec.build.spec` to directly specify the respective value.                                                                          |
 | False   | PodEvicted                              | Yes                   | The BuildRun Pod was evicted from the node it was running on. See [API-initiated Eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/api-eviction/) and [Node-pressure Eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/) for more information. |
+| False   | StepOutOfMemory                         | Yes                   | The BuildRun Pod failed because a step went out of memory.                                                                                                                                                                                                                                            |
 
 **Note**: We heavily rely on the Tekton TaskRun [Conditions](https://github.com/tektoncd/pipeline/blob/main/docs/taskruns.md#monitoring-execution-status) for populating the BuildRun ones, with some exceptions.
 
@@ -420,6 +424,24 @@ status:
     reason: GitRemotePrivate
 ```
 
+### Understanding failed BuildRuns due to VulnerabilitiesFound
+
+A buildrun can be failed, if the vulnerability scan finds vulnerabilities in the generated image and `failOnFinding` is set to true in the `vulnerabilityScan`. For setting `vulnerabilityScan`, see [here](../build#defining-the-vulnerabilityscan).
+
+Example of failed BuildRun due to vulnerabilities present in the image:
+
+```yaml
+# [...]
+status:
+  # [...]
+  conditions:
+  - type: Succeeded
+    lastTransitionTime: "2024-03-12T20:00:38Z"
+    status: "False"
+    reason: VulnerabilitiesFound
+    message: "Vulnerabilities have been found in the output image. For detailed information, check buildrun status or see kubectl --namespace default logs vuln-s6skc-v7wd2-pod --container step-image-processing"
+```
+
 #### Understanding failed git-source step
 
 All git-related operations support error reporting via `status.failureDetails`. The following table explains the possible
@@ -441,7 +463,7 @@ error reasons:
 
 After completing a `BuildRun`, the `.status` field contains the results (`.status.taskResults`) emitted from the `TaskRun` steps generated by the `BuildRun` controller as part of processing the `BuildRun`. These results contain valuable metadata for users, like the _image digest_ or the _commit sha_ of the source code used for building.
 The results from the source step will be surfaced to the `.status.sources`, and the results from
-the [output step](buildstrategies.md#system-results) will be surfaced to the `.status.output` field of a `BuildRun`.
+the [output step](../buildstrategies#system-results) will be surfaced to the `.status.output` field of a `BuildRun`.
 
 Example of a `BuildRun` with surfaced results for `git` source (note that the `branchName` is only included if the Build does not specify any `revision`):
 
@@ -477,7 +499,27 @@ status:
       digest: sha256:0f5e2070b534f9b880ed093a537626e3c7fdd28d5328a8d6df8d29cd3da760c7
 ```
 
-**Note**: The digest and size of the output image are only included if the build strategy provides them. See [System results](buildstrategies.md#system-results).
+**Note**: The digest and size of the output image are only included if the build strategy provides them. See [System results](../buildstrategies#system-results).
+
+Another example of a `BuildRun` with surfaced results for vulnerability scanning.
+
+```yaml
+# [...]
+status:
+  buildSpec:
+    # [...]
+  status:
+  output:
+    digest: sha256:1023103
+    size: 12310380
+    vulnerabilities:
+    - id: CVE-2022-12345
+      severity: high
+    - id: CVE-2021-54321
+      severity: medium
+```
+
+**Note**: The vulnerability scan will only run if it is specified in the build or buildrun spec. See [Defining the `vulnerabilityScan`](../build#defining-the-vulnerabilityscan).
 
 ### Build Snapshot
 
@@ -487,4 +529,4 @@ For every BuildRun controller reconciliation, the `buildSpec` in the status of t
 
 The `BuildRun` resource abstracts the image construction by delegating this work to the Tekton Pipeline [TaskRun](https://github.com/tektoncd/pipeline/blob/main/docs/taskruns.md). Compared to a Tekton Pipeline [Task](https://github.com/tektoncd/pipeline/blob/main/docs/tasks.md), a `TaskRun` runs all `steps` until completion of the `Task` or until a failure occurs in the `Task`.
 
-During the Reconcile, the `BuildRun` controller will generate a new `TaskRun`. The controller will embed in the `TaskRun` `Task` definition the requires `steps` to execute during the execution. These `steps` are defined in the strategy defined in the `Build` resource, either a `ClusterBuildStrategy` or a `BuildStrategy`.
+During the Reconcile, the `BuildRun` controller will generate a new `TaskRun`. The controller will embed in the `TaskRun` `Task` definition the required `steps` to execute during the execution. These `steps` are defined in the strategy defined in the `Build` resource, either a `ClusterBuildStrategy` or a `BuildStrategy`.
