@@ -81,15 +81,17 @@ Once the pull request is approved and marked "lgtm", it will get merged.
 
 ## Community Meetings Participation
 
-We run the community meetings every Monday at 13:00 UTC time.
-For each upcoming meeting we generate a new issue where we layout the topics to discuss.
-See our [previous meetings](https://github.com/shipwright-io/build/issues?q=is%3Aissue+label%3Acommunity+is%3Aclosed) outcomes.
-Please request an invite in our Slack [channel](https://kubernetes.slack.com/archives/C019ZRGUEJC) or join the [shipwright-dev mailing list](https://lists.shipwright.io/admin/lists/shipwright-users.lists.shipwright.io/).
+Shipwright Community Meetings take place weekly on Monday's at 13:00 UTC time.
 
-All meetings are also published on our [public calendar](https://calendar.google.com/calendar/embed?src=shipwright-admin%40lists.shipwright.io&ctz=America%2FNew_York).
+In our Public [Calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/shipwright) you will find all weekly meetings.
+Meetings are hosted in Zoom and are Public. 
+
+You can register yourself via the Public Calendar as well.
+
+The Zoom Meeting comes with information about the [Agenda](https://docs.google.com/document/d/10tDPl_t2-7NcxmI1Iy50dIGPIRIdIUh8v6qp1iH3wLc/edit?usp=sharing) to discuss.
 
 ## Contact Information
 
 - [Slack channel](https://kubernetes.slack.com/archives/C019ZRGUEJC)
-- End-user email list: [shipwright-users@lists.shipwright.io](https://lists.shipwright.io/admin/lists/shipwright-users.lists.shipwright.io/)
-- Developer email list: [shipwright-dev@lists.shipwright.io](https://lists.shipwright.io/admin/lists/shipwright-dev.lists.shipwright.io/)
+- End-user email list: [shipwright-users@lists.shipwright.io](https://lists.cncf.io/g/shipwright-users/join)
+- Developer email list: [shipwright-dev@lists.shipwright.io](https://lists.cncf.io/g/shipwright-dev/join)

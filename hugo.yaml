@@ -146,7 +146,7 @@ params:
   links:
     user:
     - name: User mailing list
-      url: https://lists.shipwright.io/admin/lists/shipwright-users.lists.shipwright.io/
+      url: https://lists.cncf.io/g/shipwright-users/join
       icon: fa fa-envelope
       desc: Discussion and help from your fellow users
     developer:
@@ -171,7 +171,7 @@ params:
         - name: Kubernetes Slack
           url:  https://kubernetes.slack.com/archives/C019ZRGUEJC
         - name: User Mailing List
-          url:  https://lists.shipwright.io/admin/lists/shipwright-users.lists.shipwright.io/
+          url:  https://lists.cncf.io/g/shipwright-users/join
       developer:
         links:
         - name: How to Contribute
