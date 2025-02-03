@@ -159,7 +159,7 @@ params:
       icon: fab fa-slack
       desc: Chat with the Shipwright contributors
     - name: Developer mailing list
-      url: https://lists.shipwright.io/admin/lists/shipwright-dev.lists.shipwright.io/
+      url: https://lists.cncf.io/g/shipwright-dev/join
       icon: fa fa-envelope
       desc: Discuss development issues around the project
 
@@ -177,7 +177,7 @@ params:
         - name: How to Contribute
           url: https://github.com/shipwright-io/.github/blob/main/CONTRIBUTING.md
         - name: Developer Mailing List
-          url: https://lists.shipwright.io/admin/lists/shipwright-dev.lists.shipwright.io/
+          url: https://lists.cncf.io/g/shipwright-dev/join
         - name: Website Source
           url: https://github.com/shipwright-io/website/
       help:
