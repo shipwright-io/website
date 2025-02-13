@@ -38,3 +38,18 @@ serve: ## serve the content locally for testing
 .PHONY: serve-preview
 serve-preview: ## serve the preview content locally for testing
 	hugo -t docsy server -F
+
+.PHONY: bin-dir
+bin-dir: ## Creates a local "bin" directory for helper applications.
+	@mkdir ./bin || true
+
+.PHONY: crd-ref-docs
+crd-ref-docs: bin-dir ## install crd-ref-docs tool
+	GOBIN=$(shell pwd)/bin go install github.com/elastic/crd-ref-docs@v0.1.0
+
+BUILD_REPO ?= "https://github.com/shipwright-io/build.git"
+BUILD_VERSION ?= "v0.15.0"
+
+.PHONY: gen-api-docs
+gen-api-docs: crd-ref-docs ## generate API reference documentation
+	BUILD_REPO=$(BUILD_REPO) BUILD_VERSION=$(BUILD_VERSION) ./hack/gen-api-docs.sh
