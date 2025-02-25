@@ -6,5 +6,11 @@ resources/
 public/
 .hugo_build.lock
 
+# Supporting tools
+bin/
+
+# API Generation
+api-gen/build/
+
 # IDEs
 .vscode

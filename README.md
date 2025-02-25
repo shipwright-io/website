@@ -30,7 +30,7 @@ Then install any additional dependencies by running `make install`
 To run the website locally, use Hugo's `server` command:
 
 ```bash
-$ hugo server
+$ hugo -t docsy server
 ```
 
 ## Contributing
