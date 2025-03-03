@@ -10,8 +10,8 @@ with our operator.
 
 ## Prerequsites
 
-- [Kubernetes](https://kubernetes.io/) 1.21 or later.
-- [Tekton pipelines](https://tekton.dev/docs/installation/) v0.41 or later. 
+- [Kubernetes](https://kubernetes.io/) 1.29 or later.
+- [Tekton pipelines](https://tekton.dev/docs/installation/) v0.59 or later.
 
   ```bash
   kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml

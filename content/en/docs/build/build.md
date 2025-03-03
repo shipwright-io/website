@@ -41,6 +41,8 @@ A `Build` resource allows the user to define:
 - retention
 - volumes
 - nodeSelector
+- tolerations
+- schedulerName
 
 A `Build` is available within a namespace.
 
@@ -95,6 +97,9 @@ To prevent users from triggering `BuildRun`s (_execution of a Build_) that will 
 | TriggerInvalidPipeline                          | Trigger type Pipeline is invalid.                                                                                                                                                                            |
 | OutputTimestampNotSupported                     | An unsupported output timestamp setting was used.                                                                                                                                                            |
 | OutputTimestampNotValid                         | The output timestamp value is not valid.                                                                                                                                                                     |
+| NodeSelectorNotValid                            | The specified nodeSelector is not valid. |
+| TolerationNotValid                              | The specified tolerations are not valid. |
+| SchedulerNameNotValid                              | The specified schedulerName is not valid. |
 
 ## Configuring a Build
 
@@ -105,7 +110,7 @@ The `Build` definition supports the following fields:
   - [`kind`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Specifies the Kind type, for example `Build`.
   - [`metadata`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Metadata that identify the custom resource instance, especially the name of the `Build`, and in which [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) you place it. **Note**: You should use your own namespace, and not put your builds into the shipwright-build namespace where Shipwright's system components run.
   - `spec.source` - Refers to the location of the source code, for example a Git repository or OCI artifact image.
-  - `spec.strategy` - Refers to the `BuildStrategy` to be used, see the [examples](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/buildstrategy)
+  - `spec.strategy` - Refers to the `BuildStrategy` to be used, see the [examples](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/buildstrategy)
   - `spec.output`- Refers to the location where the generated image would be pushed.
   - `spec.output.pushSecret`- Reference an existing secret to get access to the container registry.
 
@@ -126,7 +131,9 @@ The `Build` definition supports the following fields:
   - `spec.retention.ttlAfterSucceeded` - Specifies the duration for which a successful buildrun can exist.
   - `spec.retention.failedLimit` - Specifies the number of failed buildrun that can exist.
   - `spec.retention.succeededLimit` - Specifies the number of successful buildrun can exist.
-  - `spec.nodeSelector` - Specifies a selector which must match a node's labels for the build pod to be scheduled on that node.
+  - `spec.nodeSelector` - Specifies a selector which must match a node's labels for the build pod to be scheduled on that node. If nodeSelectors are specified in both a `Build` and `BuildRun`, `BuildRun` values take precedence.
+  - `spec.tolerations` - Specifies the tolerations for the build pod. Only `key`, `value`, and `operator` are supported. Only `NoSchedule` taint `effect` is supported. If tolerations are specified in both a `Build` and `BuildRun`, `BuildRun` values take precedence.
+  - `spec.schedulerName` - Specifies the scheduler name for the build pod. If schedulerName is specified in both a `Build` and `BuildRun`, `BuildRun` values take precedence.
 
 ### Defining the Source
 
@@ -307,7 +314,7 @@ In general, _paramValues_ are tightly bound to Strategy _parameters_. Please mak
 
 #### Example
 
-The [BuildKit sample `BuildStrategy`](https://github.com/shipwright-io/build/tree/v0.14.0/samples/v1beta1/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml) contains various parameters. Two of them are outlined here:
+The [BuildKit sample `BuildStrategy`](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml) contains various parameters. Two of them are outlined here:
 
 ```yaml
 apiVersion: shipwright.io/v1beta1
