@@ -65,6 +65,10 @@ markup:
 outputs:
   section: [HTML, print, RSS]
 
+services:
+  googleAnalytics:
+    id: G-XSD2CBQT26
+
 params:
   footer_cncf_note: "We are a Cloud Native Computing Foundation sandbox project."
   footer_note: "Kubernetes and the Kubernetes logo are registered trademarks of The Linux Foundation® (TLF)."
