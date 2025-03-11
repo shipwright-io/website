@@ -3,7 +3,9 @@ publish="public/"
 command="make netlify"
 
 [build.environment]
-HUGO_VERSION="0.113.0"
+HUGO_VERSION = "0.145.0"
+NODE_VERSION = "22"
+GO_VERSION = "1.23.4"
 
 [context.deploy-preview]
 command="make netlify-preview"

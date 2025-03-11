@@ -12,14 +12,14 @@ You can run the website locally using the Hugo static site generator.
 
 To use this repository, you need the following installed locally:
 
-* npm - this can be obtained by installing [Node.js](https://nodejs.org/en/download/) on your system
+* `npm` - this can be obtained by installing [Node.js](https://nodejs.org/en/download/) on your system.
 * [Hugo](https://gohugo.io/getting-started/installing/) - be sure to install the **extended version**.
-* [Ruby](https://www.ruby-lang.org/en/)
+* [Go SDK](https://go.dev/doc/install) v1.21 or higher.
 
 Once installed, clone the repository and navigate to the directory:
 
 ```bash
-$ git clone --recurse-submodules --depth 1 https://github.com/shipwright-io/website.git
+$ git clone https://github.com/shipwright-io/website.git
 $ cd website
 ```
 
