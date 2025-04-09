@@ -129,5 +129,5 @@ running `Pod`. See [`BuildRun`](/docs/build/buildrun/) for more details.
 
 - [Configuration](/docs/build/configuration/)
 - Build controller observability
-  - [Metrics](/docs/metrics/)
-  - [Profiling](/docs/profiling/)
+  - [Metrics](/docs/build/metrics/)
+  - [Profiling](/docs/build/profiling/)
