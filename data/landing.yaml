@@ -1,0 +1,172 @@
+###
+# Hero - landing page
+###
+hero:
+  enable: true
+  weight: 10
+  template: hero
+
+  backgroundImage:
+    path: "images"
+    filename:
+      desktop: "bg2.png"
+      mobile: "bg2.png"
+
+  badge:
+    text: "v0.15.0"
+    color: dark # primary, secondary, success, danger, warning, info, light, dark
+    pill: true # boolean
+    soft: false # boolean
+
+  titleLogo:
+    path: "images"
+    filename: "shipwright-stacked-color-notext.png"
+    alt: "Shipwright Lotus docs"
+    height: 80px
+
+  title: "shipwright"
+  subtitle:
+    "An extensible framework for building container images on Kubernetes. Define
+    your build strategies to build your container images using popular tools
+    such as **Kaniko**, **Cloud Native Buildpacks**, **Buildah** and more."
+  info: "**Open Source** Apache License 2.0."
+  image: # under
+    path: "images" # path to image under configured assets directory. default 'images'
+    filename: "codye.png" # filename of your hero image (including file extension)
+    # filename: "hero-zenburn-white-small.svg" # filename of your hero image (including file extension)
+    alt: "shipwright.io hero" # Optional but recommended
+    boxShadow: false # default 'false' (excludes .svg images)
+    rounded: false # round the image corners? default 'false' (excludes .svg images)
+
+  ctaButton:
+    icon: rocket_launch
+    btnText: "Get Started"
+    url: "docs/getting-started/installation/" # always omit .md
+  cta2Button:
+    icon: article
+    btnText: "Blog"
+    url: "docs/blog/"
+
+###
+# Features of shipwright
+###
+featureGrid:
+  enable: true
+  weight: 20
+  template: feature grid
+
+  title: Why shipwright?
+  subtitle:
+    "Shipwright.io provides a straightforward approach to build container images
+    of your code **within your Kubernetes cluster** by defining a minimal YAML
+    configuration."
+  items:
+    - title: Flexibility and Extensibility
+      icon: checklist_rtl
+      description:
+        "Shipwright.io supports a variety of build tools including Kaniko. This
+        flexibility allows you to choose the tool that best fits your project’s
+        requirements, ensuring that you can leverage the strengths of different
+        build strategies."
+      # ctaLink:
+      #   text: Learn more
+    - title: Simplified Configuration
+      icon: build
+      description:
+        "`BuildStrategy` enables developers to define their build processes
+        using a minimal YAML configuration. This approach abstract the knowledge
+        of container tooling for the developers, making it accessible even for
+        those new to container technologies."
+      # ctaLink:
+      #   text: Learn more
+    - title: Integration with Kubernetes
+      icon: mediation
+      description:
+        "By integrating seamlessly with Kubernetes, BuildStrategy ensures that
+        your build processes are **scalable and reliable**. This integration
+        allows you to take advantage of Kubernetes’ orchestration capabilities,
+        ensuring efficient and robust container image builds."
+      # ctaLink:
+      #   text: Learn more
+
+imageCompare:
+  enable: false
+
+###
+# Describe `BuildStrategy`
+###
+imageText1:
+  enable: true
+  weight: 40
+  template: image text
+  title: "1. Describe your strategy"
+  subtitle:
+    "Create a `BuildStrategy` that specifies the build tool and parameters you
+    want to use. This file defines how your container images are built."
+  list:
+    - text: Multiple build tools supported
+      icon: grain
+    - text: Extensible and customisable
+      icon: auto_awesome
+    - text: Scope to namespace or cluster-wide
+      icon: filter_center_focus
+  ctaButton:
+    text: Learn more
+    url: docs/build/buildstrategies/
+  image:
+    path: "images"
+    filename: "step1.png"
+    alt: "step1"
+  imgOrder:
+    desktop: 2
+    mobile: 2
+
+###
+# Describe `Build`
+###
+imageText2:
+  enable: true
+  weight: 50
+  template: image text
+  title: "2. Configure your build"
+  subtitle:
+    "Create a `Build` that links your `BuildStrategy` and declare additional
+    parameters specific to the cluster or the build itself."
+  list:
+    - text: Indicate the source code
+      icon: code
+    - text: Select the build strategy
+      icon: format_list_numbered
+    - text: Declare the output
+      icon: publish
+  ctaButton:
+    text: Learn more
+    url: docs/build/build/
+  image:
+    path: "images"
+    filename: "step2.png"
+    alt: "step2"
+  imgOrder:
+    desktop: 2
+    mobile: 2
+###
+# Describe `BuildRun`
+###
+imageText3:
+  enable: true
+  weight: 60
+  template: image text
+  title: "3. Ship it!"
+  subtitle: "Run the build to ship your container images to your registries."
+  list:
+
+  ctaButton:
+    text: Learn more
+    url: docs/build/buildrun/
+  image:
+    path: "images"
+    filename: "step3.png"
+    alt: "step3"
+  imgOrder:
+    desktop: 2
+    mobile: 2
