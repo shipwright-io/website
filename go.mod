@@ -1,5 +1,8 @@
 module github.com/shipwright-io/website
 
-go 1.20
+go 1.24.2
 
-require github.com/google/docsy v0.11.0 // indirect
+require (
+	github.com/colinwilson/lotusdocs v0.2.0 // indirect
+	github.com/gohugoio/hugo-mod-bootstrap-scss/v5 v5.20300.20400 // indirect
+)
