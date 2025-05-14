@@ -19,7 +19,6 @@ install: ## install dependencies
 	npm install
 	hugo mod get
 	hugo mod graph
-	hugo mod get github.com/google/docsy
 
 .PHONY: netlify
 netlify:
@@ -33,11 +32,11 @@ netlify-preview: ## build a preview of the site for Netlify
 
 .PHONY: serve
 serve: ## serve the content locally for testing
-	hugo -t docsy server
+	hugo server
 
 .PHONY: serve-preview
 serve-preview: ## serve the preview content locally for testing
-	hugo -t docsy server -F
+	hugo server -F
 
 .PHONY: bin-dir
 bin-dir: ## Creates a local "bin" directory for helper applications.
