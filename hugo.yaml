@@ -1,6 +1,7 @@
 # baseURL: https://shipwright.io/
 languageCode: en-us
 title: shipwright.io
+description: "An extensible framework for building container images on Kubernetes."
 module:
   # replacements: "github.com/colinwilson/lotusdocs -> /themes/lotusdocs"
   imports:
