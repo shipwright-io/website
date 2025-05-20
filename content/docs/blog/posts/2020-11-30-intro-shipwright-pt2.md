@@ -9,7 +9,7 @@ draft: false
 
 What is Shipwright? Which problems does this project try to solve?
 
-In [Part 1](/blog/2020/10/21/introducing-shipwright-part-1/) of this series, we looked back at the history of delivering software applications,
+In [Part 1](docs/blog/posts/2020-10-21-intro-shipwright-pt1/) of this series, we looked back at the history of delivering software applications,
 and how that has changed in the age of Kubernetes and cloud-native development.
 
 In this post, we'll introduce Shipwright and the Build APIs that make it simple to
@@ -17,7 +17,7 @@ build container images on Kubernetes.
 
 ## Recap - From Binaries to Images
 
-Recall in [Part 1](/blog/2020/10/21/introducing-shipwright-part-1/), developers who moved from 
+Recall in [Part 1](docs/blog/posts/2020-10-21-intro-shipwright-pt1/), developers who moved from 
 VM-based deployments to [Kubernetes](https://kubernetes.io/) needed to shift their unit of delivery
 from binaries to container images. Teams adopted various tools to accomplish this task, ranging
 from [Docker/Moby](https://mobyproject.org/) to [Cloud-Native Buildpacks](https://buildpacks.io/).
