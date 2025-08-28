@@ -43,6 +43,23 @@ _Appears in:_
 | `status` _[BuildStatus](#buildstatus)_ |  |  |  |
 
 
+### BuildExecutor
+
+
+
+BuildExecutor defines the name and kind of the build runner.
+
+
+
+_Appears in:_
+- [BuildRunStatus](#buildrunstatus)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ | Name is the name of the TaskRun or PipelineRun that was created to execute this BuildRun |  |  |
+| `kind` _string_ | Kind is the kind of the object that was created to execute the BuildRun (e.g., "TaskRun", "PipelineRun") |  |  |
+
+
 ### BuildList
 
 
@@ -203,7 +220,8 @@ _Appears in:_
 
 
 
-BuildRunSource describes the local source to use
+BuildRunSource describes the source to use in a BuildRun, overriding the value of the parent
+Build object.
 
 
 
@@ -212,7 +230,7 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `type` _[BuildSourceType](#buildsourcetype)_ | Type is the BuildRunSource qualifier, the type of the source.<br />Only Local is supported. |  |  |
+| `type` _[BuildSourceType](#buildsourcetype)_ | Type is the BuildRunSource qualifier, the type of the source.<br />Only `Local` is supported. |  |  |
 | `local` _[Local](#local)_ | Local contains the details for the source of type Local |  |  |
 
 
@@ -230,7 +248,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `build` _[ReferencedBuild](#referencedbuild)_ | Build refers to an embedded build specification<br />This field is mandatory |  |  |
-| `source` _[BuildRunSource](#buildrunsource)_ | Source refers to the location where the source code is,<br />this could only be a local source |  |  |
+| `source` _[BuildRunSource](#buildrunsource)_ | Source overrides where the source code is obtained for the BuildRun. This can only be used<br />to obtain source code from a remote machine's local directory, instead of the value defined<br />in the build. |  |  |
 | `serviceAccount` _string_ | ServiceAccount refers to the kubernetes serviceaccount<br />which is used for resource control.<br />Default serviceaccount will be set if it is empty |  |  |
 | `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#duration-v1-meta)_ | Timeout defines the maximum run time of this BuildRun. |  | Format: duration <br /> |
 | `paramValues` _[ParamValue](#paramvalue) array_ | Params is a list of key/value that could be used<br />to set strategy parameters |  |  |
@@ -260,7 +278,8 @@ _Appears in:_
 | `source` _[SourceResult](#sourceresult)_ | Source holds the results emitted from the source step |  |  |
 | `output` _[Output](#output)_ | Output holds the results emitted from step definition of an output |  |  |
 | `conditions` _[Conditions](#conditions)_ | Conditions holds the latest available observations of a resource's current state. |  |  |
-| `taskRunName` _string_ | TaskRunName is the name of the TaskRun responsible for executing this BuildRun. |  |  |
+| `taskRunName` _string_ | TaskRunName is the name of the TaskRun responsible for executing this BuildRun.<br /><br />Deprecated: Use Executor instead to describe the taskrun. |  |  |
+| `executor` _[BuildExecutor](#buildexecutor)_ | Executor is the name and kind of the resource responsible for executing this BuildRun. |  |  |
 | `startTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#time-v1-meta)_ | StartTime is the time the build is actually started. |  |  |
 | `completionTime` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#time-v1-meta)_ | CompletionTime is the time the build completed. |  |  |
 | `buildSpec` _[BuildSpec](#buildspec)_ | BuildSpec is the Build Spec of this BuildRun. |  |  |
@@ -425,10 +444,10 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `steps` _[Step](#step) array_ |  |  |  |
-| `parameters` _[Parameter](#parameter) array_ |  |  |  |
-| `securityContext` _[BuildStrategySecurityContext](#buildstrategysecuritycontext)_ |  |  |  |
-| `volumes` _[BuildStrategyVolume](#buildstrategyvolume) array_ |  |  |  |
+| `steps` _[Step](#step) array_ | Steps defines the steps of the strategy |  |  |
+| `parameters` _[Parameter](#parameter) array_ | Parameters defines the parameters of the strategy |  |  |
+| `securityContext` _[BuildStrategySecurityContext](#buildstrategysecuritycontext)_ | SecurityContext defines the default security context of all strategy steps |  |  |
+| `volumes` _[BuildStrategyVolume](#buildstrategyvolume) array_ | Volumes defines the volumes of the strategy |  |  |
 
 
 ### BuildStrategyStatus
@@ -462,35 +481,6 @@ _Appears in:_
 | `overridable` _boolean_ | Indicates that this Volume can be overridden in a Build or BuildRun.<br />Defaults to false |  |  |
 | `name` _string_ | Name of the Build Volume |  |  |
 | `description` _string_ | Description of the Build Volume |  |  |
-| `hostPath` _[HostPathVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#hostpathvolumesource-v1-core)_ | hostPath represents a pre-existing file or directory on the host<br />machine that is directly exposed to the container. This is generally<br />used for system agents or other privileged things that are allowed<br />to see the host machine. Most containers will NOT need this.<br />More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath<br />---<br />TODO(jonesdl) We need to restrict who can use host directory mounts and who can/can not<br />mount host directories as read/write. |  |  |
-| `emptyDir` _[EmptyDirVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#emptydirvolumesource-v1-core)_ | emptyDir represents a temporary directory that shares a pod's lifetime.<br />More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir |  |  |
-| `gcePersistentDisk` _[GCEPersistentDiskVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#gcepersistentdiskvolumesource-v1-core)_ | gcePersistentDisk represents a GCE Disk resource that is attached to a<br />kubelet's host machine and then exposed to the pod.<br />More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk |  |  |
-| `awsElasticBlockStore` _[AWSElasticBlockStoreVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#awselasticblockstorevolumesource-v1-core)_ | awsElasticBlockStore represents an AWS Disk resource that is attached to a<br />kubelet's host machine and then exposed to the pod.<br />More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore |  |  |
-| `gitRepo` _[GitRepoVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#gitrepovolumesource-v1-core)_ | gitRepo represents a git repository at a particular revision.<br />DEPRECATED: GitRepo is deprecated. To provision a container with a git repo, mount an<br />EmptyDir into an InitContainer that clones the repo using git, then mount the EmptyDir<br />into the Pod's container. |  |  |
-| `secret` _[SecretVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#secretvolumesource-v1-core)_ | secret represents a secret that should populate this volume.<br />More info: https://kubernetes.io/docs/concepts/storage/volumes#secret |  |  |
-| `nfs` _[NFSVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#nfsvolumesource-v1-core)_ | nfs represents an NFS mount on the host that shares a pod's lifetime<br />More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs |  |  |
-| `iscsi` _[ISCSIVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#iscsivolumesource-v1-core)_ | iscsi represents an ISCSI Disk resource that is attached to a<br />kubelet's host machine and then exposed to the pod.<br />More info: https://examples.k8s.io/volumes/iscsi/README.md |  |  |
-| `glusterfs` _[GlusterfsVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#glusterfsvolumesource-v1-core)_ | glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.<br />More info: https://examples.k8s.io/volumes/glusterfs/README.md |  |  |
-| `persistentVolumeClaim` _[PersistentVolumeClaimVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#persistentvolumeclaimvolumesource-v1-core)_ | persistentVolumeClaimVolumeSource represents a reference to a<br />PersistentVolumeClaim in the same namespace.<br />More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims |  |  |
-| `rbd` _[RBDVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#rbdvolumesource-v1-core)_ | rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.<br />More info: https://examples.k8s.io/volumes/rbd/README.md |  |  |
-| `flexVolume` _[FlexVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#flexvolumesource-v1-core)_ | flexVolume represents a generic volume resource that is<br />provisioned/attached using an exec based plugin. |  |  |
-| `cinder` _[CinderVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#cindervolumesource-v1-core)_ | cinder represents a cinder volume attached and mounted on kubelets host machine.<br />More info: https://examples.k8s.io/mysql-cinder-pd/README.md |  |  |
-| `cephfs` _[CephFSVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#cephfsvolumesource-v1-core)_ | cephFS represents a Ceph FS mount on the host that shares a pod's lifetime |  |  |
-| `flocker` _[FlockerVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#flockervolumesource-v1-core)_ | flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running |  |  |
-| `downwardAPI` _[DownwardAPIVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#downwardapivolumesource-v1-core)_ | downwardAPI represents downward API about the pod that should populate this volume |  |  |
-| `fc` _[FCVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#fcvolumesource-v1-core)_ | fc represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod. |  |  |
-| `azureFile` _[AzureFileVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#azurefilevolumesource-v1-core)_ | azureFile represents an Azure File Service mount on the host and bind mount to the pod. |  |  |
-| `configMap` _[ConfigMapVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#configmapvolumesource-v1-core)_ | configMap represents a configMap that should populate this volume |  |  |
-| `vsphereVolume` _[VsphereVirtualDiskVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#vspherevirtualdiskvolumesource-v1-core)_ | vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine |  |  |
-| `quobyte` _[QuobyteVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#quobytevolumesource-v1-core)_ | quobyte represents a Quobyte mount on the host that shares a pod's lifetime |  |  |
-| `azureDisk` _[AzureDiskVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#azurediskvolumesource-v1-core)_ | azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod. |  |  |
-| `photonPersistentDisk` _[PhotonPersistentDiskVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#photonpersistentdiskvolumesource-v1-core)_ | photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine |  |  |
-| `projected` _[ProjectedVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#projectedvolumesource-v1-core)_ | projected items for all in one resources secrets, configmaps, and downward API |  |  |
-| `portworxVolume` _[PortworxVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#portworxvolumesource-v1-core)_ | portworxVolume represents a portworx volume attached and mounted on kubelets host machine |  |  |
-| `scaleIO` _[ScaleIOVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#scaleiovolumesource-v1-core)_ | scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes. |  |  |
-| `storageos` _[StorageOSVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#storageosvolumesource-v1-core)_ | storageOS represents a StorageOS volume attached and mounted on Kubernetes nodes. |  |  |
-| `csi` _[CSIVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#csivolumesource-v1-core)_ | csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers (Beta feature). |  |  |
-| `ephemeral` _[EphemeralVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#ephemeralvolumesource-v1-core)_ | ephemeral represents a volume that is handled by a cluster storage driver.<br />The volume's lifecycle is tied to the pod that defines it - it will be created before the pod starts,<br />and deleted when the pod is removed.<br /><br />Use this if:<br />a) the volume is only needed while the pod runs,<br />b) features of normal volumes like restoring from snapshot or capacity<br />   tracking are needed,<br />c) the storage driver is specified through a storage class, and<br />d) the storage driver supports dynamic volume provisioning through<br />   a PersistentVolumeClaim (see EphemeralVolumeSource for more<br />   information on the connection between this volume type<br />   and PersistentVolumeClaim).<br /><br />Use PersistentVolumeClaim or one of the vendor-specific<br />APIs for volumes that persist for longer than the lifecycle<br />of an individual pod.<br /><br />Use CSI for light-weight local ephemeral volumes if the CSI driver is meant to<br />be used that way - see the documentation of the driver for<br />more information.<br /><br />A pod can use both types of ephemeral volumes and<br />persistent volumes at the same time. |  |  |
 
 
 ### BuildVolume
@@ -508,35 +498,6 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ | Name of the Build Volume |  |  |
-| `hostPath` _[HostPathVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#hostpathvolumesource-v1-core)_ | hostPath represents a pre-existing file or directory on the host<br />machine that is directly exposed to the container. This is generally<br />used for system agents or other privileged things that are allowed<br />to see the host machine. Most containers will NOT need this.<br />More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath<br />---<br />TODO(jonesdl) We need to restrict who can use host directory mounts and who can/can not<br />mount host directories as read/write. |  |  |
-| `emptyDir` _[EmptyDirVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#emptydirvolumesource-v1-core)_ | emptyDir represents a temporary directory that shares a pod's lifetime.<br />More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir |  |  |
-| `gcePersistentDisk` _[GCEPersistentDiskVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#gcepersistentdiskvolumesource-v1-core)_ | gcePersistentDisk represents a GCE Disk resource that is attached to a<br />kubelet's host machine and then exposed to the pod.<br />More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk |  |  |
-| `awsElasticBlockStore` _[AWSElasticBlockStoreVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#awselasticblockstorevolumesource-v1-core)_ | awsElasticBlockStore represents an AWS Disk resource that is attached to a<br />kubelet's host machine and then exposed to the pod.<br />More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore |  |  |
-| `gitRepo` _[GitRepoVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#gitrepovolumesource-v1-core)_ | gitRepo represents a git repository at a particular revision.<br />DEPRECATED: GitRepo is deprecated. To provision a container with a git repo, mount an<br />EmptyDir into an InitContainer that clones the repo using git, then mount the EmptyDir<br />into the Pod's container. |  |  |
-| `secret` _[SecretVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#secretvolumesource-v1-core)_ | secret represents a secret that should populate this volume.<br />More info: https://kubernetes.io/docs/concepts/storage/volumes#secret |  |  |
-| `nfs` _[NFSVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#nfsvolumesource-v1-core)_ | nfs represents an NFS mount on the host that shares a pod's lifetime<br />More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs |  |  |
-| `iscsi` _[ISCSIVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#iscsivolumesource-v1-core)_ | iscsi represents an ISCSI Disk resource that is attached to a<br />kubelet's host machine and then exposed to the pod.<br />More info: https://examples.k8s.io/volumes/iscsi/README.md |  |  |
-| `glusterfs` _[GlusterfsVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#glusterfsvolumesource-v1-core)_ | glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.<br />More info: https://examples.k8s.io/volumes/glusterfs/README.md |  |  |
-| `persistentVolumeClaim` _[PersistentVolumeClaimVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#persistentvolumeclaimvolumesource-v1-core)_ | persistentVolumeClaimVolumeSource represents a reference to a<br />PersistentVolumeClaim in the same namespace.<br />More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims |  |  |
-| `rbd` _[RBDVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#rbdvolumesource-v1-core)_ | rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.<br />More info: https://examples.k8s.io/volumes/rbd/README.md |  |  |
-| `flexVolume` _[FlexVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#flexvolumesource-v1-core)_ | flexVolume represents a generic volume resource that is<br />provisioned/attached using an exec based plugin. |  |  |
-| `cinder` _[CinderVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#cindervolumesource-v1-core)_ | cinder represents a cinder volume attached and mounted on kubelets host machine.<br />More info: https://examples.k8s.io/mysql-cinder-pd/README.md |  |  |
-| `cephfs` _[CephFSVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#cephfsvolumesource-v1-core)_ | cephFS represents a Ceph FS mount on the host that shares a pod's lifetime |  |  |
-| `flocker` _[FlockerVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#flockervolumesource-v1-core)_ | flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running |  |  |
-| `downwardAPI` _[DownwardAPIVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#downwardapivolumesource-v1-core)_ | downwardAPI represents downward API about the pod that should populate this volume |  |  |
-| `fc` _[FCVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#fcvolumesource-v1-core)_ | fc represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod. |  |  |
-| `azureFile` _[AzureFileVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#azurefilevolumesource-v1-core)_ | azureFile represents an Azure File Service mount on the host and bind mount to the pod. |  |  |
-| `configMap` _[ConfigMapVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#configmapvolumesource-v1-core)_ | configMap represents a configMap that should populate this volume |  |  |
-| `vsphereVolume` _[VsphereVirtualDiskVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#vspherevirtualdiskvolumesource-v1-core)_ | vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine |  |  |
-| `quobyte` _[QuobyteVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#quobytevolumesource-v1-core)_ | quobyte represents a Quobyte mount on the host that shares a pod's lifetime |  |  |
-| `azureDisk` _[AzureDiskVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#azurediskvolumesource-v1-core)_ | azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod. |  |  |
-| `photonPersistentDisk` _[PhotonPersistentDiskVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#photonpersistentdiskvolumesource-v1-core)_ | photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine |  |  |
-| `projected` _[ProjectedVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#projectedvolumesource-v1-core)_ | projected items for all in one resources secrets, configmaps, and downward API |  |  |
-| `portworxVolume` _[PortworxVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#portworxvolumesource-v1-core)_ | portworxVolume represents a portworx volume attached and mounted on kubelets host machine |  |  |
-| `scaleIO` _[ScaleIOVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#scaleiovolumesource-v1-core)_ | scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes. |  |  |
-| `storageos` _[StorageOSVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#storageosvolumesource-v1-core)_ | storageOS represents a StorageOS volume attached and mounted on Kubernetes nodes. |  |  |
-| `csi` _[CSIVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#csivolumesource-v1-core)_ | csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers (Beta feature). |  |  |
-| `ephemeral` _[EphemeralVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#ephemeralvolumesource-v1-core)_ | ephemeral represents a volume that is handled by a cluster storage driver.<br />The volume's lifecycle is tied to the pod that defines it - it will be created before the pod starts,<br />and deleted when the pod is removed.<br /><br />Use this if:<br />a) the volume is only needed while the pod runs,<br />b) features of normal volumes like restoring from snapshot or capacity<br />   tracking are needed,<br />c) the storage driver is specified through a storage class, and<br />d) the storage driver supports dynamic volume provisioning through<br />   a PersistentVolumeClaim (see EphemeralVolumeSource for more<br />   information on the connection between this volume type<br />   and PersistentVolumeClaim).<br /><br />Use PersistentVolumeClaim or one of the vendor-specific<br />APIs for volumes that persist for longer than the lifecycle<br />of an individual pod.<br /><br />Use CSI for light-weight local ephemeral volumes if the CSI driver is meant to<br />be used that way - see the documentation of the driver for<br />more information.<br /><br />A pod can use both types of ephemeral volumes and<br />persistent volumes at the same time. |  |  |
 
 
 
@@ -642,7 +603,7 @@ _Appears in:_
 
 
 
-Git describes the git repository to pull
+Git describes how to obtain source code from a git repository.
 
 
 
@@ -654,6 +615,7 @@ _Appears in:_
 | `url` _string_ | URL describes the URL of the Git repository. |  |  |
 | `revision` _string_ | Revision describes the Git revision (e.g., branch, tag, commit SHA,<br />etc.) to fetch.<br /><br />If not defined, it will fallback to the repository's default branch. |  |  |
 | `cloneSecret` _string_ | CloneSecret references a Secret that contains credentials to access<br />the repository. |  |  |
+| `depth` _integer_ | Depth specifies the depth of the shallow clone.<br />If not specified the default is set to 1.<br />Values greater than 1 will create a clone with the specified depth.<br />If value is 0, it will create a full git history clone. |  |  |
 
 
 ### GitHubEventName
@@ -736,7 +698,8 @@ _Appears in:_
 
 
 
-
+Local describes how to obtain source code streamed in from a remote machine's local directory.
+Local source code can be streamed into a build using the shp command line.
 
 
 
@@ -746,7 +709,7 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#duration-v1-meta)_ | Timeout how long the BuildSource execution must take. |  |  |
+| `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#duration-v1-meta)_ | Timeout is the maximum duration the build should wait for source code to be streamed in from<br />a remote machine's local directory. |  |  |
 | `name` _string_ | Name of the local step |  |  |
 
 
@@ -771,7 +734,8 @@ _Appears in:_
 
 
 
-OCIArtifact describes the source code bundle container to pull
+OCIArtifact describes how to obtain source code from a container image, also known as an OCI
+artifact.
 
 
 
@@ -780,9 +744,9 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `image` _string_ | Image reference, i.e. quay.io/org/image:tag |  |  |
-| `prune` _[PruneOption](#pruneoption)_ | Prune specifies whether the image is suppose to be deleted. Allowed<br />values are 'Never' (no deletion) and `AfterPull` (removal after the<br />image was successfully pulled from the registry).<br /><br />If not defined, it defaults to 'Never'. |  |  |
-| `pullSecret` _string_ | PullSecret references a Secret that contains credentials to access<br />the repository. |  |  |
+| `image` _string_ | Image is a reference to a container image to be pulled from a container registry.<br />For example, quay.io/org/image:tag |  |  |
+| `prune` _[PruneOption](#pruneoption)_ | Prune specifies whether the image containing the source code should be deleted.<br />Allowed values are 'Never' (no deletion) and `AfterPull` (removal after the<br />image was successfully pulled from the registry).<br /><br />If not defined, it defaults to 'Never'. |  |  |
+| `pullSecret` _string_ | PullSecret references a Secret that contains credentials to access<br />the container image. |  |  |
 
 
 ### ObjectKeyRef
@@ -953,7 +917,7 @@ _Appears in:_
 
 
 
-Source describes the build source type to fetch.
+Source describes the source code to fetch for the build.
 
 
 
@@ -962,11 +926,11 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `type` _[BuildSourceType](#buildsourcetype)_ | Type is the BuildSource qualifier, the type of the source. |  |  |
-| `contextDir` _string_ | ContextDir is a path to subfolder in the repo. Optional. |  |  |
-| `ociArtifact` _[OCIArtifact](#ociartifact)_ | OCIArtifact contains the details for the source of type OCIArtifact |  |  |
-| `git` _[Git](#git)_ | Git contains the details for the source of type Git |  |  |
-| `local` _[Local](#local)_ | Local contains the details for the source of type Local |  |  |
+| `type` _[BuildSourceType](#buildsourcetype)_ | Type is the type of source code used as input for the build. Allowed values are<br />`Git`, `OCI`, and `Local`. |  |  |
+| `contextDir` _string_ | ContextDir is a path to a subdirectory within the source code that should be used as the<br />build root directory. Optional. |  |  |
+| `ociArtifact` _[OCIArtifact](#ociartifact)_ | OCIArtifact contains the details for obtaining source code from a container image, also<br />known as an OCI artifact. |  |  |
+| `git` _[Git](#git)_ | Git contains the details for obtaining source code from a git repository. |  |  |
+| `local` _[Local](#local)_ | Local contains the details for obtaining source code that is streamed in from a remote<br />machine's local directory. |  |  |
 
 
 ### SourceResult
