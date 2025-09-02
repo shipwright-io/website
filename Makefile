@@ -47,7 +47,7 @@ crd-ref-docs: bin-dir ## install crd-ref-docs tool
 	GOBIN=$(shell pwd)/bin go install github.com/elastic/crd-ref-docs@v0.1.0
 
 BUILD_REPO ?= "https://github.com/shipwright-io/build.git"
-BUILD_VERSION ?= "v0.15.0"
+BUILD_VERSION ?= "v0.17.0"
 
 .PHONY: gen-api-docs
 gen-api-docs: crd-ref-docs ## generate API reference documentation
