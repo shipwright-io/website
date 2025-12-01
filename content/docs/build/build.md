@@ -91,7 +91,7 @@ The `Build` definition supports the following fields:
   - [`kind`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Specifies the Kind type, for example `Build`.
   - [`metadata`](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields) - Metadata that identify the custom resource instance, especially the name of the `Build`, and in which [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) you place it. **Note**: You should use your own namespace, and not put your builds into the shipwright-build namespace where Shipwright's system components run.
   - `spec.source` - Refers to the location of the source code, for example a Git repository or OCI artifact image.
-  - `spec.strategy` - Refers to the `BuildStrategy` to be used, see the [examples](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/buildstrategy)
+  - `spec.strategy` - Refers to the `BuildStrategy` to be used, see the [examples](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/buildstrategy)
   - `spec.output`- Refers to the location where the generated image would be pushed.
   - `spec.output.pushSecret`- Reference an existing secret to get access to the container registry.
 
@@ -120,10 +120,11 @@ The `Build` definition supports the following fields:
 
 A `Build` resource can specify a source type, such as a Git repository or an OCI artifact, together with other parameters like:
 
-- `source.type` - Specify the type of the data-source. Currently, the supported types are "Git", "OCIArtifact", and "Local".
+- `source.type` - Specify the type of the data-source. Currently, the supported types are "Git", "OCI", and "Local".
 - `source.git.url` - Specify the source location using a Git repository.
 - `source.git.cloneSecret` - For private repositories or registries, the name references a secret in the namespace that contains the SSH private key or Docker access credentials, respectively.
 - `source.git.revision` - A specific revision to select from the source repository, this can be a commit, tag or branch name. If not defined, it will fall back to the Git repository default branch.
+- `source.git.depth` - The depth of the git clone. If not specified the default value is 1 which means that no history is cloned at all. This is the fastest way to clone a Git repository and in most cases enough as long as you don't have anything in your build logic relying on it. Any value greater than 1 will create a clone with the specified depth. For a full git history clone, depth must be set to 0. **Note**: If you specify a commit sha as revision, then the full history is always cloned before this commit is checked out.
 - `source.contextDir` - For repositories where the source code is not located at the root folder, you can specify this path here.
 
 By default, the Build controller does not validate that the Git repository exists. If the validation is desired, users can explicitly define the `build.shipwright.io/verify.repository` annotation with `true`. For example:
@@ -295,7 +296,7 @@ In general, _paramValues_ are tightly bound to Strategy _parameters_. Please mak
 
 #### Example
 
-The [BuildKit sample `BuildStrategy`](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml) contains various parameters. Two of them are outlined here:
+The [BuildKit sample `BuildStrategy`](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml) contains various parameters. Two of them are outlined here:
 
 ```yaml
 apiVersion: shipwright.io/v1beta1
@@ -634,13 +635,13 @@ spec:
 
 Annotations added to the output image can be verified by running the command:
 
-```bash
+```sh
 docker manifest inspect us.icr.io/source-to-image-build/nodejs-ex | jq ".annotations"
 ```
 
 You can verify which labels were added to the output image that is available on the host machine by running the command:
 
-```bash
+```sh
 docker inspect us.icr.io/source-to-image-build/nodejs-ex | jq ".[].Config.Labels"
 ```
 
