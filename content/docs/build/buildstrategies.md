@@ -16,18 +16,18 @@ A `ClusterBuildStrategy` is available cluster-wide, while a `BuildStrategy` is a
 
 ## Available ClusterBuildStrategies
 
-Well-known strategies can be bootstrapped from [here](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/buildstrategy). The currently supported Cluster BuildStrategy are:
+Well-known strategies can be bootstrapped from [here](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/buildstrategy). The currently supported Cluster BuildStrategy are:
 
 | Name                                                                                                              | Supported platforms |
 |-------------------------------------------------------------------------------------------------------------------|---------------------|
-| [buildah](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/buildstrategy/buildah)                                                               | all                 |
-| [multiarch-native-buildah](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/buildstrategy/multiarch-native-buildah)                             | all                 |
-| [BuildKit](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/buildstrategy/buildkit)                              | all                 |
-| [buildpacks-v3-heroku](https://github.com/shipwright-io/build/blob/v0.15.2/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_cr.yaml) | linux/amd64 only    |
-| [buildpacks-v3](https://github.com/shipwright-io/build/blob/v0.15.2/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml)               | linux/amd64 only    |
-| [kaniko](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/buildstrategy/kaniko)                                    | all                 |
-| [ko](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/buildstrategy/ko)                                                | all                 |
-| [source-to-image](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/buildstrategy/source-to-image)         | linux/amd64 only    |
+| [buildah](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/buildstrategy/buildah)                                                               | all                 |
+| [multiarch-native-buildah](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/buildstrategy/multiarch-native-buildah)                             | all                 |
+| [BuildKit](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/buildstrategy/buildkit)                              | all                 |
+| [buildpacks-v3-heroku](https://github.com/shipwright-io/build/blob/v0.18.0/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_cr.yaml) | linux/amd64 only    |
+| [buildpacks-v3](https://github.com/shipwright-io/build/blob/v0.18.0/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml)               | linux/amd64 only    |
+| [kaniko](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/buildstrategy/kaniko)                                    | all                 |
+| [ko](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/buildstrategy/ko)                                                | all                 |
+| [source-to-image](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/buildstrategy/source-to-image)         | linux/amd64 only    |
 
 ## Available BuildStrategies
 
@@ -35,8 +35,8 @@ The current supported namespaces BuildStrategy are:
 
 | Name                                                                                                                         | Supported platforms |
 |------------------------------------------------------------------------------------------------------------------------------|---------------------|
-| [buildpacks-v3-heroku](https://github.com/shipwright-io/build/blob/v0.15.2/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_namespaced_cr.yaml) | linux/amd64 only    |
-| [buildpacks-v3](https://github.com/shipwright-io/build/blob/v0.15.2/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_namespaced_cr.yaml)               | linux/amd64 only    |
+| [buildpacks-v3-heroku](https://github.com/shipwright-io/build/blob/v0.18.0/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3-heroku_namespaced_cr.yaml) | linux/amd64 only    |
+| [buildpacks-v3](https://github.com/shipwright-io/build/blob/v0.18.0/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_namespaced_cr.yaml)               | linux/amd64 only    |
 
 ---
 
@@ -46,8 +46,8 @@ The `buildah` ClusterBuildStrategy uses [`buildah`](https://github.com/container
 
 The strategy is available in two formats:
 
-- [`buildah-shipwright-managed-push`](https://github.com/shipwright-io/build/blob/v0.15.2/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push_cr.yaml)
-- [`buildah-strategy-managed-push`](https://github.com/shipwright-io/build/blob/v0.15.2/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_strategy_managed_push_cr.yaml)
+- [`buildah-shipwright-managed-push`](https://github.com/shipwright-io/build/blob/v0.18.0/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push_cr.yaml)
+- [`buildah-strategy-managed-push`](https://github.com/shipwright-io/build/blob/v0.18.0/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_strategy_managed_push_cr.yaml)
 
 Learn more about the differences of [shipwright-, or strategy-managed push](#output-directory-vs-output-image)
 
@@ -55,7 +55,7 @@ Learn more about the differences of [shipwright-, or strategy-managed push](#out
 
 To install use:
 
-```bash
+```sh
 kubectl apply -f samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push_cr.yaml
 kubectl apply -f samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_strategy_managed_push_cr.yaml
 ```
@@ -64,7 +64,7 @@ kubectl apply -f samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_str
 
 ## Multi-arch Native buildah
 
-The [`multiarch-native-buildah` ClusterBuildStrategy](https://github.com/shipwright-io/build/blob/v0.15.2/samples/v1beta1/buildstrategy/multiarch-native-buildah/buildstrategy_multiarch_native_buildah_cr.yaml) uses [`buildah`](https://github.com/containers/buildah) to build and push a container image, out of a `Dockerfile`.
+The [`multiarch-native-buildah` ClusterBuildStrategy](https://github.com/shipwright-io/build/blob/v0.18.0/samples/v1beta1/buildstrategy/multiarch-native-buildah/buildstrategy_multiarch_native_buildah_cr.yaml) uses [`buildah`](https://github.com/containers/buildah) to build and push a container image, out of a `Dockerfile`.
 
 The strategy will build the image for the platforms that are listed in the `architectures` parameter of a `Build` object
 that refers it.
@@ -88,15 +88,29 @@ Finally, when running in OKD or OpenShift clusters, the service account must be 
 
 To install the cluster-scoped strategy, use:
 
-```bash
+```sh
 kubectl apply -f samples/v1beta1/buildstrategy/multiarch-native-buildah/buildstrategy_multiarch_native_buildah_cr.yaml
+kubectl apply -f samples/v1beta1/buildstrategy/multiarch-native-buildah/clusterrole_multiarch_native_buildah_cr.yaml
 ```
 
 For each namespace where you want to use the strategy, you also need to apply the RBAC rules that allow the service
 account to run the strategy. If the service account is named `pipeline` (default), you can use:
 
-```bash
-kubectl apply -n <namespace> -f  samples/v1beta1/buildstrategy/multiarch-native-buildah/
+```sh
+kubectl apply -n <namespace> -f samples/v1beta1/buildstrategy/multiarch-native-buildah/rolebinding_multiarch_native_buildah_cr.yaml
+```
+
+_note_: If `pipeline` service account isn't available in your environment (most likely when using a kind cluster), replace the subjects[0].name to `default`.
+
+```sh
+sed 's/name: pipeline/name: default/' samples/v1beta1/buildstrategy/multiarch-native-buildah/rolebinding_multiarch_native_buildah_cr.yaml| kubectl apply -f -
+```
+
+If you are on OKD platform, apply the following RBAC to use the 
+`privileged` SecurityContextConstraint:
+
+```sh
+kubectl apply -f samples/v1beta1/buildstrategy/multiarch-native-buildah/rolebinding_multiarch_native_buildah_scc_okd_cr.yaml
 ```
 
 ### Parameters
@@ -176,7 +190,7 @@ You can install the `BuildStrategy` in your namespace or install the `ClusterBui
 
 To install the cluster scope strategy, you can choose between the Paketo and Heroku buildpacks family:
 
-```bash
+```sh
 # Paketo
 kubectl apply -f samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml
 
@@ -186,7 +200,7 @@ kubectl apply -f samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_build
 
 To install the namespaced scope strategy, you can choose between the Paketo and Heroku buildpacks family:
 
-```bash
+```sh
 # Paketo
 kubectl apply -f samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_namespaced_cr.yaml
 
@@ -204,7 +218,7 @@ The `kaniko` ClusterBuildStrategy is composed by Kaniko's `executor` [kaniko], w
 
 To install the cluster scope strategy, use:
 
-```bash
+```sh
 kubectl apply -f samples/v1beta1/buildstrategy/kaniko/buildstrategy_kaniko_cr.yaml
 ```
 
@@ -248,7 +262,7 @@ _Please note:_ At this point in time, there is no way to run `rootlesskit` to st
 
 To install the cluster scope strategy, use:
 
-```bash
+```sh
 kubectl apply -f samples/v1beta1/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml
 ```
 
@@ -262,7 +276,7 @@ The `ko` ClusterBuilderStrategy is using [ko](https://github.com/ko-build/ko)'s 
 
 To install the cluster scope strategy, use:
 
-```bash
+```sh
 kubectl apply -f samples/v1beta1/buildstrategy/ko/buildstrategy_ko_cr.yaml
 ```
 
@@ -273,7 +287,7 @@ The build strategy provides the following parameters that you can set in a Build
 | Parameter           | Description                                                                                                                                                                                                                                                                                        | Default   |
 |---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
 | `go-flags`          | Value for the GOFLAGS environment variable.                                                                                                                                                                                                                                                        | Empty     |
-| `go-version`        | Version of Go, must match a tag from [the golang image](https://hub.docker.com/_/golang?tab=tags)                                                                                                                                                                                                  | `1.22`    |
+| `go-version`        | Version of Go, must match a tag from [the golang image](https://hub.docker.com/_/golang?tab=tags)                                                                                                                                                                                                  | `1.24`    |
 | `ko-version`        | Version of ko, must be either `latest` for the newest release, or a [ko release name](https://github.com/ko-build/ko/releases)                                                                                                                                                                     | `latest`  |
 | `package-directory` | The directory inside the context directory containing the main package.                                                                                                                                                                                                                            | `.`       |
 | `target-platform`   | Target platform to be built. For example: `linux/arm64`. Multiple platforms can be provided separated by comma, for example: `linux/arm64,linux/amd64`. The value `all` will build all platforms supported by the base image. The value `current` will build the platform on which the build runs. | `current` |
@@ -294,7 +308,7 @@ This BuildStrategy is composed by [`source-to-image`][s2i] and [`kaniko`][kaniko
 
 To install the cluster scope strategy use:
 
-```bash
+```sh
 kubectl apply -f samples/v1beta1/buildstrategy/source-to-image/buildstrategy_source-to-image_cr.yaml
 ```
 
@@ -320,7 +334,7 @@ Users defining _parameters_ under their strategies require to understand the fol
 
 - **Definition**: A list of parameters should be defined under `spec.parameters`. Each list item should consist of a _name_, a _description_, a _type_ (either `"array"` or `"string"`) and optionally a _default_ value (for type=string), or _defaults_ values (for type=array). If no default(s) are provided, then the user must define a value in the Build or BuildRun.
 - **Usage**: In order to use a parameter in the strategy steps, use the following syntax for type=string: `$(params.your-parameter-name)`. String parameters can be used in all places in the `buildSteps`. Some example scenarios are:
-  - `image`: to use a custom tag, for example `golang:$(params.go-version)` as it is done in the [ko sample build strategy](https://github.com/shipwright-io/build/blob/v0.15.2/samples/v1beta1/buildstrategy/ko/buildstrategy_ko_cr.yaml)
+  - `image`: to use a custom tag, for example `golang:$(params.go-version)` as it is done in the [ko sample build strategy](https://github.com/shipwright-io/build/blob/v0.18.0/samples/v1beta1/buildstrategy/ko/buildstrategy_ko_cr.yaml)
   - `args`: to pass data into your builder command
   - `env`: to force a user to provide a value for an environment variable.
   
@@ -356,7 +370,7 @@ Users defining _parameters_ under their strategies require to understand the fol
 
 **Note**: Users can provide parameter values as simple strings or as references to keys in [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/) and [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/). If they use a ConfigMap or Secret, then the value can only be used if the parameter is used in the `command`, `args`, or `env` section of the `buildSteps`. For example, the above-mentioned scenario to set a step's `image` to `golang:$(params.go-version)` does not allow the usage of ConfigMaps or Secrets.
 
-The following example is from the [BuildKit sample build strategy](https://github.com/shipwright-io/build/blob/v0.15.2/samples/v1beta1/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml). It defines and uses several parameters:
+The following example is from the [BuildKit sample build strategy](https://github.com/shipwright-io/build/blob/v0.18.0/samples/v1beta1/buildstrategy/buildkit/buildstrategy_buildkit_cr.yaml). It defines and uses several parameters:
 
 ```yaml
 ---
@@ -390,7 +404,7 @@ spec:
   steps:
     ...
     - name: build-and-push
-      image: moby/buildkit:v0.17.0-rootless
+      image: moby/buildkit:v0.26.2-rootless
       imagePullPolicy: Always
       workingDir: $(params.shp-source-root)
       ...
@@ -445,7 +459,7 @@ spec:
               # using head because the data could be multiline
               id="$(echo "${a}" | head -1 | sed 's/=.*//')"
 
-              # This is hacky, we remove the suffix ${id}= from all lines of the data.
+              # This is hacky, we remove the prefix ${id}= from all lines of the data.
               # If the data would be multiple lines and a line would start with ${id}=
               # then we would remove it. We could force users to give us the secret
               # base64 encoded. But ultimately, the best solution might be if the user
@@ -501,7 +515,7 @@ When you use the `$(params.shp-output-directory)` parameter, then Shipwright wil
 
 If you are uncertain about how to implement your build strategy, then follow this guidance:
 
-1. If your build strategy tool cannot locally store an image but always pushes it, then you must do the push operation. An example is the [Buildpacks strategy](https://github.com/shipwright-io/build/blob/v0.15.2/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml). You SHOULD respect the `$(params.shp-output-insecure)` parameter.
+1. If your build strategy tool cannot locally store an image but always pushes it, then you must do the push operation. An example is the [Buildpacks strategy](https://github.com/shipwright-io/build/blob/v0.18.0/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml). You SHOULD respect the `$(params.shp-output-insecure)` parameter.
 2. If your build strategy tool can locally store an image, then the choice depends on how you expect your build users to make use of your strategy, and the nature of your strategy.
    1. Some build strategies do not produce all layers of an image, but use a common base image and put one or more layers on top with the application. An example is `ko`. Such base image layers are often already present in the destination registry (like in rebuilds). If the strategy can perform the push operation, then it can optimize the process and can omit the download of the base image when it is not required to push it. In the case of a shipwright-managed push, the complete image must be locally stored in `$(params.shp-output-directory)`, which implies that a base image must always be downloaded.
    2. Some build strategy tools do not make it easy to determine the digest or size of the image, which can make it complex for you to set the [strategy results](#system-results). In the case of a shipwright-managed push, Shipwright has the responsibility to set them.
@@ -548,7 +562,7 @@ This opens the door to script injection, for example if the user sets the `sampl
 
 To securely pass a parameter value into a script-style argument, you can choose between these two approaches:
 
-1. Using environment variables. This is used in some of our sample strategies, for example [ko](https://github.com/shipwright-io/build/blob/v0.15.2/samples/v1beta1/buildstrategy/ko/buildstrategy_ko_cr.yaml), or [buildpacks](https://github.com/shipwright-io/build/blob/v0.15.2/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml). Basically, instead of directly using the parameter inside the script, you pass it via environment variable. Using quoting, shells ensure that no command injection is possible:
+1. Using environment variables. This is used in some of our sample strategies, for example [ko](https://github.com/shipwright-io/build/blob/v0.18.0/samples/v1beta1/buildstrategy/ko/buildstrategy_ko_cr.yaml), or [buildpacks](https://github.com/shipwright-io/build/blob/v0.18.0/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml). Basically, instead of directly using the parameter inside the script, you pass it via environment variable. Using quoting, shells ensure that no command injection is possible:
 
    ```yaml
    spec:
@@ -571,7 +585,7 @@ To securely pass a parameter value into a script-style argument, you can choose 
              some-tool --sample-argument "${PARAM_SAMPLE_PARAMETER}"
    ```
 
-2. Using arguments. This is used in some of our sample build strategies, for example [buildah](https://github.com/shipwright-io/build/blob/v0.15.2/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push_cr.yaml). Here, you use arguments to your own inline script. Appropriate shell quoting guards against command injection.
+2. Using arguments. This is used in some of our sample build strategies, for example [buildah](https://github.com/shipwright-io/build/blob/v0.18.0/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push_cr.yaml). Here, you use arguments to your own inline script. Appropriate shell quoting guards against command injection.
 
    ```yaml
    spec:
@@ -604,7 +618,7 @@ If you are using a strategy-managed push, see [output directory vs output image]
 | `$(results.shp-image-digest.path)` | File to store the digest of the image.          |
 | `$(results.shp-image-size.path)`   | File to store the compressed size of the image. |
 
-You can look at sample build strategies, such as [Buildpacks](https://github.com/shipwright-io/build/blob/v0.15.2/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml), to see how they fill some or all of the results files.
+You can look at sample build strategies, such as [Buildpacks](https://github.com/shipwright-io/build/blob/v0.18.0/samples/v1beta1/buildstrategy/buildpacks-v3/buildstrategy_buildpacks-v3_cr.yaml), to see how they fill some or all of the results files.
 
 This information will be available in the `.status.output` section of the BuildRun.
 
@@ -680,7 +694,7 @@ metadata:
 spec:
   steps:
     - name: build-and-push
-      image: gcr.io/kaniko-project/executor:v1.23.2
+      image: gcr.io/kaniko-project/executor:v1.24.0
       workingDir: $(params.shp-source-root)
       securityContext:
         runAsUser: 0
@@ -729,7 +743,7 @@ metadata:
 spec:
   steps:
     - name: build-and-push
-      image: gcr.io/kaniko-project/executor:v1.23.2
+      image: gcr.io/kaniko-project/executor:v1.24.0
       workingDir: $(params.shp-source-root)
       securityContext:
         runAsUser: 0
@@ -811,15 +825,15 @@ For a more concrete example, let´s take a look on the following scenarios:
 
 If we apply the following resources:
 
-- [buildahBuild](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/build/build_buildah_shipwright_managed_push_cr.yaml)
-- [buildahBuildRun](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/buildrun/buildrun_buildah_cr.yaml)
-- [buildahClusterBuildStrategy](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push_cr.yaml)
+- [buildahBuild](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/build/build_buildah_shipwright_managed_push_cr.yaml)
+- [buildahBuildRun](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/buildrun/buildrun_buildah_cr.yaml)
+- [buildahClusterBuildStrategy](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push_cr.yaml)
 
 We will see some differences between the `TaskRun` definition and the `pod` definition.
 
-For the `TaskRun`, as expected we can see the resources on each `step`, as we previously define on our [strategy](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push_cr.yaml).
+For the `TaskRun`, as expected we can see the resources on each `step`, as we previously define on our [strategy](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push_cr.yaml).
 
-```bash
+```sh
 $ kubectl -n test-build get tr buildah-golang-buildrun-9gmcx-pod-lhzbc -o json | jq '.spec.taskSpec.steps[] | select(.name == "step-buildah-bud" ) | .resources'
 {
   "limits": {
@@ -847,7 +861,7 @@ $ kubectl -n test-build get tr buildah-golang-buildrun-9gmcx-pod-lhzbc -o json |
 
 The pod definition is different, while Tekton will only use the **highest** values of one container, and set the rest(lowest) to zero:
 
-```bash
+```sh
 $ kubectl -n test-build get pods buildah-golang-buildrun-9gmcx-pod-lhzbc -o json | jq '.spec.containers[] | select(.name == "step-step-buildah-bud" ) | .resources'
 {
   "limits": {
@@ -883,13 +897,13 @@ In this scenario, only one container can have the `spec.resources.requests` defi
 
 If we apply the following resources:
 
-- [buildahBuild](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/build/build_buildah_shipwright_managed_push_cr.yaml)
-- [buildahBuildRun](https://github.com/shipwright-io/build/tree/v0.15.2/samples/v1beta1/buildrun/buildrun_buildah_cr.yaml)
+- [buildahBuild](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/build/build_buildah_shipwright_managed_push_cr.yaml)
+- [buildahBuildRun](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/buildrun/buildrun_buildah_cr.yaml)
 - We will use a modified buildah strategy, with the following steps resources:
 
   ```yaml
     - name: buildah-bud
-      image: quay.io/containers/buildah:v1.37.5
+      image: quay.io/containers/buildah:v1.42.1
       workingDir: $(params.shp-source-root)
       securityContext:
         privileged: true
@@ -911,7 +925,7 @@ If we apply the following resources:
         - name: buildah-images
           mountPath: /var/lib/containers/storage
     - name: buildah-push
-      image: quay.io/containers/buildah:v1.37.5
+      image: quay.io/containers/buildah:v1.42.1
       securityContext:
         privileged: true
       command:
@@ -931,7 +945,7 @@ If we apply the following resources:
 
 For the `TaskRun`, as expected we can see the resources on each `step`.
 
-```bash
+```sh
 $ kubectl -n test-build get tr buildah-golang-buildrun-skgrp -o json | jq '.spec.taskSpec.steps[] | select(.name == "step-buildah-bud" ) | .resources'
 {
   "limits": {
@@ -959,7 +973,7 @@ $ kubectl -n test-build get tr buildah-golang-buildrun-skgrp -o json | jq '.spec
 
 The pod definition is different, while Tekton will only use the **highest** values of one container, and set the rest(lowest) to zero:
 
-```bash
+```sh
 $ kubectl -n test-build get pods buildah-golang-buildrun-95xq8-pod-mww8d -o json | jq '.spec.containers[] | select(.name == "step-step-buildah-bud" ) | .resources'
 {
   "limits": {
