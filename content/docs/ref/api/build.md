@@ -126,6 +126,7 @@ _Appears in:_
 | `NodeSelectorNotValid` | NodeSelectorNotValid indicates that the nodeSelector value is not valid<br /> |
 | `TolerationNotValid` | TolerationNotValid indicates that the Toleration value is not valid<br /> |
 | `SchedulerNameNotValid` | SchedulerNameNotValid indicates that the Scheduler name is not valid<br /> |
+| `RuntimeClassNameNotValid` | RuntimeClassNameNotValid indicates that the RuntimeClassName is not valid<br /> |
 
 
 ### BuildRetention
@@ -260,6 +261,7 @@ _Appears in:_
 | `nodeSelector` _object (keys:string, values:string)_ | NodeSelector is a selector which must be true for the pod to fit on a node.<br />Selector which must match a node's labels for the pod to be scheduled on that node.<br />More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ |  |  |
 | `tolerations` _[Toleration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#toleration-v1-core) array_ | If specified, the pod's tolerations. |  |  |
 | `schedulerName` _string_ | SchedulerName specifies the scheduler to be used to dispatch the Pod |  |  |
+| `runtimeClassName` _string_ | RuntimeClassName specifies the RuntimeClass to be used to run the Pod |  |  |
 
 
 ### BuildRunStatus
@@ -332,6 +334,7 @@ _Appears in:_
 | `nodeSelector` _object (keys:string, values:string)_ | NodeSelector is a selector which must be true for the pod to fit on a node.<br />Selector which must match a node's labels for the pod to be scheduled on that node.<br />More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ |  |  |
 | `tolerations` _[Toleration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.3/#toleration-v1-core) array_ | If specified, the pod's tolerations. |  |  |
 | `schedulerName` _string_ | SchedulerName specifies the scheduler to be used to dispatch the Pod |  |  |
+| `runtimeClassName` _string_ | RuntimeClassName specifies the RuntimeClass to be used to run the Pod |  |  |
 
 
 ### BuildStatus
