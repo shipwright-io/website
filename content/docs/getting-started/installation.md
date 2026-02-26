@@ -14,7 +14,7 @@ with our operator.
 - [Tekton pipelines](https://tekton.dev/docs/installation/) v0.68 or later.
 
   ```bash
-  kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
+  kubectl apply --filename https://infra.tekton.dev/tekton-releases/pipeline/latest/release.yaml
   ```
 
 ## Installing Shipwright Builds with the Operator
