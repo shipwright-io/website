@@ -18,6 +18,7 @@ params:
     version: true
   social:
     github: "shipwright-io/build"
+    twitter: "shipwrightio"
   docs:
     title: Shipwright Docs
     themeColor: blue
