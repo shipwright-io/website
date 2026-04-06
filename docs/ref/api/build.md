@@ -1,6 +1,7 @@
 ---
 title: Build Resources
-weight: 10
+sidebar_position: 1
+description: Build Custom Resource Definitions
 ---
 
 # Packages
@@ -65,7 +66,6 @@ _Appears in:_
 
 
 BuildList contains a list of Build
-
 
 
 
@@ -174,7 +174,6 @@ _Appears in:_
 
 
 BuildRunList contains a list of BuildRun
-
 
 
 
@@ -404,7 +403,6 @@ BuildStrategyList contains a list of BuildStrategy
 
 
 
-
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `apiVersion` _string_ | `shipwright.io/v1beta1` | | |
@@ -530,7 +528,6 @@ _Appears in:_
 
 
 ClusterBuildStrategyList contains a list of ClusterBuildStrategy
-
 
 
 
@@ -758,8 +755,6 @@ _Appears in:_
 
 
 
-
-
 _Appears in:_
 - [SingleValue](#singlevalue)
 
@@ -881,9 +876,6 @@ _Appears in:_
 
 
 ### ReferencedBuild
-
-
-
 
 
 
@@ -1194,5 +1186,3 @@ _Appears in:_
 | `name` _string_ | Name target object name. |  |  |
 | `status` _string array_ | Status object status. |  |  |
 | `selector` _object (keys:string, values:string)_ | Selector label selector. |  |  |
-
-

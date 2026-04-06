@@ -3,7 +3,8 @@
 
 ---
 title: {{env "API_GROUP"}} Resources
-weight: {{env "API_WEIGHT"}}
+sidebar_position: {{env "API_POSITION"}}
+description: {{env "API_GROUP"}} Custom Resource Definitions
 ---
 
 # Packages
