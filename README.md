@@ -6,32 +6,29 @@ This repository contains the assets needed to build the Shipwright website and d
 
 ## Using this repository
 
-You can run the website locally using the Hugo static site generator.
+This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 
-### Getting Started
-
-To use this repository, you need the following installed locally:
-
-* `npm` - this can be obtained by installing [Node.js](https://nodejs.org/en/download/) on your system.
-* [Hugo](https://gohugo.io/getting-started/installing/) - be sure to install the **extended version**.
-* [Go SDK](https://go.dev/doc/install) v1.21 or higher.
-
-Once installed, clone the repository and navigate to the directory:
+### Installation
 
 ```bash
-$ git clone https://github.com/shipwright-io/website.git
-$ cd website
+yarn
 ```
 
-Then install any additional dependencies by running `make install`
-
-### Running the website locally
-
-To run the website locally, use Hugo's `server` command:
+### Local Development
 
 ```bash
-$ hugo -t docsy server
+yarn start
 ```
+
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+
+### Build
+
+```bash
+yarn build
+```
+
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
 ## Contributing
 

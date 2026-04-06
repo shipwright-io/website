@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" fill="none">
+  <!-- Central hub - the BuildStrategy API -->
+  <g>
+    <circle cx="100" cy="100" r="22" stroke="#7c8fa4" stroke-width="3" fill="none"/>
+    <!-- Gear/cog teeth to represent the build engine -->
+    <line x1="100" y1="74" x2="100" y2="68" stroke="#7c8fa4" stroke-width="3" stroke-linecap="round"/>
+    <line x1="100" y1="132" x2="100" y2="126" stroke="#7c8fa4" stroke-width="3" stroke-linecap="round"/>
+    <line x1="74" y1="100" x2="68" y2="100" stroke="#7c8fa4" stroke-width="3" stroke-linecap="round"/>
+    <line x1="132" y1="100" x2="126" y2="100" stroke="#7c8fa4" stroke-width="3" stroke-linecap="round"/>
+    <line x1="81.5" y1="81.5" x2="77.3" y2="77.3" stroke="#7c8fa4" stroke-width="3" stroke-linecap="round"/>
+    <line x1="118.5" y1="118.5" x2="122.7" y2="122.7" stroke="#7c8fa4" stroke-width="3" stroke-linecap="round"/>
+    <line x1="118.5" y1="81.5" x2="122.7" y2="77.3" stroke="#7c8fa4" stroke-width="3" stroke-linecap="round"/>
+    <line x1="81.5" y1="118.5" x2="77.3" y2="122.7" stroke="#7c8fa4" stroke-width="3" stroke-linecap="round"/>
+    <!-- Inner dot -->
+    <circle cx="100" cy="100" r="5" fill="#7c8fa4" opacity="0.5"/>
+  </g>
+
+  <!-- Tool 1 - top left: wrench -->
+  <g>
+    <!-- Connecting line to hub -->
+    <line x1="82" y1="84" x2="52" y2="54" stroke="#7c8fa4" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+    <!-- Wrench head -->
+    <path d="M38,36 L32,42 L38,48 L44,48 L50,42 L44,36 Z" stroke="#7c8fa4" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+    <!-- Wrench opening -->
+    <line x1="35" y1="39" x2="41" y2="45" stroke="#7c8fa4" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  </g>
+
+  <!-- Tool 2 - top right: hammer -->
+  <g>
+    <!-- Connecting line to hub -->
+    <line x1="118" y1="84" x2="148" y2="54" stroke="#7c8fa4" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+    <!-- Hammer head -->
+    <rect x="140" y="32" width="24" height="12" rx="2" stroke="#7c8fa4" stroke-width="2.5" fill="none"/>
+    <!-- Hammer handle -->
+    <line x1="152" y1="44" x2="152" y2="58" stroke="#7c8fa4" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Tool 3 - bottom right: paintbrush/terminal -->
+  <g>
+    <!-- Connecting line to hub -->
+    <line x1="118" y1="116" x2="148" y2="146" stroke="#7c8fa4" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+    <!-- Terminal window -->
+    <rect x="138" y="140" width="28" height="22" rx="3" stroke="#7c8fa4" stroke-width="2.5" fill="none"/>
+    <!-- Prompt chevron -->
+    <polyline points="143,148 149,152 143,156" stroke="#7c8fa4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Cursor line -->
+    <line x1="152" y1="156" x2="160" y2="156" stroke="#7c8fa4" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  </g>
+
+  <!-- Tool 4 - bottom left: container/box -->
+  <g>
+    <!-- Connecting line to hub -->
+    <line x1="82" y1="116" x2="52" y2="146" stroke="#7c8fa4" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+    <!-- Package box -->
+    <rect x="28" y="140" width="24" height="22" rx="2" stroke="#7c8fa4" stroke-width="2.5" fill="none"/>
+    <!-- Box cross lines (package tape) -->
+    <line x1="40" y1="140" x2="40" y2="162" stroke="#7c8fa4" stroke-width="1.5" opacity="0.5"/>
+    <line x1="28" y1="151" x2="52" y2="151" stroke="#7c8fa4" stroke-width="1.5" opacity="0.5"/>
+  </g>
+</svg>
