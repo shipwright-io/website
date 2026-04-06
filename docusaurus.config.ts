@@ -37,6 +37,16 @@ const config: Config = {
 
   plugins: [
     [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'contributing',
+        path: 'contributing',
+        routeBasePath: 'contributing',
+        sidebarPath: './sidebars-contributing.ts',
+        editUrl: 'https://github.com/shipwright-io/website/tree/main/contributing/',
+      },
+    ],
+    [
       '@docusaurus/plugin-client-redirects',
       {
         redirects: [
@@ -68,6 +78,8 @@ const config: Config = {
           { from: ['/docs/blog/posts/2026-03-13-release-v0.19', '/docs/blog/posts/2026-03-13-release-v0.19/'], to: '/blog/shipwright-v0.19-is-here' },
           // Redirect the blog index
           { from: ['/docs/blog', '/docs/blog/'], to: '/blog' },
+          // Redirect contribution guidelines from old Hugo path
+          { from: ['/docs/contribution-guidelines', '/docs/contribution-guidelines/'], to: '/contributing/contribution-guidelines' },
         ],
       },
     ],
@@ -125,6 +137,13 @@ const config: Config = {
           label: 'Docs',
         },
         {to: '/blog', label: 'Blog', position: 'left'},
+        {
+          type: 'docSidebar',
+          sidebarId: 'contributingSidebar',
+          docsPluginId: 'contributing',
+          position: 'left',
+          label: 'Contributing',
+        },
         {
           href: 'https://github.com/shipwright-io',
           label: 'GitHub',

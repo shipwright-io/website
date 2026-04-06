@@ -1,20 +1,12 @@
 ---
-weight: 2000
-title: "Contribution"
-description: "Contributing guidelines"
-icon: "article"
-date: "2025-04-25T16:48:17+02:00"
-lastmod: "2025-04-25T16:48:17+02:00"
-toc: true
+title: Contributing Guidelines
+sidebar_label: Contributing Guidelines
 ---
-<!--
+{/*
 Copyright The Shipwright Contributors
 
 SPDX-License-Identifier: Apache-2.0
--->
-
-
-# Contributing Guidelines
+*/}
 
 Welcome to Shipwright, we are glad you want to contribute to the project!
 This document contains general guidelines for submitting contributions.
@@ -94,7 +86,7 @@ Once the pull request is approved and marked "lgtm", it will get merged.
 Shipwright Community Meetings take place weekly on Monday's at 13:00 UTC time.
 
 In our Public [Calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/shipwright) you will find all weekly meetings.
-Meetings are hosted in Zoom and are Public. 
+Meetings are hosted in Zoom and are Public.
 
 You can register yourself via the Public Calendar as well.
 
