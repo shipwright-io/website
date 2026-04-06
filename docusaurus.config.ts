@@ -35,6 +35,44 @@ const config: Config = {
     locales: ['en'],
   },
 
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          // Redirects from Hugo /docs/blog/posts/{slug}/ to Docusaurus /blog/{slug}
+          { from: ['/docs/blog/posts/2020-10-21-intro-shipwright-pt1', '/docs/blog/posts/2020-10-21-intro-shipwright-pt1/', '/blog/2020/10/21/introducing-shipwright-part-1'], to: '/blog/introducing-shipwright-part-1' },
+          { from: ['/docs/blog/posts/2020-11-30-intro-shipwright-pt2', '/docs/blog/posts/2020-11-30-intro-shipwright-pt2/'], to: '/blog/introducing-shipwright-part-2' },
+          { from: ['/docs/blog/posts/2021-08-02-adding-gatekeeper.md', '/docs/blog/posts/2021-08-02-adding-gatekeeper.md/'], to: '/blog/gatekeeper-policies-with-shipwright' },
+          { from: ['/docs/blog/posts/2021-08-03-cd-foundation-incubating-project', '/docs/blog/posts/2021-08-03-cd-foundation-incubating-project/'], to: '/blog/cd-foundation-incubating-project' },
+          { from: ['/docs/blog/posts/2021-10-26-build-release-v0.6.0', '/docs/blog/posts/2021-10-26-build-release-v0.6.0/'], to: '/blog/shipwright-v0.6.0-is-here' },
+          { from: ['/docs/blog/posts/2021-12-20-build-release-v0.7.0', '/docs/blog/posts/2021-12-20-build-release-v0.7.0/'], to: '/blog/shipwright-v0.7.0-is-here' },
+          { from: ['/docs/blog/posts/2022-02-01-build-release-v0.8.0', '/docs/blog/posts/2022-02-01-build-release-v0.8.0/'], to: '/blog/shipwright-v0.8.0-is-here' },
+          { from: ['/docs/blog/posts/2022-04-14-build-release-v0.9.0', '/docs/blog/posts/2022-04-14-build-release-v0.9.0/'], to: '/blog/shipwright-v0.9.0-is-here' },
+          { from: ['/docs/blog/posts/2022-05-23-cdcon-2022', '/docs/blog/posts/2022-05-23-cdcon-2022/'], to: '/blog/upcoming-shipwright-community-summit' },
+          { from: ['/docs/blog/posts/2022-06-03-build-release-v0.10.0', '/docs/blog/posts/2022-06-03-build-release-v0.10.0/'], to: '/blog/shipwright-v0.10.0-is-here' },
+          { from: ['/docs/blog/posts/2022-09-09-build-release-v0.11.0', '/docs/blog/posts/2022-09-09-build-release-v0.11.0/'], to: '/blog/shipwright-v0.11.0-is-here' },
+          { from: ['/docs/blog/posts/2022-09-28-hacktoberfest', '/docs/blog/posts/2022-09-28-hacktoberfest/'], to: '/blog/hacktoberfest-2022' },
+          { from: ['/docs/blog/posts/2022-10-25-shipwright-beta', '/docs/blog/posts/2022-10-25-shipwright-beta/'], to: '/blog/bringing-shipwright-to-beta-and-beyond' },
+          { from: ['/docs/blog/posts/2023-10-01-hacktoberfest', '/docs/blog/posts/2023-10-01-hacktoberfest/'], to: '/blog/hacktoberfest-2023' },
+          { from: ['/docs/blog/posts/2023-11-05-build-release-v0.12.0', '/docs/blog/posts/2023-11-05-build-release-v0.12.0/'], to: '/blog/shipwright-v0.12.0-is-here' },
+          { from: ['/docs/blog/posts/2023-11-07-beta-api', '/docs/blog/posts/2023-11-07-beta-api/'], to: '/blog/introducing-shipwright-beta-api' },
+          { from: ['/docs/blog/posts/2024-03-27-build-release-v0.13.0', '/docs/blog/posts/2024-03-27-build-release-v0.13.0/'], to: '/blog/shipwright-v0.13.0-is-here' },
+          { from: ['/docs/blog/posts/2024-07-15-vulnerability-scanning', '/docs/blog/posts/2024-07-15-vulnerability-scanning/'], to: '/blog/building-secure-container-images-with-shipwright' },
+          { from: ['/docs/blog/posts/2024-11-15-release-v0.14.0', '/docs/blog/posts/2024-11-15-release-v0.14.0/'], to: '/blog/shipwright-v0.14.0-is-here' },
+          { from: ['/docs/blog/posts/2025-02-28-release-v0.15', '/docs/blog/posts/2025-02-28-release-v0.15/'], to: '/blog/shipwright-v0.15-is-here' },
+          { from: ['/docs/blog/posts/2025-5-20-build-scheduler-features', '/docs/blog/posts/2025-5-20-build-scheduler-features/'], to: '/blog/shipwright-build-scheduler-features' },
+          { from: ['/docs/blog/posts/2025-06-16-release-v0.16', '/docs/blog/posts/2025-06-16-release-v0.16/'], to: '/blog/shipwright-v0.16-is-here' },
+          { from: ['/docs/blog/posts/2025-09-02-release-v0.17', '/docs/blog/posts/2025-09-02-release-v0.17/'], to: '/blog/shipwright-v0.17-is-here' },
+          { from: ['/docs/blog/posts/2025-12-01-release-v0.18', '/docs/blog/posts/2025-12-01-release-v0.18/'], to: '/blog/shipwright-v0.18-is-here' },
+          { from: ['/docs/blog/posts/2026-03-13-release-v0.19', '/docs/blog/posts/2026-03-13-release-v0.19/'], to: '/blog/shipwright-v0.19-is-here' },
+          // Redirect the blog index
+          { from: ['/docs/blog', '/docs/blog/'], to: '/blog' },
+        ],
+      },
+    ],
+  ],
+
   presets: [
     [
       'classic',
