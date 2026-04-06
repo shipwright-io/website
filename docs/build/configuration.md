@@ -1,11 +1,12 @@
 ---
 title: Configuration
+description: Environment variables and RBAC roles available for configuring the Shipwright Build controller.
 ---
-<!--
+{/*
 Copyright The Shipwright Contributors
 
 SPDX-License-Identifier: Apache-2.0
--->
+*/}
 ## Controller Settings
 
 The controller is installed into Kubernetes with reasonable defaults. However, there are some settings that can be overridden using environment variables in [`controller.yaml`](https://github.com/shipwright-io/build/blob/v0.15.2/deploy/500-controller.yaml).

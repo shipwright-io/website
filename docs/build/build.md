@@ -1,12 +1,13 @@
 ---
 title: Build
-weight: 20
+sidebar_position: 2
+description: Configure what, where, and how a container image should be built.
 ---
-<!--
+{/*
 Copyright The Shipwright Contributors
 
 SPDX-License-Identifier: Apache-2.0
--->
+*/}
 
 ## Overview
 

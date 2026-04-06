@@ -1,6 +1,7 @@
 ---
 title: Authentication during builds
-weight: 40
+sidebar_position: 4
+description: Configure authentication with Git repositories and container registries during builds.
 ---
 
 The following document provides an introduction around the different authentication methods that can take place during an image build when using the Build controller.

@@ -1,34 +1,13 @@
 ---
 title: BuildRun
-weight: 30
+sidebar_position: 3
+description: Execute a container image build on your cluster.
 ---
-<!--
+{/*
 Copyright The Shipwright Contributors
 
 SPDX-License-Identifier: Apache-2.0
--->
-
-- [Overview](#overview)
-- [BuildRun Controller](#buildrun-controller)
-- [Configuring a BuildRun](#configuring-a-buildrun)
-  - [Defining the Build Reference](#defining-the-build-reference)
-  - [Defining the Build Specification](#defining-the-build-specification)
-  - [Defining the Build Source](#defining-the-build-source)
-  - [Defining ParamValues](#defining-paramvalues)
-  - [Defining the ServiceAccount](#defining-the-serviceaccount)
-  - [Defining Retention Parameters](#defining-retention-parameters)
-  - [Defining Volumes](#defining-volumes)
-- [Canceling a `BuildRun`](#canceling-a-buildrun)
-- [Automatic `BuildRun` deletion](#automatic-buildrun-deletion)
-- [Specifying Environment Variables](#specifying-environment-variables)
-- [BuildRun Status](#buildrun-status)
-  - [Understanding the state of a BuildRun](#understanding-the-state-of-a-buildrun)
-  - [Understanding failed BuildRuns](#understanding-failed-buildruns)
-  - [Understanding failed BuildRuns due to VulnerabilitiesFound](#understanding-failed-buildruns-due-to-vulnerabilitiesfound)
-    - [Understanding failed git-source step](#understanding-failed-git-source-step)
-  - [Step Results in BuildRun Status](#step-results-in-buildrun-status)
-  - [Build Snapshot](#build-snapshot)
-- [Relationship with Tekton Tasks](#relationship-with-tekton-tasks)
+*/}
 
 ## Overview
 

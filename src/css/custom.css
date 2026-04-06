@@ -200,6 +200,15 @@
   background-color: var(--shipwright-deep-sea);
 }
 
+/* Category cards */
+:root {
+  --ifm-card-background-color: var(--shipwright-ivory);
+}
+
+[data-theme='dark'] {
+  --ifm-card-background-color: var(--shipwright-deep-sea);
+}
+
 /* Sidebar styling */
 :root .menu__link {
   color: var(--shipwright-slate-blue);

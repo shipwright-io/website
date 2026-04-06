@@ -1,8 +1,7 @@
 ---
 title: "Installation"
 description: "Install Shipwright on your Kubernetes cluster."
-draft: false
-weight: 10
+sidebar_position: 1
 ---
 
 The Shipwright Build APIs and controllers can be installed directly with our release deployment, or

@@ -1,12 +1,13 @@
 ---
 title: Build Strategies
-weight: 10
+sidebar_position: 1
+description: Define and share container image build tools with your teams.
 ---
-<!--
+{/*
 Copyright The Shipwright Contributors
 
 SPDX-License-Identifier: Apache-2.0
--->
+*/}
 
 ## Overview
 

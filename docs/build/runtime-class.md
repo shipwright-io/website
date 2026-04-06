@@ -1,27 +1,13 @@
 ---
 title: RuntimeClass
-weight: 45
+sidebar_position: 5
+description: How to use Kubernetes RuntimeClass to select an alternative container runtime for build pods.
 ---
-<!--
+{/*
 Copyright The Shipwright Contributors
 
 SPDX-License-Identifier: Apache-2.0
--->
-
-- [Overview](#overview)
-- [Prerequisites](#prerequisites)
-- [Use Cases](#use-cases)
-- [Configuring RuntimeClass](#configuring-runtimeclass)
-  - [Build with RuntimeClass](#build-with-runtimeclass)
-  - [BuildRun with RuntimeClass](#buildrun-with-runtimeclass)
-  - [BuildRun overriding Build RuntimeClass](#buildrun-overriding-build-runtimeclass)
-- [CLI Usage](#cli-usage)
-- [Precedence Behavior](#precedence-behavior)
-- [Troubleshooting](#troubleshooting)
-  - [Pod scheduling failures](#pod-scheduling-failures)
-  - [RuntimeClassNameNotValid validation error](#runtimeclassnamenotvalid-validation-error)
-  - [Non-existent RuntimeClass](#non-existent-runtimeclass)
-
+*/}
 ## Overview
 
 [RuntimeClass](https://kubernetes.io/docs/concepts/containers/runtime-class/) is a Kubernetes feature that allows selecting the container runtime configuration used to run a pod's containers. By specifying a `runtimeClassName` in a `Build` or `BuildRun`, the build pod runs with an alternative container runtime instead of the cluster's default.
