@@ -76,6 +76,21 @@ const config: Config = {
           { from: ['/docs/blog/posts/2025-09-02-release-v0.17', '/docs/blog/posts/2025-09-02-release-v0.17/'], to: '/blog/shipwright-v0.17-is-here' },
           { from: ['/docs/blog/posts/2025-12-01-release-v0.18', '/docs/blog/posts/2025-12-01-release-v0.18/'], to: '/blog/shipwright-v0.18-is-here' },
           { from: ['/docs/blog/posts/2026-03-13-release-v0.19', '/docs/blog/posts/2026-03-13-release-v0.19/'], to: '/blog/shipwright-v0.19-is-here' },
+          // Redirects from old Hugo /docs/blog/releases/{slug} paths to Docusaurus /docs/ref/release-notes/{version}
+          { from: ['/docs/blog/releases/v0.1.0-release-notes', '/docs/blog/releases/v0.1.0-release-notes/'], to: '/docs/ref/release-notes/v0.1.0' },
+          { from: ['/docs/blog/releases/v0.1.1-release-notes', '/docs/blog/releases/v0.1.1-release-notes/'], to: '/docs/ref/release-notes/v0.1.1' },
+          { from: ['/docs/blog/releases/v0.2.0-release-notes', '/docs/blog/releases/v0.2.0-release-notes/'], to: '/docs/ref/release-notes/v0.2.0' },
+          { from: ['/docs/blog/releases/v0.3.0-release-notes', '/docs/blog/releases/v0.3.0-release-notes/'], to: '/docs/ref/release-notes/v0.3.0' },
+          { from: ['/docs/blog/releases/v0.4.0-release-notes', '/docs/blog/releases/v0.4.0-release-notes/'], to: '/docs/ref/release-notes/v0.4.0' },
+          { from: ['/docs/blog/releases/v0.5.1-release-notes', '/docs/blog/releases/v0.5.1-release-notes/'], to: '/docs/ref/release-notes/v0.5.1' },
+          { from: ['/docs/blog/releases/v0.6.0-release-notes', '/docs/blog/releases/v0.6.0-release-notes/'], to: '/docs/ref/release-notes/v0.6.0' },
+          { from: ['/docs/blog/releases/v0.7.0-release-notes', '/docs/blog/releases/v0.7.0-release-notes/'], to: '/docs/ref/release-notes/v0.7.0' },
+          { from: ['/docs/blog/releases/v0.8.0-release-notes', '/docs/blog/releases/v0.8.0-release-notes/'], to: '/docs/ref/release-notes/v0.8.0' },
+          { from: ['/docs/blog/releases/v0.9.0-release-notes', '/docs/blog/releases/v0.9.0-release-notes/'], to: '/docs/ref/release-notes/v0.9.0' },
+          { from: ['/docs/blog/releases/v0.10.0-release-notes', '/docs/blog/releases/v0.10.0-release-notes/'], to: '/docs/ref/release-notes/v0.10.0' },
+          { from: ['/docs/blog/releases/v0.11.0-release-notes', '/docs/blog/releases/v0.11.0-release-notes/'], to: '/docs/ref/release-notes/v0.11.0' },
+          // Redirect the releases index
+          { from: ['/docs/blog/releases', '/docs/blog/releases/'], to: '/docs/ref/release-notes' },
           // Redirect the blog index
           { from: ['/docs/blog', '/docs/blog/'], to: '/blog' },
           // Redirect contribution guidelines from old Hugo path
