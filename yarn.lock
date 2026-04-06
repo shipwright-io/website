@@ -4193,6 +4193,11 @@ dns-packet@^5.2.2:
   dependencies:
     "@leichtgewicht/ip-codec" "^2.0.1"
 
+docusaurus-plugin-cookie-consent@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/docusaurus-plugin-cookie-consent/-/docusaurus-plugin-cookie-consent-4.1.0.tgz#37fc6a0fbc973208f66c45b1239f17d8147e7397"
+  integrity sha512-MMWXl1NXbFhgD/mZGw3QDojTJDDQuoVb1kcc7SI/TiOqrAlo9OTUm3P2MqIwCChJcOwQi5a7t1GJnDpVfPy+8w==
+
 dom-converter@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/dom-converter/-/dom-converter-0.2.0.tgz#6721a9daee2e293682955b6afe416771627bb768"

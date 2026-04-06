@@ -37,6 +37,32 @@ const config: Config = {
 
   plugins: [
     [
+      'docusaurus-plugin-cookie-consent',
+      {
+        title: 'We Value Your Privacy',
+        description: 'We use Google Analytics to understand how visitors use this site. Analytics cookies are optional — you can accept or decline below.',
+        links: [
+          { label: 'Privacy Policy', href: 'https://www.linuxfoundation.org/legal/privacy-policy'},
+          { label: 'Cookies Policy', href: 'https://www.linuxfoundation.org/legal/cookies'}
+        ],
+        acceptAllText: 'Accept',
+        rejectAllText: 'Decline',
+        storageKey: 'shipwright-io-cookie-consent',
+        toastMode: true,
+        googleConsentMode: {
+          enabled: true,
+          waitForUpdate: 500,
+          adsDataRedaction: true,
+          urlPassthrough: false,
+        },
+        cookies: {
+          analytics: {
+            enabled: true,
+          },
+        },
+      },
+    ],
+    [
       '@docusaurus/plugin-content-docs',
       {
         id: 'contributing',
@@ -128,6 +154,10 @@ const config: Config = {
         },
         theme: {
           customCss: './src/css/custom.css',
+        },
+        gtag: {
+          trackingID: 'G-XSD2CBQT26',
+          anonymizeIP: true,
         },
       } satisfies Preset.Options,
     ],
