@@ -40,7 +40,7 @@ The following environment variables are available:
 | `VULNERABILITY_COUNT_LIMIT`                      | holds vulnerability count limit if vulnerability scan is enabled for the output image. If it is defined as 10, then it will output only 10 vulnerabilities sorted by severity in the buildrun status.Output. Default is 50.                                                                                                                                                                                                                                                                                                                                              |
 | `BUILDRUN_EXECUTOR`                              | Sets the kind of buildrun exectutor that will be used. Value can be `TaskRun` or `PipelineRun`. By default buildrun will use `TaskRun` for its build executor.                                                                                                                                                                                                                                                                                                                                          |
 
-[^1]: The `runAsUser` and `runAsGroup` are dynamically overwritten depending on the build strategy that is used. See [Security Contexts](../buildstrategies#security-contexts) for more information.
+[^1]: The `runAsUser` and `runAsGroup` are dynamically overwritten depending on the build strategy that is used. See [Security Contexts](./buildstrategies#security-contexts) for more information.
 
 ## Role-based Access Control
 

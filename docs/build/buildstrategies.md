@@ -674,7 +674,7 @@ spec:
 
 This runAs configuration will be used for all shipwright-managed steps such as the step that retrieves the source code, and for the steps you define in the build strategy. This configuration ensures that all steps share the same runAs configuration which eliminates file permission problems.
 
-Without a `securityContext` for the build strategy, shipwright-managed steps will run with the `runAsUser` and `runAsGroup` that is defined in the [configuration's container templates](../configuration) that is potentially a different user than you use in your build strategy. This can result in issues when for example source code is downloaded as user A as defined by the Git container template, but your strategy accesses it as user B.
+Without a `securityContext` for the build strategy, shipwright-managed steps will run with the `runAsUser` and `runAsGroup` that is defined in the [configuration's container templates](./configuration) that is potentially a different user than you use in your build strategy. This can result in issues when for example source code is downloaded as user A as defined by the Git container template, but your strategy accesses it as user B.
 
 In build strategy steps you can define a step-specific `securityContext` that matches [Kubernetes' security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) where you can configure other security aspects such as capabilities or privileged containers.
 

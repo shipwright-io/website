@@ -263,12 +263,12 @@ spec:
 
 A `Build` resource can specify the `BuildStrategy` to use, these are:
 
-- [Buildah](../buildstrategies#buildah)
-- [Buildpacks-v3](../buildstrategies#buildpacks-v3)
-- [BuildKit](../buildstrategies#buildkit)
-- [Kaniko](../buildstrategies#kaniko)
-- [ko](../buildstrategies#ko)
-- [Source-to-Image](../buildstrategies#source-to-image)
+- [Buildah](./buildstrategies#buildah)
+- [Buildpacks-v3](./buildstrategies#buildpacks-v3)
+- [BuildKit](./buildstrategies#buildkit)
+- [Kaniko](./buildstrategies#kaniko)
+- [ko](./buildstrategies#ko)
+- [Source-to-Image](./buildstrategies#source-to-image)
 
 Defining the strategy is straightforward. You define the `name` and the `kind`. For example:
 
@@ -285,7 +285,7 @@ spec:
 
 ### Defining ParamValues
 
-A `Build` resource can specify _paramValues_ for parameters that are defined in the referenced `BuildStrategy`. You specify these parameter values to control how the steps of the build strategy behave. You can overwrite values in the `BuildRun` resource. See the related [documentation](../buildrun#defining-paramvalues) for more information.
+A `Build` resource can specify _paramValues_ for parameters that are defined in the referenced `BuildStrategy`. You specify these parameter values to control how the steps of the build strategy behave. You can overwrite values in the `BuildRun` resource. See the related [documentation](./buildrun#defining-paramvalues) for more information.
 
 The build strategy author can define a parameter as either a simple string or an array. Depending on that, you must specify the value accordingly. The build strategy parameter can be specified with a default value. You must specify a value in the `Build` or `BuildRun` for parameters without a default.
 

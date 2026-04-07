@@ -85,7 +85,7 @@ future.
 
 ## Bringing Shipwright to Beta
 
-Starting in version 0.12, Shipwright will introduce the beta [Build API](/docs/build/build)
+Starting in version 0.12, Shipwright will introduce the beta [Build API](/docs/build/)
 and begin phasing out the current alpha API.
 We encourage current and future users to provide feedback as we roll this new
 API out.

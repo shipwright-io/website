@@ -24,7 +24,7 @@ You can read more about it in the separate blog post [Building Secure Container 
 
 ### Parameters in the CLI
 
-The Shipwright CLI finally received the first support for [build parameters](/docs/build/build#defining-paramvalues). You can use the `--param-value` argument to provide values for strategy parameters such as the Go version and Go flags in our [ko sample build strategy](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/ko/buildstrategy_ko_cr.yaml#L8-L13) like this: `shp build create my-app --param-value go-version=1.23 --param-value go-flags=-mod=vendor`.
+The Shipwright CLI finally received the first support for [build parameters](/docs/build/#defining-paramvalues). You can use the `--param-value` argument to provide values for strategy parameters such as the Go version and Go flags in our [ko sample build strategy](https://github.com/shipwright-io/build/blob/v0.14.0/samples/v1beta1/buildstrategy/ko/buildstrategy_ko_cr.yaml#L8-L13) like this: `shp build create my-app --param-value go-version=1.23 --param-value go-flags=-mod=vendor`.
 
 ### The smaller but still nice things
 

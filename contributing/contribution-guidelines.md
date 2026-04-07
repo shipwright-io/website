@@ -16,11 +16,11 @@ Each component of Shipwright will have its own specific guidelines.
 
 The project enforces [Developer Certificate of Origin (DCO)](https://wiki.linuxfoundation.org/dco).
 By submitting pull requests submitters acknowledge they grant the
-[Apache License v2](./LICENSE) to the code and that they are eligible to grant this license for all commits submitted in their pull requests.
+[Apache License v2](https://github.com/shipwright-io/website/blob/main/LICENSE) to the code and that they are eligible to grant this license for all commits submitted in their pull requests.
 
 ## Getting Started
 
-All contributors must abide by our [Code of Conduct](/CODE_OF_CONDUCT.md).
+All contributors must abide by our [Code of Conduct](https://github.com/shipwright-io/.github/blob/main/CODE_OF_CONDUCT.md).
 
 The core code for Shipwright is located in the following repositories:
 
@@ -49,7 +49,7 @@ Use the following checklist to determine where you should create an issue:
 If you are not sure, create an issue in this repository, and the Shipwright maintainers will route it to the correct location.
 
 If feature request is sufficiently broad or significant, the community may ask you to submit a SHIP enhancement proposal.
-Please refer to the [SHIP guidelines](/ships/README.md) to learn how to submit a SHIP proposal.
+Please refer to the [SHIP guidelines](https://github.com/shipwright-io/community/blob/main/ships/README.md) to learn how to submit a SHIP proposal.
 
 ## Writing Pull Requests
 
