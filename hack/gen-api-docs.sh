@@ -18,7 +18,7 @@ fi
 
 git clone --branch "${buildVersion}" --depth 1 "${buildRepo}" "build"
 
-API_GROUP="Build" API_WEIGHT="10" ${crdRefDocs} --config build.yaml \
+API_GROUP="Build" API_POSITION="1" ${crdRefDocs} --config build.yaml \
   --renderer markdown \
   --source-path "build/pkg/apis/build/v1beta1" \
   --output-path "${destRoot}/build.md" \

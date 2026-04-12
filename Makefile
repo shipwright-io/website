@@ -3,22 +3,20 @@ all: build
 
 .PHONY: build
 build: clean ## build the site
-	hugo -F --minify
+	yarn build
 
 .PHONY: build-preview
 build-preview: clean ## build a preview, with future-dated content allowed.
-	hugo -F --minify
+	yarn build
 
 .PHONY: clean
 clean: ## clean the build assets
 	rm -rf public/*
+	rm -rf build/*
 
 .PHONY: install
 install: ## install dependencies
-	bundle
-	npm install
-	hugo mod get
-	hugo mod graph
+	yarn
 
 .PHONY: netlify
 netlify:
@@ -32,11 +30,11 @@ netlify-preview: ## build a preview of the site for Netlify
 
 .PHONY: serve
 serve: ## serve the content locally for testing
-	hugo server
+	yarn start
 
 .PHONY: serve-preview
 serve-preview: ## serve the preview content locally for testing
-	hugo server -F
+	yarn start
 
 .PHONY: bin-dir
 bin-dir: ## Creates a local "bin" directory for helper applications.

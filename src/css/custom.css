@@ -1,0 +1,227 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* Shipwright Brand Colors - Light Theme */
+:root {
+  /* Core brand colors */
+  --shipwright-navy: #0e232e;
+  --shipwright-slate-blue: #546378;
+  --shipwright-light-slate: #7c8fa4;
+  --shipwright-white: #ffffff;
+  --shipwright-ivory: #f5f7f9;
+
+  /* Typography - Brand Font Stacks */
+  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
+                          Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --ifm-font-family-monospace: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+                               "Liberation Mono", monospace;
+
+  /* Type Scale - Shipwright Brand Standards */
+  --ifm-h1-font-size: 2.5rem; /* 40px */
+  --ifm-h2-font-size: 2rem; /* 32px */
+  --ifm-h3-font-size: 1.5rem; /* 24px */
+  --ifm-h4-font-size: 1.25rem; /* 20px */
+  --ifm-h5-font-size: 1rem; /* 16px */
+  --ifm-h6-font-size: 0.875rem; /* 14px */
+  --ifm-font-size-base: 1rem; /* 16px */
+
+  /* Line Heights - Brand Standards */
+  --ifm-line-height-base: 1.6; /* Body text */
+  --ifm-heading-line-height: 1.25; /* Headings */
+  --ifm-pre-line-height: 1.5; /* Code blocks */
+
+  /* Primary colors - Slate Blue for links and interactive elements */
+  --ifm-color-primary: #546378;
+  --ifm-color-primary-dark: #4b5769;
+  --ifm-color-primary-darker: #465261;
+  --ifm-color-primary-darkest: #39434f;
+  --ifm-color-primary-light: #5d6f87;
+  --ifm-color-primary-lighter: #627590;
+  --ifm-color-primary-lightest: #7c8fa4;
+
+  /* Background and text colors */
+  --ifm-background-color: #ffffff;
+  --ifm-font-color-base: #0e232e;
+  --ifm-color-emphasis-600: #546378;
+  --ifm-color-emphasis-700: #0e232e;
+
+  /* Code blocks */
+  --ifm-code-background: #f5f7f9;
+  --ifm-code-font-size: 93.75%; /* 15px */
+  --docusaurus-highlighted-code-line-bg: rgba(14, 35, 46, 0.1);
+
+  /* Links */
+  --ifm-link-color: #546378;
+  --ifm-link-hover-color: #0e232e;
+
+  /* Status colors */
+  --ifm-color-success: #2ea043;
+  --ifm-color-warning: #9a6700;
+  --ifm-color-danger: #cf222e;
+  --ifm-color-info: #0969da;
+
+  /* Borders and accents */
+  --ifm-color-emphasis-300: #7c8fa4;
+}
+
+/* Shipwright Brand Colors - Dark Theme */
+[data-theme='dark'] {
+  /* Core brand colors */
+  --shipwright-sky-blue: #a8c5e0;
+  --shipwright-deep-sea: #1a3340;
+
+  /* Primary colors - Sky Blue for links and interactive elements */
+  --ifm-color-primary: #a8c5e0;
+  --ifm-color-primary-dark: #91b7d7;
+  --ifm-color-primary-darker: #84afd3;
+  --ifm-color-primary-darkest: #5e99c4;
+  --ifm-color-primary-light: #bfd3e9;
+  --ifm-color-primary-lighter: #ccdbed;
+  --ifm-color-primary-lightest: #e6eff6;
+
+  /* Background and text colors */
+  --ifm-background-color: #0e232e;
+  --ifm-font-color-base: #ffffff;
+  --ifm-color-emphasis-600: #7c8fa4;
+  --ifm-color-emphasis-700: #ffffff;
+
+  /* Code blocks */
+  --ifm-code-background: #1a3340;
+  --docusaurus-highlighted-code-line-bg: rgba(168, 197, 224, 0.1);
+
+  /* Links */
+  --ifm-link-color: #a8c5e0;
+  --ifm-link-hover-color: #ffffff;
+
+  /* Status colors */
+  --ifm-color-success: #3fb950;
+  --ifm-color-warning: #d29922;
+  --ifm-color-danger: #f85149;
+  --ifm-color-info: #58a6ff;
+
+  /* Borders and accents */
+  --ifm-color-emphasis-300: #546378;
+}
+
+/* Additional Shipwright brand styling */
+
+/* Headings - Brand Font Weights and Colors */
+:root h1,
+:root h2,
+:root h3,
+:root h4,
+:root h5,
+:root h6 {
+  color: var(--shipwright-navy);
+  line-height: var(--ifm-heading-line-height);
+}
+
+:root h1 {
+  font-weight: 700;
+}
+
+:root h2,
+:root h3,
+:root h4 {
+  font-weight: 600;
+}
+
+/* Headings use White in dark mode */
+[data-theme='dark'] h1,
+[data-theme='dark'] h2,
+[data-theme='dark'] h3,
+[data-theme='dark'] h4,
+[data-theme='dark'] h5,
+[data-theme='dark'] h6 {
+  color: var(--shipwright-white);
+}
+
+/* Body text */
+:root p,
+:root li,
+:root td,
+:root th {
+  line-height: var(--ifm-line-height-base);
+}
+
+/* Inline code styling - Brand Standards (14px) */
+:root code {
+  background-color: var(--shipwright-ivory);
+  color: var(--shipwright-navy);
+  border: 1px solid var(--shipwright-light-slate);
+  font-size: 0.875rem; /* 14px - inline code */
+}
+
+[data-theme='dark'] code {
+  background-color: var(--shipwright-deep-sea);
+  color: var(--shipwright-white);
+  border: 1px solid var(--shipwright-slate-blue);
+}
+
+/* Code blocks - Brand Standards (15px, 1.5 line height) */
+:root pre code {
+  font-size: 0.9375rem; /* 15px - code blocks */
+  line-height: var(--ifm-pre-line-height);
+}
+
+[data-theme='dark'] pre code {
+  font-size: 0.9375rem;
+}
+
+/* Navbar styling */
+:root .navbar {
+  background-color: var(--shipwright-white);
+  border-bottom: 1px solid var(--shipwright-light-slate);
+}
+
+[data-theme='dark'] .navbar {
+  background-color: var(--shipwright-navy);
+  border-bottom: 1px solid var(--shipwright-slate-blue);
+}
+
+/* Footer styling */
+:root .footer {
+  background-color: var(--shipwright-navy);
+  color: var(--shipwright-white);
+}
+
+:root .footer a {
+  color: var(--shipwright-sky-blue);
+}
+
+:root .footer a:hover {
+  color: var(--shipwright-white);
+}
+
+[data-theme='dark'] .footer {
+  background-color: var(--shipwright-deep-sea);
+}
+
+/* Category cards */
+:root {
+  --ifm-card-background-color: var(--shipwright-ivory);
+}
+
+[data-theme='dark'] {
+  --ifm-card-background-color: var(--shipwright-deep-sea);
+}
+
+/* Sidebar styling */
+:root .menu__link {
+  color: var(--shipwright-slate-blue);
+}
+
+:root .menu__link:hover {
+  color: var(--shipwright-navy);
+}
+
+[data-theme='dark'] .menu__link {
+  color: var(--shipwright-light-slate);
+}
+
+[data-theme='dark'] .menu__link:hover {
+  color: var(--shipwright-white);
+}
