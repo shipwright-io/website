@@ -4,11 +4,6 @@ node_modules/
 # Production
 /build
 
-# Hugo output
-resources/
-public/
-.hugo_build.lock
-
 # Docusaurus Generated files
 .docusaurus
 .cache-loader
@@ -22,17 +17,6 @@ api-gen/build/
 # IDEs
 .vscode
 
-assets/jsconfig.json
-hugo_stats.json
-
-# Executable may be added to repository
-hugo.exe
-hugo.darwin
-hugo.linux
-
-# Temporary lock file while building
-.hugo_build.lock
-themes/**
 .DS_Store
 
 # Misc
