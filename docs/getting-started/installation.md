@@ -59,6 +59,15 @@ Applying this manifest requires cluster administrator permissions:
 $ kubectl apply -f https://github.com/shipwright-io/build/releases/latest/download/release.yaml --server-side=true
 ```
 
+Run the following two scripts (also requires cluster administrator permissions)
+to setup the webhook certificate and migrate the storage if required.
+
+ ```bash $
+$ curl --silent --location https://raw.githubusercontent.com/shipwright-io/build/latest/hack/setup-webhook-cert.sh | bash
+
+$ curl --silent --location https://raw.githubusercontent.com/shipwright-io/build/latest/hack/storage-version-migration.sh | bash
+```
+
 ## Installing Sample Build Strategies
 
 The Shipwright community maintains a curated set of build strategies for popular build tools.
