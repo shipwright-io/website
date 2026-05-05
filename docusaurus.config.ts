@@ -232,7 +232,11 @@ const config: Config = {
             },
             {
               label: 'X',
-              href: 'https://x.com/shipwright-io',
+              href: 'https://x.com/shipwrightio',
+            },
+            {
+              label: 'YouTube',
+              href: 'https://www.youtube.com/@shipwright-io',
             }
           ],
         },
