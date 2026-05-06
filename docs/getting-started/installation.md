@@ -63,10 +63,13 @@ Run the following two scripts (also requires cluster administrator permissions)
 to setup the webhook certificate and migrate the storage if required.
 
  ```bash $
-$ curl --silent --location https://raw.githubusercontent.com/shipwright-io/build/latest/hack/setup-webhook-cert.sh | bash
+$ curl --silent --location https://raw.githubusercontent.com/shipwright-io/build/main/hack/setup-webhook-cert.sh | bash
 
-$ curl --silent --location https://raw.githubusercontent.com/shipwright-io/build/latest/hack/storage-version-migration.sh | bash
+$ curl --silent --location https://raw.githubusercontent.com/shipwright-io/build/main/hack/storage-version-migration.sh | bash
 ```
+
+If you want to use a specific version of Shipwright, replace latest and main in
+the URLs above with the corresponding tag.
 
 ## Installing Sample Build Strategies
 
