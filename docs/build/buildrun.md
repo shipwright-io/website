@@ -335,6 +335,24 @@ buildpacks-v3-buildrun  True        Succeeded   All Steps have completed executi
 
 The above allows users to get an overview of the building mechanism state.
 
+### Understanding the BuildRun executor
+
+The `status.executor` field, added in Shipwright Build v0.17.0, identifies the underlying resource that is executing the `BuildRun`:
+
+```yaml
+# [...]
+status:
+  # [...]
+  executor:
+    name: buildpacks-v3-buildrun-9gmcx
+    kind: TaskRun
+```
+
+- `name` is the name of the `TaskRun` or `PipelineRun` that was created to execute the `BuildRun`.
+- `kind` is the kind of that resource, either `TaskRun` or `PipelineRun`, depending on how the cluster is configured (see [`BUILDRUN_EXECUTOR`](./configuration#controller-settings)).
+
+**Note**: `status.taskRunName` is deprecated as of v0.17.0 in favor of `status.executor`, since a `BuildRun` is no longer always backed by a `TaskRun`.
+
 ### Understanding the state of a BuildRun
 
 A `BuildRun` resource stores the relevant information regarding the object's state under `status.conditions`.
@@ -509,6 +527,6 @@ For every BuildRun controller reconciliation, the `buildSpec` in the status of t
 
 ## Relationship with Tekton Tasks
 
-The `BuildRun` resource abstracts the image construction by delegating this work to the Tekton Pipeline [TaskRun](https://github.com/tektoncd/pipeline/blob/main/docs/taskruns.md). Compared to a Tekton Pipeline [Task](https://github.com/tektoncd/pipeline/blob/main/docs/tasks.md), a `TaskRun` runs all `steps` until completion of the `Task` or until a failure occurs in the `Task`.
+The `BuildRun` resource abstracts the image construction by delegating this work to the Tekton Pipeline [TaskRun](https://github.com/tektoncd/pipeline/blob/main/docs/taskruns.md) (the default) or, depending on the [`BUILDRUN_EXECUTOR`](./configuration#controller-settings) setting, a `PipelineRun`. The resource actually used for a given `BuildRun` is reported in [`status.executor`](#understanding-the-buildrun-executor). Compared to a Tekton Pipeline [Task](https://github.com/tektoncd/pipeline/blob/main/docs/tasks.md), a `TaskRun` runs all `steps` until completion of the `Task` or until a failure occurs in the `Task`.
 
 During the Reconcile, the `BuildRun` controller will generate a new `TaskRun`. The controller will embed in the `TaskRun` `Task` definition the required `steps` to execute during the execution. These `steps` are defined in the strategy defined in the `Build` resource, either a `ClusterBuildStrategy` or a `BuildStrategy`.
