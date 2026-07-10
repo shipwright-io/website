@@ -320,7 +320,12 @@ spec:
 The `BuildRun` resource is updated as soon as the current image building status changes:
 
 ```bash
-$ kubectl get buildrun buildpacks-v3-buildrun
+kubectl get buildrun buildpacks-v3-buildrun
+```
+
+The output is similar to this:
+
+```text
 NAME                    SUCCEEDED   REASON    MESSAGE   STARTTIME   COMPLETIONTIME
 buildpacks-v3-buildrun  Unknown     Pending   Pending   1s
 ```
@@ -328,7 +333,12 @@ buildpacks-v3-buildrun  Unknown     Pending   Pending   1s
 And finally:
 
 ```bash
-$ kubectl get buildrun buildpacks-v3-buildrun
+kubectl get buildrun buildpacks-v3-buildrun
+```
+
+The output is similar to this:
+
+```text
 NAME                    SUCCEEDED   REASON      MESSAGE                              STARTTIME   COMPLETIONTIME
 buildpacks-v3-buildrun  True        Succeeded   All Steps have completed executing   4m28s       16s
 ```
