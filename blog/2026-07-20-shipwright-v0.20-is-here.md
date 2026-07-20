@@ -1,11 +1,11 @@
 ---
 title: "Shipwright v0.20 Is Here!"
 description: "Shipwright v0.20 release announcement with new features, fixes, and infrastructure updates."
-icon: "article"
-date: "2026-07-20T12:00:00-04:00"
-lastmod: "2026-07-20T12:00:00-04:00"
-draft: false
-author: "Shipwright Contributors"
+date: 2026-07-20T12:00:00-04:00
+slug: shipwright-v0.20-is-here
+authors:
+  - name: Shipwright Contributors
+tags: [shipwright, release]
 ---
 
 We are excited to announce the release of Shipwright v0.20.0! This release brings multi-architecture
