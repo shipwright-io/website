@@ -17,3 +17,13 @@ hola:
   label: Hola
   permalink: /hola
   description: Hola tag description
+
+community:
+  label: Community
+  permalink: /community
+  description: Community related content
+
+kubecon:
+  label: KubeCon
+  permalink: /kubecon
+  description: Posts related to KubeCon + CloudNativeCon

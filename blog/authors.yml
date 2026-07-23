@@ -61,3 +61,11 @@ dorzel:
   image_url: https://github.com/dorzel.png
   socials:
     github: dorzel
+
+psrvere:
+  name: Prateek Rathore
+  title: Shipwright Contributor
+  url: https://github.com/psrvere
+  image_url: https://github.com/psrvere.png
+  socials:
+    github: psrvere
