@@ -11,7 +11,6 @@ build-preview: clean ## build a preview, with future-dated content allowed.
 
 .PHONY: clean
 clean: ## clean the build assets
-	rm -rf public/*
 	rm -rf build/*
 
 .PHONY: install

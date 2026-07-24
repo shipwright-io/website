@@ -4,7 +4,7 @@ set -e
 
 genRoot="$(pwd)/api-gen"
 crdRefDocs="$(pwd)/bin/crd-ref-docs"
-destRoot="$(pwd)/content/docs/ref/api"
+destRoot="$(pwd)/docs/ref/api"
 
 buildRepo=${BUILD_REPO:-"https://github.com/shipwright-io/build"}
 buildVersion=${BUILD_VERSION:-"v0.17.0"}
