@@ -1,5 +1,6 @@
 approvers:
 - qu1queee
+- adambkaplan
 - otaviof
 - SaschaSchwarze0
 
@@ -9,7 +10,6 @@ reviewers:
 - rxinui
 
 emeritus_approvers:
-- adambkaplan # 2026-06-17
 - sbose78
 
 emeritus_reviewers:
