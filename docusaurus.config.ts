@@ -135,7 +135,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/shipwright-io/website/tree/main/docs/'
+            'https://github.com/shipwright-io/website/tree/main/docs/',
         },
         blog: {
           showReadingTime: true,
@@ -188,6 +188,10 @@ const config: Config = {
           docsPluginId: 'contributing',
           position: 'left',
           label: 'Contributing',
+        },
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
         },
         {
           href: 'https://github.com/shipwright-io',

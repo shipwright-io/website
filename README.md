@@ -30,6 +30,25 @@ yarn build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
+### Versioning
+
+Docs for released versions of Shipwright components are managed with
+[Docusaurus's versioning](https://docusaurus.io/docs/versioning). The `docs/`
+directory always tracks unreleased work and is served at `/docs/next/`. The
+unprefixed `/docs/` path serves the latest released version.
+
+To cut a new version (typically alongside a new minor Build release):
+
+```bash
+yarn docusaurus docs:version <x.y>
+```
+
+This snapshots the current contents of `docs/` into `versioned_docs/version-<x.y>/`
+and `versioned_sidebars/version-<x.y>-sidebars.json`, and adds `<x.y>` to
+`versions.json`. Commit all of these generated files together. Older versions
+are never edited retroactively; only `docs/` (the next/unreleased version)
+should receive ongoing changes.
+
 ## Contributing
 
 We are happy to have you join us and contribute to the Shipwright website!
