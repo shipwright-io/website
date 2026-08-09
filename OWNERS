@@ -3,12 +3,14 @@ approvers:
 - adambkaplan
 - otaviof
 - SaschaSchwarze0
+- IrvingMg
 
 reviewers:
 - SaschaSchwarze0
 - HeavyWombat
 - rxinui
 - kaizakin
+- IrvingMg
 
 emeritus_approvers:
 - sbose78
