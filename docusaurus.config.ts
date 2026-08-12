@@ -250,7 +250,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `<p>© ${new Date().getFullYear()} Shipwright Contributors | Documentation Distributed under <a href="https://github.com/shipwright-io/website/blob/main/LICENSE">CC by 4.0</a></p><p>© ${new Date().getFullYear()} The Linux Foundation®. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage">Trademark Usage</a> page</p>`,
+      copyright: `<p>© ${new Date().getFullYear()} Shipwright Contributors | Documentation Distributed under <a href="https://github.com/shipwright-io/website/blob/main/LICENSE">CC by 4.0</a></p><p><strong>Copyright ${new Date().getFullYear()} Shipwright, a Series of LF Projects, LLC</strong></p><p><strong>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org/policies/">lfprojects.org/policies/</a>.</strong></p>`,
     },
     prism: {
       theme: prismThemes.github,
