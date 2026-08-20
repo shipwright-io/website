@@ -26,7 +26,7 @@ Before installation, ensure that OLM has been deployed on your cluster by follow
 Once OLM has been deployed, use the following command to install the latest operator release from [operatorhub.io](https://operatorhub.io/operator/shipwright-operator):
 
 ```bash
-$ kubectl apply -f https://operatorhub.io/install/shipwright-operator.yaml
+kubectl apply -f https://operatorhub.io/install/shipwright-operator.yaml
 ```
 
 ### Usage
@@ -56,16 +56,16 @@ We also publish a Kubernetes manifest that installs Shipwright directly into the
 Applying this manifest requires cluster administrator permissions:
 
 ```bash
-$ kubectl apply -f https://github.com/shipwright-io/build/releases/latest/download/release.yaml --server-side=true
+kubectl apply -f https://github.com/shipwright-io/build/releases/latest/download/release.yaml --server-side=true
 ```
 
 Run the following two scripts (also requires cluster administrator permissions)
 to setup the webhook certificate and migrate the storage if required.
 
- ```bash $
-$ curl --silent --location https://raw.githubusercontent.com/shipwright-io/build/main/hack/setup-webhook-cert.sh | bash
+```bash
+curl --silent --location https://raw.githubusercontent.com/shipwright-io/build/main/hack/setup-webhook-cert.sh | bash
 
-$ curl --silent --location https://raw.githubusercontent.com/shipwright-io/build/main/hack/storage-version-migration.sh | bash
+curl --silent --location https://raw.githubusercontent.com/shipwright-io/build/main/hack/storage-version-migration.sh | bash
 ```
 
 If you want to use a specific version of Shipwright, replace latest and main in
@@ -77,5 +77,5 @@ The Shipwright community maintains a curated set of build strategies for popular
 These can be optionally installed after Shipwright Builds has been deployed:
 
 ```bash
-$ kubectl apply -f https://github.com/shipwright-io/build/releases/latest/download/sample-strategies.yaml
+kubectl apply -f https://github.com/shipwright-io/build/releases/latest/download/sample-strategies.yaml
 ```
