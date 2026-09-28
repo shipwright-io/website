@@ -835,7 +835,12 @@ We will see some differences between the `TaskRun` definition and the `pod` defi
 For the `TaskRun`, as expected we can see the resources on each `step`, as we previously define on our [strategy](https://github.com/shipwright-io/build/tree/v0.18.0/samples/v1beta1/buildstrategy/buildah/buildstrategy_buildah_shipwright_managed_push_cr.yaml).
 
 ```sh
-$ kubectl -n test-build get tr buildah-golang-buildrun-9gmcx-pod-lhzbc -o json | jq '.spec.taskSpec.steps[] | select(.name == "step-buildah-bud" ) | .resources'
+kubectl -n test-build get tr buildah-golang-buildrun-9gmcx-pod-lhzbc -o json | jq '.spec.taskSpec.steps[] | select(.name == "step-buildah-bud" ) | .resources'
+```
+
+The output is similar to this:
+
+```json
 {
   "limits": {
     "cpu": "500m",
@@ -846,8 +851,15 @@ $ kubectl -n test-build get tr buildah-golang-buildrun-9gmcx-pod-lhzbc -o json |
     "memory": "65Mi"
   }
 }
+```
 
-$ kubectl -n test-build get tr buildah-golang-buildrun-9gmcx-pod-lhzbc -o json | jq '.spec.taskSpec.steps[] | select(.name == "step-buildah-push" ) | .resources'
+```sh
+kubectl -n test-build get tr buildah-golang-buildrun-9gmcx-pod-lhzbc -o json | jq '.spec.taskSpec.steps[] | select(.name == "step-buildah-push" ) | .resources'
+```
+
+The output is similar to this:
+
+```json
 {
   "limits": {
     "cpu": "500m",
@@ -863,7 +875,12 @@ $ kubectl -n test-build get tr buildah-golang-buildrun-9gmcx-pod-lhzbc -o json |
 The pod definition is different, while Tekton will only use the **highest** values of one container, and set the rest(lowest) to zero:
 
 ```sh
-$ kubectl -n test-build get pods buildah-golang-buildrun-9gmcx-pod-lhzbc -o json | jq '.spec.containers[] | select(.name == "step-step-buildah-bud" ) | .resources'
+kubectl -n test-build get pods buildah-golang-buildrun-9gmcx-pod-lhzbc -o json | jq '.spec.containers[] | select(.name == "step-step-buildah-bud" ) | .resources'
+```
+
+The output is similar to this:
+
+```json
 {
   "limits": {
     "cpu": "500m",
@@ -875,8 +892,15 @@ $ kubectl -n test-build get pods buildah-golang-buildrun-9gmcx-pod-lhzbc -o json
     "memory": "65Mi"
   }
 }
+```
 
-$ kubectl -n test-build get pods buildah-golang-buildrun-9gmcx-pod-lhzbc -o json | jq '.spec.containers[] | select(.name == "step-step-buildah-push" ) | .resources'
+```sh
+kubectl -n test-build get pods buildah-golang-buildrun-9gmcx-pod-lhzbc -o json | jq '.spec.containers[] | select(.name == "step-step-buildah-push" ) | .resources'
+```
+
+The output is similar to this:
+
+```text
 {
   "limits": {
     "cpu": "500m",
@@ -947,7 +971,12 @@ If we apply the following resources:
 For the `TaskRun`, as expected we can see the resources on each `step`.
 
 ```sh
-$ kubectl -n test-build get tr buildah-golang-buildrun-skgrp -o json | jq '.spec.taskSpec.steps[] | select(.name == "step-buildah-bud" ) | .resources'
+kubectl -n test-build get tr buildah-golang-buildrun-skgrp -o json | jq '.spec.taskSpec.steps[] | select(.name == "step-buildah-bud" ) | .resources'
+```
+
+The output is similar to this:
+
+```json
 {
   "limits": {
     "cpu": "500m",
@@ -958,8 +987,15 @@ $ kubectl -n test-build get tr buildah-golang-buildrun-skgrp -o json | jq '.spec
     "memory": "65Mi"
   }
 }
+```
 
-$ kubectl -n test-build get tr buildah-golang-buildrun-skgrp -o json | jq '.spec.taskSpec.steps[] | select(.name == "step-buildah-push" ) | .resources'
+```sh
+kubectl -n test-build get tr buildah-golang-buildrun-skgrp -o json | jq '.spec.taskSpec.steps[] | select(.name == "step-buildah-push" ) | .resources'
+```
+
+The output is similar to this:
+
+```json
 {
   "limits": {
     "cpu": "500m",
@@ -975,7 +1011,12 @@ $ kubectl -n test-build get tr buildah-golang-buildrun-skgrp -o json | jq '.spec
 The pod definition is different, while Tekton will only use the **highest** values of one container, and set the rest(lowest) to zero:
 
 ```sh
-$ kubectl -n test-build get pods buildah-golang-buildrun-95xq8-pod-mww8d -o json | jq '.spec.containers[] | select(.name == "step-step-buildah-bud" ) | .resources'
+kubectl -n test-build get pods buildah-golang-buildrun-95xq8-pod-mww8d -o json | jq '.spec.containers[] | select(.name == "step-step-buildah-bud" ) | .resources'
+```
+
+The output is similar to this:
+
+```text
 {
   "limits": {
     "cpu": "500m",
@@ -987,7 +1028,15 @@ $ kubectl -n test-build get pods buildah-golang-buildrun-95xq8-pod-mww8d -o json
     "memory": "0"                 <------------------- See how the memory is set to ZERO
   }
 }
-$ kubectl -n test-build get pods buildah-golang-buildrun-95xq8-pod-mww8d -o json | jq '.spec.containers[] | select(.name == "step-step-buildah-push" ) | .resources'
+```
+
+```sh
+kubectl -n test-build get pods buildah-golang-buildrun-95xq8-pod-mww8d -o json | jq '.spec.containers[] | select(.name == "step-step-buildah-push" ) | .resources'
+```
+
+The output is similar to this:
+
+```text
 {
   "limits": {
     "cpu": "500m",
